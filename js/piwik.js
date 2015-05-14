@@ -2340,7 +2340,6 @@ if (typeof Piwik !== 'object') {
                     expiryDate = new Date();
                     expiryDate.setTime(expiryDate.getTime() + msToExpire);
                 }
-
                 documentAlias.cookie = cookieName + '=' + encodeWrapper(value) +
                     (msToExpire ? ';expires=' + expiryDate.toGMTString() : '') +
                     ';path=' + (path || '/') +
@@ -2487,6 +2486,7 @@ if (typeof Piwik !== 'object') {
                     };
 
                     xhr.setRequestHeader('Content-Type', configRequestContentType);
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'NB71WUkOn16KiP-hSizIExB2IrpUAOk8CGLvcUOPdvX');
 
                     xhr.send(request);
                 } catch (e) {

@@ -1,0 +1,60 @@
+[database]
+host = "127.0.0.1"
+username = "root"
+dbname = "piwik"
+tables_prefix = "piwik_"
+charset = "utf8"
+
+[General]
+session_save_handler = "dbtable"
+enabled_trusted_host_check=0
+enable_framed_pages=1
+enable_framed_settings=1
+
+
+plugin "UsersManager" is probably something we should disable, preferring Sandstorm's delegation features instead.
+
+
+Setup flow: skip entirely?
+    database credentials are trivial
+    database schema/init are substantially harder
+    db table 'site' is probably irrelevant, stub out with a single site?
+    db table 'user' should probably be replaced with X-Sandstorm-*
+    db table 'option' needs a *lot* of stuff.  most are module versions, but some are more functional:
+	    ('MobileMessaging_DelegatedManagement','false',0)
+	    ,('piwikUrl','http://q8wafsxznyo7la25ezfp.local.sandstorm.io:6080/',1)
+	    ,('PrivacyManager.doNotTrackEnabled','1',0)
+	    ,('PrivacyManager.ipAnonymizerEnabled','0',0)
+	    ,('SitesManager_DefaultTimezone','America/Los_Angeles',0)
+	    ,('UpdateCheck_LastTimeChecked','1431559531',1)
+	    ,('UpdateCheck_LatestVersion','',0)
+	    ,('usercountry.location_provider','geoip_pecl',0)
+
+
+
+core/Access.php seems the right place to add hooks for X-Sandstorm-Permissions
+
+core/Piwik.php has a getCurrentUserEmail, see what that's used by
+                     getAllSuperUserAccessEmailAddresses
+               could theoretically use HackSessionContext to send emails?
+
+
+index.php?action=tablesCreation&trackerStatus=500&module=Installation
+
+Snippet:
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//ue9ssrr0lmsgg0t16dkz.local.sandstorm.io:6080/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//ue9ssrr0lmsgg0t16dkz.local.sandstorm.io:6080/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
