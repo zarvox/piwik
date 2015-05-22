@@ -33,7 +33,7 @@ class DevelopmentSyncUITestScreenshots extends ConsoleCommand
     {
         $this->setName('development:sync-ui-test-screenshots');
         $this->setDescription('For Piwik core devs. Copies screenshots '
-                            . 'from travis artifacts to the tests/UI/expected-ui-screenshots/ folder');
+                            . 'from travis artifacts to the tests/UI/expected-screenshots/ folder');
         $this->addArgument('buildnumber', InputArgument::REQUIRED, 'Travis build number you want to sync.');
         $this->addArgument('screenshotsRegex', InputArgument::OPTIONAL,
             'A regex to use when selecting screenshots to copy. If not supplied all screenshots are copied.', '.*');
@@ -109,7 +109,7 @@ git push";
             $commands .= "
 cd ..
 git pull
-git add expected-ui-screenshots/
+git add expected-screenshots/
 git status
 sleep 5
 git commit -m '' # Copy paste the good commit message
@@ -133,10 +133,10 @@ cd ../../../../../\n\n";
     protected function getDownloadToPath($plugin)
     {
         if (empty($plugin)) {
-            return PIWIK_DOCUMENT_ROOT . "/tests/UI/expected-ui-screenshots/";
+            return PIWIK_DOCUMENT_ROOT . "/tests/UI/expected-screenshots/";
         }
 
-        $downloadTo = PIWIK_DOCUMENT_ROOT . "/plugins/$plugin/tests/UI/expected-ui-screenshots/";
+        $downloadTo = PIWIK_DOCUMENT_ROOT . "/plugins/$plugin/tests/UI/expected-screenshots/";
         if(is_dir($downloadTo)) {
             return $downloadTo;
         }
