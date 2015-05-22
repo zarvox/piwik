@@ -67,6 +67,7 @@ script: {{ travisShScriptLocation }}
 
 before_install:
 {% if customTravisBuildSteps.before_install.before|default is not empty %}{{ customTravisBuildSteps.before_install.before|raw }}
+  - ./tests/travis/install_git_lfs.sh
 
 {% endif %}
   # do not use the Zend allocator on PHP 5.3 since it will randomly segfault after program execution
