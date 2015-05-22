@@ -11,4 +11,4 @@ rm -rf git-lfs-*
 # Now that git-lfs is installed we update the repo to download the screenshots
 # See https://github.com/github/git-lfs/issues/325
 rm tests/UI/expected-screenshots/*.png
-git checkout .
+sudo git checkout .
