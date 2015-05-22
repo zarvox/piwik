@@ -17,4 +17,4 @@ git config --global user.name "$TRAVIS_COMMITTER_NAME"
 # TODO: remove when Travis updates the VM (should be installed by default)
 curl -sLo - https://github.com/github/git-lfs/releases/download/v0.5.1/git-lfs-linux-amd64-0.5.1.tar.gz | tar xzvf -
 cd git-lfs-*
-./install.sh
+sudo ./install.sh
