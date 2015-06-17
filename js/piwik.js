@@ -420,7 +420,7 @@ if (typeof JSON2 !== 'object') {
     setCustomVariable, getCustomVariable, deleteCustomVariable, storeCustomVariablesInCookie,
     setDownloadExtensions, addDownloadExtensions, removeDownloadExtensions,
     setDomains, setIgnoreClasses, setRequestMethod, setRequestContentType,
-    setReferrerUrl, setCustomUrl, setAPIUrl, setDocumentTitle,
+    setReferrerUrl, setCustomUrl, setAPIUrl, setApiToken, setDocumentTitle,
     setDownloadClasses, setLinkClasses,
     setCampaignNameKey, setCampaignKeywordKey,
     discardHashTag,
@@ -2174,6 +2174,9 @@ if (typeof Piwik !== 'object') {
 
                 // API URL (only set if it differs from the Tracker URL)
                 configApiUrl = '',
+
+                // SANDSTORM EDIT: api token to include as bearer token in XHRs
+                configApiToken = '',
 
                 // This string is appended to the Tracker URL Request (eg. to send data that is not handled by the existing setters/getters)
                 configAppendToTrackingUrl = '',
@@ -4754,6 +4757,16 @@ if (typeof Piwik !== 'object') {
                 },
 
                 /**
+                 * Set the Sandstorm API token.  It is added as an Authorization: Bearer header in
+                 * requests to the Piwik API.
+                 *
+                 * @param string apiToken
+                 */
+                setApiToken: function(apiToken) {
+                    configApiToken = apiToken;
+                },
+
+                /**
                  * Set array of classes to be treated as downloads
                  *
                  * @param string|array downloadClasses
@@ -5524,7 +5537,7 @@ if (typeof Piwik !== 'object') {
 
         asyncTracker = new Tracker();
 
-        var applyFirst  = ['disableCookies', 'setTrackerUrl', 'setAPIUrl', 'setCookiePath', 'setCookieDomain', 'setUserId', 'setSiteId', 'enableLinkTracking'];
+        var applyFirst  = ['disableCookies', 'setTrackerUrl', 'setAPIUrl', 'setCookiePath', 'setCookieDomain', 'setApiToken', 'setUserId', 'setSiteId', 'enableLinkTracking'];
         _paq = applyMethodsInOrder(_paq, applyFirst);
 
         // apply the queue of actions
