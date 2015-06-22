@@ -47,7 +47,10 @@ class TrackerCodeGenerator
     ) {
         // changes made to this code should be mirrored in plugins/CoreAdminHome/javascripts/jsTrackingGenerator.js var generateJsCode
         $jsCode = file_get_contents(PIWIK_INCLUDE_PATH . "/plugins/Morpheus/templates/javascriptCode.tpl");
-        $jsCode = htmlentities($jsCode);
+        # SANDSTORM EDIT: if Sandstorm is enabled, don't escape the JS.
+        if (!defined('SANDSTORM_PUBLISH_URI')) {
+            $jsCode = htmlentities($jsCode);
+        }
         if (substr($piwikUrl, 0, 4) !== 'http') {
             $piwikUrl = 'http://' . $piwikUrl;
         }
@@ -155,6 +158,12 @@ class TrackerCodeGenerator
             $codeImpl['httpsPiwikUrl'] = rtrim($codeImpl['httpsPiwikUrl'], "/");
         }
         $codeImpl = array('setTrackerUrl' => htmlentities($setTrackerUrl)) + $codeImpl;
+
+        # SANDSTORM EDIT: if Sandstorm is enabled, add the static publishing URI to the template
+        if (defined('SANDSTORM_PUBLISH_URI')) {
+            $codeImpl = array('publicHost' => htmlentities(SANDSTORM_PUBLISH_URI)) + $codeImpl;
+            $codeImpl['setTrackerUrl'] = '';
+        }
 
         foreach ($codeImpl as $keyToReplace => $replaceWith) {
             $jsCode = str_replace('{$' . $keyToReplace . '}', $replaceWith, $jsCode);

@@ -12,6 +12,10 @@ rm -rf /var/run
 mkdir -p /var/run
 mkdir -p /var/run/mysqld
 
+# Prepare piwik.js to be published, which can happen on first request or on each request.
+mkdir -p /var/www
+cp /opt/app/piwik.js /var/www/embed.js
+
 # Ensure mysql tables created
 HOME=/etc/mysql /usr/bin/mysql_install_db --force
 
@@ -50,7 +54,7 @@ fi
 #time php /opt/app/console core:update --yes -n -vv
 #echo "Ran update script"
 
-time php /opt/app/console customvariables:info
+#time php /opt/app/console customvariables:info
 
 # Spawn PHP
 /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf &

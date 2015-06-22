@@ -9,7 +9,53 @@
 
     <p>{{ 'CoreAdminHome_JSTracking_CodeNote'|translate("&lt;/body&gt;")|raw }}</p>
 
-    <pre>{{ jsTag|raw }}</pre>
+<script>
+// SANDSTORM EDIT: use offer template to render HTML to copy
+sandstormTemplate = "{{ jsTag|e('js') }}";
+console.log(sandstormTemplate);
+var sandstormRequests = [];
+
+function onMessageSandstorm(event) {
+  console.log("got message: ");
+  console.log(event);
+  var data = event.data;
+  if (! data.hasOwnProperty("rpcId")) {
+    console.log("message did not contain an rpcId, ignoring");
+    return;
+  }
+  var idx = sandstormRequests.indexOf(data.rpcId);
+  if (idx != -1) {
+    // RPC id was valid.  Remove it from the list of half-finished RPCs...
+    sandstormRequests.splice(idx, 1);
+
+    // TODO: actually show the iframe.
+    console.log("got valid rpc reply: ");
+    console.log(data);
+    var tag = document.getElementById("embedme");
+    tag.src = data.uri;
+  } else {
+    console.log("Got unexpected rpcId: " + data.rpcId);
+  }
+}
+
+function requestOfferTemplate() {
+  var rpcId = "rpc";
+  sandstormRequests.push(rpcId);
+  window.parent.postMessage({
+      renderTemplate: {
+        rpcId: rpcId,
+        template: sandstormTemplate,
+        petname: "Piwik tracker site-embedded API key"
+      }
+    },
+    "*"
+  );
+}
+
+window.addEventListener("message", onMessageSandstorm, false);
+requestOfferTemplate();
+</script>
+    <iframe id="embedme" src="" style="border 0; width: 100%; height: auto;">
 
     <p>{{ 'CoreAdminHome_JSTrackingIntro5'|translate('<a rel="noreferrer" target="_blank" href="http://piwik.org/docs/javascript-tracking/">','</a>')|raw }}</p>
 

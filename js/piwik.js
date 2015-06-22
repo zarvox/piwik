@@ -2159,7 +2159,7 @@ if (typeof Piwik !== 'object') {
 
                 enableJSErrorTracking = false,
 
-                defaultRequestMethod = 'GET',
+                defaultRequestMethod = 'POST',
 
                 // Request method (GET or POST)
                 configRequestMethod = defaultRequestMethod,
