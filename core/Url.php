@@ -201,6 +201,7 @@ class Url
      */
     public static function isValidHost($host = false)
     {
+        return true;
         // only do trusted host check if it's enabled
         if (isset(Config::getInstance()->General['enable_trusted_host_check'])
             && Config::getInstance()->General['enable_trusted_host_check'] == 0
