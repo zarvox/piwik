@@ -2486,7 +2486,11 @@ if (typeof Piwik !== 'object') {
                     };
 
                     xhr.setRequestHeader('Content-Type', configRequestContentType);
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + 'NB71WUkOn16KiP-hSizIExB2IrpUAOk8CGLvcUOPdvX');
+                    // SANDSTORM EDIT: add bearer token, if provided
+                    if (configApiToken && configApiToken.length) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + configApiToken);
+                        xhr.setRequestHeader('X-Sandstorm-Passthrough', 'address');
+                    }
 
                     xhr.send(request);
                 } catch (e) {
