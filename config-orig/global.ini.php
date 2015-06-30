@@ -312,7 +312,7 @@ hash_algorithm = whirlpool
 
 ; by default, Piwik uses PHP's built-in file-based session save handler with lock files.
 ; For clusters, use dbtable.
-session_save_handler = files
+session_save_handler = dbtable
 
 ; If set to 1, Piwik will automatically redirect all http:// requests to https://
 ; If SSL / https is not correctly configured on the server, this will break Piwik
@@ -349,11 +349,11 @@ login_password_recovery_replyto_email_name = "No-reply"
 
 ; Set to 1 to disable the framebuster on standard Non-widgets pages (a click-jacking countermeasure).
 ; Default is 0 (i.e., bust frames on all non Widget pages such as Login, API, Widgets, Email reports, etc.).
-enable_framed_pages = 0
+enable_framed_pages = 1
 
 ; Set to 1 to disable the framebuster on Admin pages (a click-jacking countermeasure).
 ; Default is 0 (i.e., bust frames on the Settings forms).
-enable_framed_settings = 0
+enable_framed_settings = 1
 
 ; language cookie name for session
 language_cookie_name = piwik_lang
@@ -456,7 +456,7 @@ assume_secure_protocol = 0
 
 ; Whether to enable trusted host checking. This can be disabled if you're running Piwik
 ; on several URLs and do not wish to constantly edit the trusted host list.
-enable_trusted_host_check = 1
+enable_trusted_host_check = 0
 
 ; List of trusted hosts (eg domain or subdomain names) when generating absolute URLs.
 ;
