@@ -1,6 +1,6 @@
 <div id="{{ widget.uniqueId }}"
      class="{{widget.viewDataTable}}"
-     ng-class="{'smallTopMargin': (!widget.parameters.widget && !widget.isFirstInPage && (!widget.name || !showName))}"
+     ng-class="{'smallTopMargin': (!widget.isFirstInPage && (!widget.name || !showName))}"
     >
     <!--smallTopMargin: we display small margin if it's not the first widget on the page and if there's no headline -->
     <h2 ng-if="widget.name && showName"

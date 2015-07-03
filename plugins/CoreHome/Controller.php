@@ -79,15 +79,19 @@ class Controller extends \Piwik\Plugin\Controller
 
         $widgets = Request::processRequest('API.getWidgetMetadata', array(
             'idSite'  => $idSite,
-            'date'    => $date,
             'period'  => $period,
+            'date'    => $date,
             'segment' => $segment,
             'deep'    => '1'
         ));
 
         foreach ($widgets as $widget) {
-            if (!empty($widget['isContainer']) && $widget['parameters']['containerId'] === $containerId) {
+            if (!empty($widget['isContainer'])
+                && !empty($widget['parameters']['containerId'])
+                && $widget['parameters']['containerId'] === $containerId) {
+
                 if (!empty($isWidgetized)) {
+                    $widget['isFirstInPage'] = '1';
                     $widget['parameters']['widget'] = '1';
                     foreach ($widget['widgets'] as &$subwidget) {
                         $subwidget['parameters']['widget'] = '1';
