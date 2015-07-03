@@ -64,7 +64,7 @@ class WidgetsListTest extends IntegrationTestCase
     private function getWidgetsPerCategory(WidgetsList $list)
     {
         $widgetsPerCategory = array();
-        foreach ($list->getWidgets() as $widgetConfig) {
+        foreach ($list->getWidgetConfigs() as $widgetConfig) {
             $category = $widgetConfig->getCategoryId();
             if (!isset($widgetsPerCategory[$category])) {
                 $widgetsPerCategory[$category] = array();

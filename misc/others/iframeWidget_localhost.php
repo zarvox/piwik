@@ -34,7 +34,7 @@ require_once PIWIK_INCLUDE_PATH . "/index.php";
 require_once PIWIK_INCLUDE_PATH . "/core/API/Request.php";
 
 FrontController::getInstance()->init();
-$widgets = WidgetsList::get()->getWidgets();
+$widgets = WidgetsList::get()->getWidgetConfigs();
 $widgetCategoriesHandled = array();
 foreach ($widgets as $widgetConfig) {
     $category = $widgetConfig->getCategoryId();

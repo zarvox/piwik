@@ -12,6 +12,7 @@ use Piwik\API\Request;
 use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\DataTable\Filter\AddColumnsProcessedMetricsGoal;
+use Piwik\FrontController;
 use Piwik\Piwik;
 use Piwik\Plugins\Referrers\API as APIReferrers;
 use Piwik\Translation\Translator;
@@ -326,5 +327,33 @@ class Controller extends \Piwik\Plugin\Controller
         }
         $view->goalsJSON = json_encode($goals);
         $view->ecommerceEnabled = $this->site->isEcommerceEnabled();
+    }
+
+    /**
+     * @deprecated used to be a widgetized URL. There to not break widget URLs
+     */
+    public function widgetGoalReport()
+    {
+        $idGoal = Common::getRequestVar('idGoal', '', 'string');
+
+        if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+            $_GET['containerId'] = 'Goals_EcommerceGeneral_Overview';
+        } elseif (!empty($idGoal)) {
+            $_GET['containerId'] = 'Goals_Goals' . (int) $idGoal;
+        } else {
+            return '';
+        }
+
+        return FrontController::getInstance()->fetchDispatch('CoreHome', 'renderWidgetContainer');
+    }
+
+    /**
+     * @deprecated used to be a widgetized URL. There to not break widget URLs
+     */
+    public function widgetGoalsOverview()
+    {
+        $_GET['containerId'] = 'Goals_GoalsGeneral_Overview';
+
+        return FrontController::getInstance()->fetchDispatch('CoreHome', 'renderWidgetContainer');
     }
 }

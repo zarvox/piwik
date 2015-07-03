@@ -111,7 +111,7 @@ class GenerateWidget extends GeneratePluginBase
     protected function getExistingCategories()
     {
         $categories = array();
-        foreach (WidgetsList::get()->getWidgets() as $widget) {
+        foreach (WidgetsList::get()->getWidgetConfigs() as $widget) {
             if ($widget->getCategoryId()) {
                 $categories[] = Piwik::translate($widget->getCategoryId());
             }

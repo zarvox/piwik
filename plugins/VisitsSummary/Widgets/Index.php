@@ -36,7 +36,7 @@ class Index extends \Piwik\Widget\WidgetContainerConfig
         $list = new WidgetsList();
         $report->configureWidgets($list, $factory);
 
-        foreach ($list->getWidgets() as $config) {
+        foreach ($list->getWidgetConfigs() as $config) {
             $config->setIsNotWidgetizable();
             $widgets[] = $config;
         }

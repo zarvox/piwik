@@ -30,7 +30,7 @@ class Get extends \Piwik\Plugin\Report
     protected function init()
     {
         parent::init();
-        $this->categoryId      = 'General_Visitors';
+        $this->categoryId    = 'General_Visitors';
         $this->name          = Piwik::translate('VisitsSummary_VisitsSummary');
         $this->documentation = ''; // TODO
         $this->processedMetrics = array(

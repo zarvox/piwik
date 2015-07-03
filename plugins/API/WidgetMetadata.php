@@ -28,7 +28,7 @@ class WidgetMetadata
 
     public function getPagesMetadata(WidgetsList $widgetsList)
     {
-        $categories  = $this->moveWidgetsIntoCategories($widgetsList->getWidgets());
+        $categories  = $this->moveWidgetsIntoCategories($widgetsList->getWidgetConfigs());
         $categories  = $this->buildPagesMetadata($categories);
 
         return $categories;
@@ -38,9 +38,9 @@ class WidgetMetadata
     {
         $flat = array();
 
-        $categories = $this->moveWidgetsIntoCategories($widgetsList->getWidgets());
+        $categories = $this->moveWidgetsIntoCategories($widgetsList->getWidgetConfigs());
 
-        foreach ($widgetsList->getWidgets() as $widgetConfig) {
+        foreach ($widgetsList->getWidgetConfigs() as $widgetConfig) {
 
             /** @var WidgetConfig[] $widgets */
             $widgets = array($widgetConfig);

@@ -10,7 +10,9 @@ namespace Piwik\Plugins\VisitFrequency;
 
 use Piwik\API\Request;
 use Piwik\Common;
+use Piwik\FrontController;
 use Piwik\Piwik;
+use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
 use Piwik\Translation\Translator;
 use Piwik\View;
 
@@ -26,6 +28,17 @@ class Controller extends \Piwik\Plugin\Controller
         $this->translator = $translator;
 
         parent::__construct();
+    }
+
+    /**
+     * @deprecated used to be a widgetized URL. There to not break widget URLs
+     */
+    public function getSparklines()
+    {
+        $_GET['forceView'] = '1';
+        $_GET['viewDataTable'] = Sparklines::ID;
+
+        return FrontController::getInstance()->fetchDispatch('VisitFrequency', 'get');
     }
 
     public function getEvolutionGraph()

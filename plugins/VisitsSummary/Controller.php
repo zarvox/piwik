@@ -12,7 +12,9 @@ use Piwik\API\Request;
 use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\DataTable\Row;
+use Piwik\FrontController;
 use Piwik\Piwik;
+use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
 use Piwik\Site;
 use Piwik\Translation\Translator;
 use Piwik\View;
@@ -32,6 +34,27 @@ class Controller extends \Piwik\Plugin\Controller
         $this->translator = $translator;
 
         parent::__construct();
+    }
+
+    /**
+     * @deprecated used to be a widgetized URL. There to not break widget URLs
+     */
+    public function getSparklines()
+    {
+        $_GET['forceView'] = '1';
+        $_GET['viewDataTable'] = Sparklines::ID;
+
+        return FrontController::getInstance()->fetchDispatch('VisitsSummary', 'get');
+    }
+
+    /**
+     * @deprecated used to be a widgetized URL. There to not break widget URLs
+     */
+    public function index()
+    {
+        $_GET['containerId'] = 'VisitOverviewWithGraph';
+
+        return FrontController::getInstance()->fetchDispatch('CoreHome', 'renderWidgetContainer');
     }
 
     public function getEvolutionGraph()

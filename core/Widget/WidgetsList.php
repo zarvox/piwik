@@ -76,7 +76,7 @@ class WidgetsList
         }
     }
 
-    public function getWidgets()
+    public function getWidgetConfigs()
     {
         return $this->widgets;
     }
