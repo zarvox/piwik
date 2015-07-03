@@ -239,7 +239,7 @@ class UITestFixture extends SqlDump
             if ($widget['uniqueId'] == 'widgetSEOgetRank'
                 || $widget['uniqueId'] == 'widgetReferrersgetKeywordsForPage'
                 || $widget['uniqueId'] == 'widgetLivegetVisitorProfilePopup'
-                || $widget['uniqueId'] == 'widgetActionsgetPageTitlesmoduleActionsactiongetPageTitlesforceView0viewDataTabletable'
+                || $widget['uniqueId'] == 'widgetActionsgetPageTitles'
                 || strpos($widget['uniqueId'], 'widgetExample') === 0
             ) {
                 continue;
@@ -290,11 +290,12 @@ class UITestFixture extends SqlDump
         $dashboard = array(
             array(
                 array(
-                    'uniqueId' => "widgetVisitsSummarygetEvolutionGraphmoduleVisitsSummaryactiongetEvolutionGraphforceView1viewDataTablegraphEvolutioncolumnsArray",
+                    'uniqueId' => "widgetVisitsSummarygetEvolutionGraphforceView1viewDataTablegraphEvolution",
                     'parameters' => array(
                         'module' => 'VisitsSummary',
                         'action' => 'getEvolutionGraph',
-                        'columns' => 'nb_visits'
+                        'forceView' => '1',
+                        'viewDataTable' => 'graphEvolution'
                     )
                 )
             ),
