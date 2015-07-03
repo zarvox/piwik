@@ -32,7 +32,8 @@ class GetPageTitlesFollowingSiteSearch extends SiteSearchBase
             new AveragePageGenerationTime()
         );
         $this->order = 19;
-        $this->widgetTitle  = 'Actions_WidgetPageTitlesFollowingSearch';
+
+        $this->subcategoryId = 'Actions_SubmenuSitesearch';
     }
 
     public function configureView(ViewDataTable $view)

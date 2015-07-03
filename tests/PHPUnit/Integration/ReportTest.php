@@ -16,12 +16,12 @@ use Piwik\Piwik;
 use Piwik\Metrics;
 use Piwik\Plugins\ExampleTracker\Columns\ExampleDimension;
 use Piwik\Plugins\Referrers\Columns\Keyword;
-use Piwik\WidgetsList;
+use Piwik\Report\ReportWidgetFactory;
 use Piwik\Translate;
-use Piwik\Menu\MenuReporting;
 use Piwik\Plugin\Manager as PluginManager;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Piwik\Widget\WidgetsList;
 
 class GetBasicReport extends Report
 {
@@ -33,7 +33,7 @@ class GetBasicReport extends Report
         $this->order  = 20;
         $this->module = 'TestPlugin';
         $this->action = 'getBasicReport';
-        $this->category = 'Goals_Goals';
+        $this->categoryId = 'Goals_Goals';
         $this->actionToLoadSubTables = 'invalidReport';
     }
 }
@@ -45,8 +45,7 @@ class GetAdvancedReport extends GetBasicReport
         parent::init();
 
         $this->action      = 'getAdvancedReport';
-        $this->widgetTitle = 'Actions_WidgetPageTitlesFollowingSearch';
-        $this->menuTitle   = 'Actions_SubmenuPageTitles';
+        $this->subcategoryId = 'Actions_SubmenuPageTitles';
         $this->documentation = Piwik::translate('ExampleReportDocumentation');
         $this->dimension   = new ExitPageUrl();
         $this->metrics     = array('nb_actions', 'nb_visits');
@@ -55,6 +54,12 @@ class GetAdvancedReport extends GetBasicReport
         $this->isSubtableReport = true;
         $this->actionToLoadSubTables = 'GetBasicReport';
         $this->constantRowsCount = true;
+    }
+
+    public function configureWidgets(WidgetsList $widgetsList, ReportWidgetFactory $factory)
+    {
+        $widget = $factory->createWidget()->setName('Actions_WidgetPageTitlesFollowingSearch');
+        $widgetsList->addWidget($widget);
     }
 
     public function set($param, $value)
@@ -114,8 +119,6 @@ class ReportTest extends IntegrationTestCase
 
     public function tearDown()
     {
-        WidgetsList::getInstance()->_reset();
-        MenuReporting::getInstance()->unsetInstance();
         unset($_GET['idSite']);
         parent::tearDown();
     }
@@ -149,104 +152,11 @@ class ReportTest extends IntegrationTestCase
         $this->disabledReport->checkIsEnabled();
     }
 
-    public function test_getWidgetTitle_shouldReturnNullIfNoTitleIsSet()
-    {
-        $this->assertNull($this->basicReport->getWidgetTitle());
-    }
-
-    public function test_getWidgetTitle_shouldReturnTranslatedTitleIfSet()
-    {
-        Translate::loadAllTranslations();
-        $this->assertEquals('Page Titles Following a Site Search', $this->advancedReport->getWidgetTitle());
-        Translate::reset();
-    }
-
     public function test_getCategory_shouldReturnTranslatedCategory()
     {
         Translate::loadAllTranslations();
-        $this->assertEquals('Goals', $this->advancedReport->getCategory());
+        $this->assertEquals('Goals_Goals', $this->advancedReport->getCategoryId());
         Translate::reset();
-    }
-
-    public function test_configureWidget_shouldNotAddAWidgetIfNoWidgetTitleIsSet()
-    {
-        $widgets = WidgetsList::get();
-        $this->assertCount(0, $widgets);
-
-        $this->basicReport->configureWidget(WidgetsList::getInstance());
-
-        $widgets = WidgetsList::get();
-        $this->assertCount(0, $widgets);
-    }
-
-    public function test_configureWidget_shouldAddAWidgetIfAWidgetTitleIsSet()
-    {
-        $widgets = WidgetsList::get();
-        $this->assertCount(0, $widgets);
-
-        $this->advancedReport->configureWidget(WidgetsList::getInstance());
-
-        $widgets = WidgetsList::get();
-        $this->assertCount(1, $widgets);
-        $this->assertEquals(array(array(
-            'name'       => 'Actions_WidgetPageTitlesFollowingSearch',
-            'uniqueId'   => 'widgetTestPlugingetAdvancedReport',
-            'parameters' => array('module' => 'TestPlugin', 'action' => 'getAdvancedReport')
-        )), $widgets['Goals_Goals']);
-    }
-
-    public function test_configureWidget_shouldMixinWidgetParametersIfSet()
-    {
-        $widgets = WidgetsList::get();
-        $this->assertCount(0, $widgets);
-
-        $this->advancedReport->set('widgetParams', array('foo' => 'bar'));
-        $this->advancedReport->configureWidget(WidgetsList::getInstance());
-
-        $widgets = WidgetsList::get();
-        $this->assertCount(1, $widgets);
-        $this->assertEquals(array('module' => 'TestPlugin', 'action' => 'getAdvancedReport', 'foo' => 'bar'),
-                            $widgets['Goals_Goals'][0]['parameters']);
-    }
-
-    public function test_configureReportingMenu_shouldNotAddAMenuIfNoWidgetTitleIsSet()
-    {
-        $menu      = MenuReporting::getInstance();
-        $menuItems = $menu->getMenu();
-        $this->assertNull($menuItems);
-
-        $this->basicReport->configureReportingMenu($menu);
-
-        $menuItems = $menu->getMenu();
-        $this->assertNull($menuItems);
-    }
-
-    public function test_configureReportingMenu_shouldAddAMenuIfATitleIsSet()
-    {
-        $menu      = MenuReporting::getInstance();
-        $menuItems = $menu->getMenu();
-        $this->assertNull($menuItems);
-
-        $this->advancedReport->configureReportingMenu($menu);
-
-        $menuItems = $menu->getMenu();
-        
-        $expected = array(
-            '_tooltip' => false,
-            '_order' => 20,
-            '_hasSubmenu' => true,
-            'Actions_SubmenuPageTitles' => array(
-            '_url' => array(
-                'module' => 'TestPlugin',
-                'action' => 'menuGetAdvancedReport'
-            ),
-            '_order' => 20,
-            '_name' => 'Actions_SubmenuPageTitles',
-            '_tooltip' =>  false,
-        ));
-        
-        $this->assertCount(1, $menuItems);
-        $this->assertEquals($expected, $menuItems['Goals_Goals']);
     }
 
     public function test_getMetrics_shouldUseDefaultMetrics()
@@ -353,7 +263,8 @@ class ReportTest extends IntegrationTestCase
                     'conversion_rate' => 'General_ColumnConversionRate',
                 ),
                 'actionToLoadSubTables' => 'invalidReport',
-                'order' => 20
+                'order' => 20,
+                'subcategory' => null
             )
         ), $reports);
     }
@@ -390,7 +301,8 @@ class ReportTest extends IntegrationTestCase
                 ),
                 'actionToLoadSubTables' => 'GetBasicReport',
                 'constantRowsCount' => true,
-                'order' => '20'
+                'order' => '20',
+                'subcategory' => 'Actions_SubmenuPageTitles'
             )
         ), $reports);
     }

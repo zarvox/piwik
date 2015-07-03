@@ -3,7 +3,8 @@
 	<website>Site 1</website>
 	<prettyDate>Sunday 3 January 2010</prettyDate>
 	<metadata>
-		<category>Visits Summary</category>
+		<category>Visitors</category>
+		<subcategory>Times</subcategory>
 		<name>Visits by Server Time</name>
 		<module>VisitTime</module>
 		<action>getVisitInformationPerServerTime</action>

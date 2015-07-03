@@ -10,7 +10,7 @@ namespace Piwik\Plugins\Dashboard;
 use Piwik\Common;
 use Piwik\Db;
 use Piwik\DbHelper;
-use Piwik\WidgetsList;
+use Piwik\Widget\WidgetsList;
 
 class Model
 {

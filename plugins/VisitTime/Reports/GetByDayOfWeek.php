@@ -14,7 +14,9 @@ use Piwik\Plugin\ViewDataTable;
 use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
 use Piwik\Plugins\VisitTime\Columns\DayOfTheWeek;
 use Piwik\Period;
+use Piwik\Report\ReportWidgetFactory;
 use Piwik\Site;
+use Piwik\Widget\WidgetsList;
 
 class GetByDayOfWeek extends Base
 {
@@ -28,7 +30,13 @@ class GetByDayOfWeek extends Base
         $this->documentation = Piwik::translate('VisitTime_WidgetByDayOfWeekDocumentation');
         $this->constantRowsCount = true;
         $this->order = 25;
-        $this->widgetTitle  = 'VisitTime_VisitsByDayOfWeek';
+    }
+
+    public function configureWidgets(WidgetsList $widgetsList, ReportWidgetFactory $factory)
+    {
+        // we have to do it manually since it's only done automatically if a subcategoryId is specified,
+        // we do not set a subcategoryId since this report is not supposed to be shown in the UI
+        $widgetsList->addWidget($factory->createWidget());
     }
 
     public function configureView(ViewDataTable $view)

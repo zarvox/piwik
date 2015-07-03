@@ -17,6 +17,8 @@ use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
 use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
 use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
 use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
+use Piwik\Report\ReportWidgetFactory;
+use Piwik\Widget\WidgetsList;
 
 class GetPageTitles extends Base
 {
@@ -40,8 +42,7 @@ class GetPageTitles extends Base
 
         $this->actionToLoadSubTables = $this->action;
 
-        $this->menuTitle   = 'Actions_SubmenuPageTitles';
-        $this->widgetTitle = 'Actions_WidgetPageTitles';
+        $this->subcategoryId = 'Actions_SubmenuPageTitles';
     }
 
     public function getMetrics()

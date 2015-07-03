@@ -20,8 +20,9 @@ class GetResolution extends Base
         $this->dimension     = new Resolution();
         $this->name          = Piwik::translate('Resolution_WidgetResolutions');
         $this->documentation = ''; // TODO
-        $this->order = 0;
-        $this->widgetTitle  = 'Resolution_WidgetResolutions';
+        $this->order = 8;
+
+        $this->subcategoryId = 'DevicesDetection_Devices';
     }
 
     public function configureView(ViewDataTable $view)

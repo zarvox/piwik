@@ -18,10 +18,11 @@ class GetConfiguration extends Base
     {
         parent::init();
         $this->dimension     = new Configuration();
-        $this->name          = Piwik::translate('Resolution_WidgetGlobalVisitors');
+        $this->name          = Piwik::translate('Resolution_Configurations');
         $this->documentation = Piwik::translate('Resolution_WidgetGlobalVisitorsDocumentation', '<br />');
         $this->order = 7;
-        $this->widgetTitle  = 'Resolution_WidgetGlobalVisitors';
+
+        $this->subcategoryId = 'DevicesDetection_Software';
     }
 
     public function configureView(ViewDataTable $view)

@@ -29,7 +29,7 @@ class Get extends Report
         $this->module        = 'API';
         $this->action        = 'get';
 
-        $this->category      = 'API';
+        $this->categoryId      = 'API';
         $this->name          = Piwik::translate('General_MainMetrics');
         $this->documentation = '';
 

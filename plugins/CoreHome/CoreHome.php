@@ -13,6 +13,8 @@ namespace Piwik\Plugins\CoreHome;
  */
 class CoreHome extends \Piwik\Plugin
 {
+    const WIDGET_CONTAINER_LAYOUT_BY_DIMENSION = 'ByDimension';
+
     /**
      * @see Piwik\Plugin::getListHooksRegistered
      */
@@ -105,8 +107,6 @@ class CoreHome extends \Piwik\Plugin
         $jsFiles[] = "plugins/CoreHome/javascripts/dataTable_rowactions.js";
         $jsFiles[] = "plugins/CoreHome/javascripts/popover.js";
         $jsFiles[] = "plugins/CoreHome/javascripts/broadcast.js";
-        $jsFiles[] = "plugins/CoreHome/javascripts/menu.js";
-        $jsFiles[] = "plugins/CoreHome/javascripts/menu_init.js";
         $jsFiles[] = "plugins/CoreHome/javascripts/calendar.js";
         $jsFiles[] = "plugins/CoreHome/javascripts/sparkline.js";
         $jsFiles[] = "plugins/CoreHome/javascripts/corehome.js";
@@ -120,8 +120,12 @@ class CoreHome extends \Piwik\Plugin
         $jsFiles[] = "plugins/CoreHome/angularjs/piwikApp.config.js";
 
         $jsFiles[] = "plugins/CoreHome/angularjs/common/services/service.module.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/common/services/global-ajax-queue.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/common/services/piwik.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/common/services/piwik-api.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/common/services/piwik-url.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/common/services/report-metadata-model.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/common/services/reporting-pages-model.js";
 
         $jsFiles[] = "plugins/CoreHome/angularjs/common/filters/filter.module.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/common/filters/translate.js";
@@ -130,6 +134,7 @@ class CoreHome extends \Piwik\Plugin
         $jsFiles[] = "plugins/CoreHome/angularjs/common/filters/length.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/common/filters/trim.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/common/filters/pretty-url.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/common/filters/escape.js";
 
         $jsFiles[] = "plugins/CoreHome/angularjs/common/directives/directive.module.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/common/directives/autocomplete-matched.js";
@@ -163,6 +168,21 @@ class CoreHome extends \Piwik\Plugin
 
         $jsFiles[] = "plugins/CoreHome/angularjs/ajax-form/ajax-form.controller.js";
         $jsFiles[] = "plugins/CoreHome/angularjs/ajax-form/ajax-form.directive.js";
+
+        $jsFiles[] = "plugins/CoreHome/angularjs/widget-loader/widgetloader.directive.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/widget-bydimension-container/widget-bydimension-container.directive.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/widget-container/widgetcontainer.directive.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/widget/widget.directive.js";
+
+        $jsFiles[] = "plugins/CoreHome/angularjs/popover-handler/popover-handler.directive.js";
+
+        $jsFiles[] = "plugins/CoreHome/angularjs/reporting-page/reportingpage.controller.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/reporting-page/reportingpage-model.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/reporting-page/reportingpage.directive.js";
+
+        $jsFiles[] = "plugins/CoreHome/angularjs/reporting-menu/reportingmenu.controller.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/reporting-menu/reportingmenu-model.js";
+        $jsFiles[] = "plugins/CoreHome/angularjs/reporting-menu/reportingmenu.directive.js";
     }
 
     public function getClientSideTranslationKeys(&$translationKeys)
@@ -258,5 +278,6 @@ class CoreHome extends \Piwik\Plugin
         $translationKeys[] = 'CoreHome_UndoPivotBySubtable';
         $translationKeys[] = 'CoreHome_PivotBySubtable';
         $translationKeys[] = 'General_LearnMore';
+        $translationKeys[] = 'CoreHome_NoSuchPage';
     }
 }

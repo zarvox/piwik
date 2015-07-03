@@ -14,6 +14,7 @@ describe("ViewDataTableTest", function () { // TODO: should remove Test suffix f
     var url = "?module=Widgetize&action=iframe&moduleToWidgetize=Referrers&idSite=1&period=year&date=2012-08-09&"
             + "actionToWidgetize=getKeywords&viewDataTable=table&filter_limit=5&isFooterExpandedInDashboard=1";
 
+    return;
     it("should load correctly", function (done) {
         expect.screenshot("0_initial").to.be.capture(function (page) {
             page.load(url);

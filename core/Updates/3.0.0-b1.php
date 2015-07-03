@@ -1,0 +1,360 @@
+<?php
+/**
+ * Piwik - free/libre analytics platform
+ *
+ * @link http://piwik.org
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ *
+ */
+
+namespace Piwik\Updates;
+
+use Piwik\Common;
+use Piwik\Db;
+use Piwik\Updater;
+use Piwik\Updates;
+use Piwik\Plugins\Dashboard;
+
+/**
+ * Update for version 3.0.0-b1.
+ */
+class Updates_3_0_0_b1 extends Updates
+{
+    /**
+     * Here you can define one or multiple SQL statements that should be executed during the update.
+     * @return array
+     */
+    static function getSql()
+    {
+        $allGoals = Db::get()->fetchAll(sprintf("SELECT DISTINCT idgoal FROM %s", Common::prefixTable('goal')));
+        $allDashboards = Db::get()->fetchAll(sprintf("SELECT * FROM %s", Common::prefixTable('user_dashboard')));
+
+        return self::getDashboardMigrationSqls($allDashboards, $allGoals);
+    }
+
+    /**
+     * Here you can define any action that should be performed during the update. For instance executing SQL statements,
+     * renaming config entries, updating files, etc.
+     */
+    static function update()
+    {
+        Updater::updateDatabase(__FILE__, self::getSql());
+    }
+
+    private function getDashboardMigrationSqls($allDashboards, $allGoals)
+    {
+        $sqls = array();
+
+
+        // update dashboard to use new widgets
+        $oldWidgets = array(
+            array (
+                'module' => 'VisitTime',
+                'action' => 'getVisitInformationPerServerTime',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitTime',
+                'action' => 'getVisitInformationPerLocalTime',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitTime',
+                'action' => 'getByDayOfWeek',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitsSummary',
+                'action' => 'getEvolutionGraph',
+                'params' =>
+                    array (
+                        'columns' => array ('nb_visits'),
+                    ),
+            ),array (
+                'module' => 'VisitsSummary',
+                'action' => 'getSparklines',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitsSummary',
+                'action' => 'index',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Live',
+                'action' => 'getVisitorLog',
+                'params' =>
+                    array ('small' => 1),
+            ),array (
+                'module' => 'VisitorInterest',
+                'action' => 'getNumberOfVisitsPerVisitDuration',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitorInterest',
+                'action' => 'getNumberOfVisitsPerPage',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitFrequency',
+                'action' => 'getSparklines',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'VisitFrequency',
+                'action' => 'getEvolutionGraph',
+                'params' =>
+                    array (
+                        'columns' => array ('nb_visits_returning'),
+                    ),
+            ),array (
+                'module' => 'DevicesDetection',
+                'action' => 'getBrowserEngines',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Referrers',
+                'action' => 'getReferrerType',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Referrers',
+                'action' => 'getAll',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Referrers',
+                'action' => 'getSocials',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'widgetGoalsOverview',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'getItemsSku',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'getItemsName',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'getItemsCategory',
+                'params' =>
+                    array (
+                    ),
+            ),array (
+                'module' => 'Ecommerce',
+                'action' => 'widgetGoalReport',
+                'params' =>
+                    array (
+                        'idGoal' => 'ecommerceOrder',
+                    ),
+            ),
+        );
+
+        foreach ($allGoals as $goal) {
+            $oldWidgets[] = array (
+                'module' => 'Goals',
+                'action' => 'widgetGoalReport',
+                'params' =>
+                    array (
+                        'idGoal' => $goal['idGoal'],
+                    ));
+        }
+
+        $newWidgets = array(
+            array (
+                'module' => 'VisitTime',
+                'action' => 'getVisitInformationPerServerTime',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'graphVerticalBar',
+                    ),
+            ),array (
+                'module' => 'VisitTime',
+                'action' => 'getVisitInformationPerLocalTime',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'graphVerticalBar',
+                    ),
+            ),array (
+                'module' => 'VisitTime',
+                'action' => 'getByDayOfWeek',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'graphVerticalBar'
+                    ),
+            ),array (
+                'module' => 'VisitsSummary',
+                'action' => 'getEvolutionGraph',
+                'params' =>
+                    array (
+                        'forceView' => '1',
+                        'viewDataTable' => 'graphEvolution',
+                    ),
+            ),array (
+                'module' => 'VisitsSummary',
+                'action' => 'get',
+                'params' =>
+                    array (
+                        'forceView' => '1',
+                        'viewDataTable' => 'sparklines',
+                    ),
+            ),array (
+                'module' => 'CoreHome',
+                'action' => 'renderWidgetContainer',
+                'params' =>
+                    array (
+                        'containerId' => 'VisitOverviewWithGraph',
+                    ),
+            ),array (
+                'module' => 'Live',
+                'action' => 'getLastVisitsDetails',
+                'params' =>
+                    array (
+                        'forceView' => '1',
+                        'viewDataTable' => 'Piwik\\Plugins\\Live\\VisitorLog',
+                        'small' => '1',
+                    ),
+            ),array (
+                'module' => 'VisitorInterest',
+                'action' => 'getNumberOfVisitsPerVisitDuration',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'cloud',
+                    ),
+            ),array (
+                'module' => 'VisitorInterest',
+                'action' => 'getNumberOfVisitsPerPage',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'cloud',
+                    ),
+            ),array (
+                'module' => 'VisitFrequency',
+                'action' => 'get',
+                'params' =>
+                    array (
+                        'forceView' => '1',
+                        'viewDataTable' => 'sparklines'
+                    ),
+            ),array (
+                'module' => 'VisitFrequency',
+                'action' => 'getEvolutionGraph',
+                'params' =>
+                    array (
+                        'forceView' => 1,
+                        'viewDataTable' => 'graphEvolution',
+                    ),
+            ),array (
+                'module' => 'DevicesDetection',
+                'action' => 'getBrowserEngines',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'graphPie',
+                    ),
+            ),array (
+                'module' => 'CoreHome',
+                'action' => 'renderWidgetContainer',
+                'params' =>
+                    array (
+                        'containerId' => 'Goals_EcommerceGeneral_Overview',
+                    ),
+            ),array (
+                'module' => 'Referrers',
+                'action' => 'getAll',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'tableAllColumns',
+                    ),
+            ),array (
+                'module' => 'Referrers',
+                'action' => 'getSocials',
+                'params' =>
+                    array (
+                        'viewDataTable' => 'graphPie',
+                    ),
+            ),array (
+                'module' => 'CoreHome',
+                'action' => 'renderWidgetContainer',
+                'params' =>
+                    array (
+                        'containerId' => 'Goals_GoalsGeneral_Overview'
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'getItemsSku',
+                'params' =>
+                    array (
+                        'abandonedCarts' => '0',
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'getItemsName',
+                'params' =>
+                    array (
+                        'abandonedCarts' => '0',
+                    ),
+            ),array (
+                'module' => 'Goals',
+                'action' => 'getItemsCategory',
+                'params' =>
+                    array (
+                        'abandonedCarts' => '0',
+                    ),
+            ),array (
+                'module' => 'CoreHome',
+                'action' => 'renderWidgetContainer',
+                'params' =>
+                    array (
+                        'containerId' => 'Goals_EcommerceGeneral_Overview',
+                    ),
+            ),
+        );
+
+        foreach ($allGoals as $goal) {
+            $newWidgets[] = array (
+                'module' => 'CoreHome',
+                'action' => 'renderWidgetContainer',
+                'params' =>
+                    array (
+                        'idGoal' => $goal['idgoal'],
+                        'containerId' => 'Goals_Goals' . $goal['idgoal'],
+                    ));
+        }
+
+        foreach ($allDashboards as $dashboard) {
+            $dashboardLayout = json_decode($dashboard['layout']);
+
+            $dashboardLayout = Dashboard\Model::replaceDashboardWidgets($dashboardLayout, $oldWidgets, $newWidgets);
+
+            $newLayout = json_encode($dashboardLayout);
+            if ($newLayout != $dashboard['layout']) {
+                $sqls["UPDATE " . Common::prefixTable('user_dashboard') . " SET layout = '".addslashes($newLayout)."' WHERE iddashboard = ".$dashboard['iddashboard']] = false;
+            }
+        }
+
+        return $sqls;
+    }
+}

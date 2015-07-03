@@ -10,6 +10,7 @@
 namespace Piwik\Plugins\CoreConsole\Commands;
 
 use Piwik\Columns\Dimension;
+use Piwik\Piwik;
 use Piwik\Plugin\Manager;
 use Piwik\Plugin\Report;
 use Piwik\Translate;
@@ -67,8 +68,8 @@ class GenerateReport extends GeneratePluginBase
         $this->copyTemplateToPlugin($exampleFolder, $pluginName, $replace, $whitelistFiles);
 
         $this->writeSuccessMessage($output, array(
-            sprintf('Reports/%s.php for %s generated.', ucfirst($apiName), $pluginName),
-            'You should now implement the method called "' . lcfirst($apiName) . '" in API.php',
+            sprintf('plugins/%s/Reports/%s.php for %s generated.', $pluginName, ucfirst($apiName)),
+            'You should now implement the method called <comment>"' . lcfirst($apiName) . '()"</comment> in API.php',
            // 'Read more about this here: link to developer guide',
             'Enjoy!'
         ));
@@ -79,7 +80,7 @@ class GenerateReport extends GeneratePluginBase
         $order = 1;
 
         foreach (Report::getAllReports() as $report) {
-            if ($report->getCategory() === $category) {
+            if ($report->getCategoryId() === $category) {
                 if ($report->getOrder() > $order) {
                     $order = $report->getOrder() + 1;
                 }
@@ -191,8 +192,8 @@ class GenerateReport extends GeneratePluginBase
 
         $categories = array();
         foreach (Report::getAllReports() as $report) {
-            if ($report->getCategory()) {
-                $categories[] = $report->getCategory();
+            if ($report->getCategoryId()) {
+                $categories[] = Piwik::translate($report->getCategoryId());
             }
         }
         $categories = array_values(array_unique($categories));

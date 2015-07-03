@@ -20,7 +20,6 @@ class GetLanguageCode extends GetLanguage
         $this->name          = Piwik::translate('UserLanguage_LanguageCode');
         $this->documentation = '';
         $this->order = 11;
-        $this->widgetTitle  = 'UserLanguage_LanguageCode';
     }
 
     public function getRelatedReports()

@@ -11,7 +11,6 @@ namespace Piwik\Plugin;
 use Piwik\Common;
 use Piwik\Development;
 use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuReporting;
 use Piwik\Menu\MenuTop;
 use Piwik\Menu\MenuUser;
 use Piwik\Plugin\Manager as PluginManager;
@@ -207,14 +206,6 @@ class Menu
             'period' => $defaultPeriod,
             'date'   => $defaultDate,
         );
-    }
-
-    /**
-     * Configures the reporting menu which should only contain links to reports of a specific site such as
-     * "Search Engines", "Page Titles" or "Locations & Provider".
-     */
-    public function configureReportingMenu(MenuReporting $menu)
-    {
     }
 
     /**

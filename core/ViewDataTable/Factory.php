@@ -58,6 +58,8 @@ use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
  */
 class Factory
 {
+    const DEFAULT_VIEW = HtmlTable::ID;
+
     /**
      * Cache for getDefaultTypeViewDataTable result.
      *
@@ -132,7 +134,7 @@ class Factory
             // Common::getRequestVar removes backslashes from the defaultValue in case magic quotes are enabled.
             // therefore do not pass this as a default value to getRequestVar()
             if ('' === $type) {
-                $type = $defaultType ?: HtmlTable::ID;
+                $type = $defaultType ?: self::DEFAULT_VIEW;
             }
         } else {
             $type = $defaultViewType;
@@ -154,8 +156,8 @@ class Factory
             return self::createViewDataTableInstance($visualizations[$defaultType], $controllerAction, $apiAction, $params);
         }
 
-        if (array_key_exists(HtmlTable::ID, $visualizations)) {
-            return self::createViewDataTableInstance($visualizations[HtmlTable::ID], $controllerAction, $apiAction, $params);
+        if (array_key_exists(self::DEFAULT_VIEW, $visualizations)) {
+            return self::createViewDataTableInstance($visualizations[self::DEFAULT_VIEW], $controllerAction, $apiAction, $params);
         }
 
         throw new \Exception('No visualization found to render ViewDataTable');

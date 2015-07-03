@@ -35,12 +35,10 @@ class Controller extends \Piwik\Plugin\Controller
         parent::__construct();
     }
 
-    public function index()
+    public function getSparklines()
     {
-        $view = new View('@Referrers/index');
-
-        $view->graphEvolutionReferrers = $this->getEvolutionGraph(Common::REFERRER_TYPE_DIRECT_ENTRY, array(), array('nb_visits'));
-        $view->nameGraphEvolutionReferrers = 'Referrers.getEvolutionGraph';
+        $view = new View('@Referrers/getSparklines');
+        $this->setPeriodVariablesView($view);
 
         $nameValues = $this->getReferrersVisitorsByType();
 
@@ -92,51 +90,6 @@ class Controller extends \Piwik\Plugin\Controller
         $view->urlSparklineDistinctKeywords = $this->getUrlSparkline('getLastDistinctKeywordsGraph');
         $view->urlSparklineDistinctWebsites = $this->getUrlSparkline('getLastDistinctWebsitesGraph');
         $view->urlSparklineDistinctCampaigns = $this->getUrlSparkline('getLastDistinctCampaignsGraph');
-
-        return $view->render();
-    }
-
-    public function allReferrers()
-    {
-        $view = new View('@Referrers/allReferrers');
-
-        // building the referrers summary report
-        $view->dataTableReferrerType = $this->renderReport('getReferrerType');
-
-        $nameValues = $this->getReferrersVisitorsByType();
-
-        $totalVisits = array_sum($nameValues);
-        foreach ($nameValues as $name => $value) {
-            $view->$name = $value;
-
-            // calculate percent of total, if there were any visits
-            if ($value != 0
-                && $totalVisits != 0
-            ) {
-                $percentName = $name . 'Percent';
-                $view->$percentName = round(($value / $totalVisits) * 100, 0);
-            }
-        }
-
-        $view->totalVisits = $totalVisits;
-        $view->referrersReportsByDimension = $this->renderReport('getAll');
-
-        return $view->render();
-    }
-
-    public function getSearchEnginesAndKeywords()
-    {
-        $view = new View('@Referrers/getSearchEnginesAndKeywords');
-        $view->searchEngines = $this->renderReport('getSearchEngines');
-        $view->keywords      = $this->renderReport('getKeywords');
-        return $view->render();
-    }
-
-    public function indexWebsites()
-    {
-        $view = new View('@Referrers/indexWebsites');
-        $view->websites = $this->renderReport('getWebsites');
-        $view->socials  = $this->renderReport('getSocials');
 
         return $view->render();
     }
@@ -221,7 +174,7 @@ class Controller extends \Piwik\Plugin\Controller
         } else {
             // use $typeReferrer as default
             if ($typeReferrer === false) {
-                $typeReferrer = Common::getRequestVar('typeReferrer', false);
+                $typeReferrer = Common::getRequestVar('typeReferrer', Common::REFERRER_TYPE_DIRECT_ENTRY);
             }
             $label = self::getTranslatedReferrerTypeLabel($typeReferrer);
             $total = $this->translator->translate('General_Total');

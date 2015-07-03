@@ -1,0 +1,15 @@
+<div>
+
+    <div ng-show="loading" class="loadingPiwik">
+        <img src="plugins/Morpheus/images/loading-blue.gif" alt=""/>{{ 'General_LoadingData'|translate }}
+    </div>
+
+    <div ng-show="loadingFailed">
+        <div class="notification system notification-error">
+            {{ 'General_ErrorRequest'|translate:(''):('') }}
+        </div>
+    </div>
+
+    <div class="theWidgetContent"></div>
+
+</div>

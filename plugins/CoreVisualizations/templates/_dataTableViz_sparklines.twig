@@ -1,0 +1,43 @@
+{% if not isWidget %}
+<div class="row">
+    <div class="col-md-6">
+{% endif %}
+
+        {% for key, sparkline in sparklines %}
+            {% if key is even %}
+
+                <div class="sparkline">
+                    {% if sparkline.url %}{{ sparkline(sparkline.url)|raw }}{% endif %}
+                    {% for metric in sparkline.metrics %}
+                        <strong>{{ metric.value }}</strong> {{ metric.description }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+{% if not isWidget %}
+    </div>
+    <div class="col-md-6">
+{% endif %}
+
+        {% for key, sparkline in sparklines %}
+            {% if key is odd %}
+
+                <div class="sparkline">
+                    {% if sparkline.url %}{{ sparkline(sparkline.url)|raw }}{% endif %}
+                    {% for metric in sparkline.metrics %}
+                        <strong>{{ metric.value }}</strong> {{ metric.description }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+{% if not isWidget %}
+    </div>
+</div>
+{% endif %}
+
+{% include "_sparklineFooter.twig" %}
+

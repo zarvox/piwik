@@ -1,0 +1,8 @@
+<div>
+    <div piwik-widget widget="{{ widget|json_encode }}" show-name="{% if showWidgetTitle %}true{% else %}false{% endif %}"></div>
+    <script type="text/javascript">
+        $(function () {
+            piwikHelper.compileAngularComponents('[id="{{ widget.uniqueId }}"]');
+        });
+    </script>
+</div>

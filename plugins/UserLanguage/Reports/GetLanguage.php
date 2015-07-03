@@ -20,8 +20,7 @@ class GetLanguage extends Base
         $this->dimension     = new Language();
         $this->name          = Piwik::translate('UserLanguage_BrowserLanguage');
         $this->documentation = ''; // TODO
-        $this->order = 10;
-        $this->widgetTitle  = 'UserLanguage_BrowserLanguage';
+        $this->order = 8;
     }
 
     public function configureView(ViewDataTable $view)

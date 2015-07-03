@@ -171,7 +171,7 @@ class Visualization extends ViewDataTable
         $this->report = Report::factory($this->requestConfig->getApiModuleToRequest(), $this->requestConfig->getApiMethodToRequest());
     }
 
-    protected function buildView()
+    public function render()
     {
         $this->overrideSomeConfigPropertiesIfNeeded();
 
@@ -233,7 +233,7 @@ class Visualization extends ViewDataTable
         $view->footerIcons = $this->config->footer_icons;
         $view->isWidget    = Common::getRequestVar('widget', 0, 'int');
 
-        return $view;
+        return $view->render();
     }
 
     /**

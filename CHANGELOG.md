@@ -2,6 +2,28 @@
 
 This is a changelog for Piwik platform developers. All changes for our HTTP API's, Plugins, Themes, etc will be listed here.
 
+## Piwik 3.0.0
+
+### Breaking Changes
+* The menu classes `Piwik\Menu\MenuReporting` and `Piwik\Menu\MenuMain` have been removed
+* The class `Piwik\Plugin\Widgets` has been removed and replaced by `Piwik\Widget\Widget`. For each widget one class is needed from now on. You can generate a widget via `./console generate:widget`.
+* The class `Piwik\WidgetList` class has been removed and replaced by `Piwik\Widget\WidgetsList
+* The method `Piwik\Plugin\Menu::configureReportingMenu` has been removed. To add something to the reporting menu you need to create widgets
+* The method `Report::configureWidget()`, `Report::getWidgetTitle()` and `Report::configureReportingMenu()` have been removed, use the new method `Report::configureWidgets()` instead.
+* The method `Report::getCategory()` does no longer return the translated category but the translation key of the category
+* The properties `Report::$widgetTitle`, `Report::$widgetParams` and `Report::$menuTitle` were removed, use the method `Report::configureWidgets()` to create widgets instead
+* In the HTTP API methods `Dashboard.getDefaultDashboard` and `Dashboard.getUserDashboards` we do no longer remove not existing widgets as it is up to the client which widgets actually exist
+
+### New APIs
+* Multiple widgets for one report can now be created via the `Report::configureWidgets()` method via the new classes `Piwik\Widget\ReportWidgetFactory` and `Piwik\Widget\ReportWidgetConfig`
+* There is a new property `Report::$subCategory` that let's you add a report to the reporting UI. If a page having that name does not exist yet, it will be created automatically. The newly added method `Report::getSubCategory()` let's you get this value.
+* The new classes `Piwik\Widget\Widget`, `Piwik\Widget\WidgetConfig` and `Piwik\Widget\WidgetContainerConfig` let's you create a new widget.
+* New HTTP API method `API.getWidgetMetadata` to get a list of available widgets
+* New HTTP API method `API.getReportPagesMetadata` to get a list of all available pages that exist including the widgets they include
+
+### New features
+* New "Sparklines" visualization that let's you create a widget showing multiple sparklines
+
 ## Piwik 2.14.0
 
 ### Breaking Changes

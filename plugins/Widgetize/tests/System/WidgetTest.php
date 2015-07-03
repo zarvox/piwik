@@ -14,7 +14,7 @@ use Piwik\Piwik;
 use Piwik\Plugins\Goals;
 use Piwik\Plugins\Widgetize\tests\Fixtures\WidgetizeFixture;
 use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\WidgetsList;
+use Piwik\Widget\WidgetsList;
 
 /**
  * @group Widgetize

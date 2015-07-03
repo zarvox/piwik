@@ -11,7 +11,9 @@ namespace Piwik\Plugins\Dashboard;
 use Piwik\Common;
 use Piwik\Db;
 use Piwik\Piwik;
-use Piwik\WidgetsList;
+use Piwik\Category\Subcategory;
+use Piwik\Widget\WidgetConfig;
+use Piwik\Widget\WidgetsList;
 
 /**
  */
@@ -26,8 +28,41 @@ class Dashboard extends \Piwik\Plugin
             'AssetManager.getJavaScriptFiles'        => 'getJsFiles',
             'AssetManager.getStylesheetFiles'        => 'getStylesheetFiles',
             'UsersManager.deleteUser'                => 'deleteDashboardLayout',
-            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys'
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
+            'Widgets.addWidgets' => 'addWidgets',
+            'Subcategory.addSubcategories' => 'addSubcategories'
         );
+    }
+
+    public function addWidgets(WidgetsList $widgetsList)
+    {
+        $dashboards = API::getInstance()->getDashboards();
+
+        foreach ($dashboards as $dashboard) {
+            $config = new WidgetConfig();
+            $config->setIsNotWidgetizable();
+            $config->setModule('Dashboard');
+            $config->setAction('embeddedIndex');
+            $config->setCategoryId('Dashboard_Dashboard');
+            $config->setSubcategoryId($dashboard['id']);
+            $config->setParameters(array('idDashboard' => $dashboard['id']));
+            $widgetsList->addWidget($config);
+        }
+    }
+
+    public function addSubcategories(&$subcategories)
+    {
+        $dashboards = API::getInstance()->getDashboards();
+
+        $order = 0;
+        foreach ($dashboards as $dashboard) {
+            $config = new Subcategory();
+            $config->setName($dashboard['name']);
+            $config->setCategoryId('Dashboard_Dashboard');
+            $config->setId($dashboard['id']);
+            $config->setOrder($order++);
+            $subcategories[] = $config;
+        }
     }
 
     /**
@@ -70,14 +105,14 @@ class Dashboard extends \Piwik\Plugin
 
             $defaultLayout = '[
                 [
-                    {"uniqueId":"widgetVisitsSummarygetEvolutionGraphcolumnsArray","parameters":{"module":"VisitsSummary","action":"getEvolutionGraph","columns":"nb_visits"}},
+                    {"uniqueId":"widgetVisitsSummarygetEvolutionGraphforceView1viewDataTablegraphEvolution","parameters":{"forceView":"1","viewDataTable":"graphEvolution","module":"VisitsSummary","action":"getEvolutionGraph"}},
                     {"uniqueId":"widgetLivewidget","parameters":{"module":"Live","action":"widget"}},
-                    {"uniqueId":"widgetVisitorInterestgetNumberOfVisitsPerVisitDuration","parameters":{"module":"VisitorInterest","action":"getNumberOfVisitsPerVisitDuration"}}
+                    {"uniqueId":"widgetVisitorInterestgetNumberOfVisitsPerVisitDurationviewDataTablecloud","parameters":{"viewDataTable":"cloud","module":"VisitorInterest","action":"getNumberOfVisitsPerVisitDuration"}}
                 ],
                 [
                     ' . $topWidget . '
                     {"uniqueId":"widgetReferrersgetWebsites","parameters":{"module":"Referrers","action":"getWebsites"}},
-                    {"uniqueId":"widgetVisitTimegetVisitInformationPerServerTime","parameters":{"module":"VisitTime","action":"getVisitInformationPerServerTime"}}
+                    {"uniqueId":"widgetVisitTimegetVisitInformationPerServerTime","parameters":{"viewDataTable": "graphVerticalBar","module":"VisitTime","action":"getVisitInformationPerServerTime"}}
                 ],
                 [
                     {"uniqueId":"widgetUserCountryMapvisitorMap","parameters":{"module":"UserCountryMap","action":"visitorMap"}},
@@ -160,24 +195,6 @@ class Dashboard extends \Piwik\Plugin
             );
         }
 
-        foreach ($layoutObject->columns as &$row) {
-            if (!is_array($row)) {
-                $row = array();
-                continue;
-            }
-
-            foreach ($row as $widgetId => $widget) {
-                if (isset($widget->parameters->module)) {
-                    $controllerName = $widget->parameters->module;
-                    $controllerAction = $widget->parameters->action;
-                    if (!WidgetsList::isDefined($controllerName, $controllerAction)) {
-                        unset($row[$widgetId]);
-                    }
-                } else {
-                    unset($row[$widgetId]);
-                }
-            }
-        }
         $layout = $this->encodeLayout($layoutObject);
         return $layout;
     }
@@ -202,11 +219,13 @@ class Dashboard extends \Piwik\Plugin
 
     public function getJsFiles(&$jsFiles)
     {
+        $jsFiles[] = "plugins/Dashboard/angularjs/common/services/dashboards-model.js";
         $jsFiles[] = "plugins/Dashboard/javascripts/widgetMenu.js";
         $jsFiles[] = "libs/javascript/json2.js";
         $jsFiles[] = "plugins/Dashboard/javascripts/dashboardObject.js";
         $jsFiles[] = "plugins/Dashboard/javascripts/dashboardWidget.js";
         $jsFiles[] = "plugins/Dashboard/javascripts/dashboard.js";
+        $jsFiles[] = "plugins/Dashboard/angularjs/dashboard/dashboard.directive.js";
     }
 
     public function getStylesheetFiles(&$stylesheets)

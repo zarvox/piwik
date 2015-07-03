@@ -23,7 +23,7 @@ var Overlay_Helper = {
     getOverlayLink: function (idSite, period, date, link) {
         var url = 'index.php?module=Overlay&period=' + period + '&date=' + date + '&idSite=' + idSite;
         if (link) {
-            url += '#l=' + Overlay_Helper.encodeFrameUrl(link);
+            url += '#?l=' + Overlay_Helper.encodeFrameUrl(link);
         }
         return url;
     }
