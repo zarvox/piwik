@@ -176,7 +176,7 @@ class Updates_3_0_0_b1 extends Updates
                 'action' => 'widgetGoalReport',
                 'params' =>
                     array (
-                        'idGoal' => $goal['idGoal'],
+                        'idGoal' => $goal['idgoal'],
                     ));
         }
 
