@@ -24,21 +24,18 @@ class Updates_3_0_0_b1 extends Updates
      * Here you can define one or multiple SQL statements that should be executed during the update.
      * @return array
      */
-    static function getSql()
+    public function getMigrationQueries(Updater $updater)
     {
-        $allGoals = Db::get()->fetchAll(sprintf("SELECT DISTINCT idgoal FROM %s", Common::prefixTable('goal')));
-        $allDashboards = Db::get()->fetchAll(sprintf("SELECT * FROM %s", Common::prefixTable('user_dashboard')));
+        $db = Db::get();
+        $allGoals = $db->fetchAll(sprintf("SELECT DISTINCT idgoal FROM %s", Common::prefixTable('goal')));
+        $allDashboards = $db->fetchAll(sprintf("SELECT * FROM %s", Common::prefixTable('user_dashboard')));
 
-        return self::getDashboardMigrationSqls($allDashboards, $allGoals);
+        return $this->getDashboardMigrationSqls($allDashboards, $allGoals);
     }
 
-    /**
-     * Here you can define any action that should be performed during the update. For instance executing SQL statements,
-     * renaming config entries, updating files, etc.
-     */
-    static function update()
+    public function doUpdate(Updater $updater)
     {
-        Updater::updateDatabase(__FILE__, self::getSql());
+        $updater->executeMigrationQueries(__FILE__, $this->getMigrationQueries($updater));
     }
 
     private function getDashboardMigrationSqls($allDashboards, $allGoals)

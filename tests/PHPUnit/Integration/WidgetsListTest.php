@@ -43,10 +43,10 @@ class WidgetsListTest extends IntegrationTestCase
         $numberOfWidgets = array(
             'Dashboard_Dashboard' => 1,
             'General_Actions' => 15,
-            'General_Visitors' => 34,
+            'General_Visitors' => 35,
             'Example Widgets' => 5,
             'SEO' => 2,
-            'Goals_Goals' => 5,
+            'Goals_Goals' => 2,
             'Live!' => 2,
             'Insights_WidgetCategory' => 2,
             'ExampleUI_UiFramework' => 8,
@@ -80,7 +80,7 @@ class WidgetsListTest extends IntegrationTestCase
     {
         Fixture::createWebsite('2009-01-04 00:11:42');
 
-        $initialGoalsWidgets = 5;
+        $initialGoalsWidgets = 2;
 
         $_GET['idSite'] = 1;
 
@@ -94,7 +94,7 @@ class WidgetsListTest extends IntegrationTestCase
 
         // number of main categories
         $this->assertEquals(10, count($perCategory));
-        $this->assertEquals($initialGoalsWidgets + 5, count($perCategory['Goals_Goals'])); // make sure widgets for that goal were added
+        $this->assertEquals($initialGoalsWidgets + 2, count($perCategory['Goals_Goals'])); // make sure widgets for that goal were added
     }
 
     public function testGetWithGoalsAndEcommerce()
@@ -111,8 +111,8 @@ class WidgetsListTest extends IntegrationTestCase
 
         // check if each category has the right number of widgets
         $numberOfWidgets = array(
-            'Goals_Goals'     => 10,
-            'Goals_Ecommerce' => 6,
+            'Goals_Goals'     => 4,
+            'Goals_Ecommerce' => 4,
         );
 
         foreach ($numberOfWidgets as $category => $widgetCount) {
