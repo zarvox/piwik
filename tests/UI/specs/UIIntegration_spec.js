@@ -526,7 +526,7 @@ describe("UIIntegrationTest", function () { // TODO: Rename to Piwik?
         expect.screenshot('widgets_listing').to.be.captureSelector('#content', function (page) {
             page.load("?" + generalParams + "&module=Widgetize&action=index");
             page.mouseMove('.widgetpreview-categorylist>li:contains(Visitors)');
-            page.mouseMove('li[uniqueid="widgetVisitsSummarygetEvolutionGraphviewDataTablegraphEvolution"]');
+            page.mouseMove('li[uniqueid="widgetVisitsSummarygetEvolutionGraphforceView1viewDataTablegraphEvolution"]');
         }, done);
     });
 
