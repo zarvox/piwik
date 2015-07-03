@@ -70,7 +70,6 @@ class Controller extends \Piwik\Plugin\Controller
         $segment     = Request::getRawSegmentFromRequest();
 
         $view = new View('@CoreHome/widgetContainer');
-        $view->widget = '';
         $view->showWidgetTitle = true;
 
         if (Common::getRequestVar('widget', 0, 'int')) {
@@ -82,17 +81,18 @@ class Controller extends \Piwik\Plugin\Controller
             'date'    => $date,
             'period'  => $period,
             'segment' => $segment,
-            'deep'    => 1
+            'deep'    => '1'
         ));
 
         foreach ($widgets as $widget) {
             if (!empty($widget['isContainer']) && $widget['parameters']['containerId'] === $containerId) {
                 $view->widget = $widget;
-                break;
+
+                return $view->render();
             }
         }
 
-        return $view->render();
+        throw new Exception(Piwik::translate('Dashboard_WidgetNotFound'));
     }
 
     /**
