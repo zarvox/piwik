@@ -63,16 +63,17 @@ class Controller extends \Piwik\Plugin\Controller
         Piwik::checkUserHasSomeViewAccess();
         $this->checkSitePermission();
 
-        $containerId = Common::getRequestVar('containerId', null, 'string');
-        $idSite      = Common::getRequestVar('idSite', null, 'int');
-        $date        = Common::getRequestVar('date', null, 'string');
-        $period      = Common::getRequestVar('period', null, 'string');
-        $segment     = Request::getRawSegmentFromRequest();
+        $containerId  = Common::getRequestVar('containerId', null, 'string');
+        $isWidgetized = Common::getRequestVar('widget', 0, 'int');
+        $idSite       = Common::getRequestVar('idSite', null, 'int');
+        $date         = Common::getRequestVar('date', null, 'string');
+        $period       = Common::getRequestVar('period', null, 'string');
+        $segment      = Request::getRawSegmentFromRequest();
 
         $view = new View('@CoreHome/widgetContainer');
         $view->showWidgetTitle = true;
 
-        if (Common::getRequestVar('widget', 0, 'int')) {
+        if ($isWidgetized) {
             $view->showWidgetTitle = false;
         }
 
@@ -86,6 +87,13 @@ class Controller extends \Piwik\Plugin\Controller
 
         foreach ($widgets as $widget) {
             if (!empty($widget['isContainer']) && $widget['parameters']['containerId'] === $containerId) {
+                if (!empty($isWidgetized)) {
+                    $widget['parameters']['widget'] = '1';
+                    foreach ($widget['widgets'] as &$subwidget) {
+                        $subwidget['parameters']['widget'] = '1';
+                    }
+                }
+
                 $view->widget = $widget;
 
                 return $view->render();
