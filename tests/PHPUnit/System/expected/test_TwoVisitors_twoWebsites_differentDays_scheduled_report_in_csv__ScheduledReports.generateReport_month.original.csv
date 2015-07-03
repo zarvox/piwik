@@ -28,12 +28,12 @@ label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site
 800x300,9,41,0%,4.6,00:13:21,11%
 1024x768,2,2,0%,1,00:00:00,100%
 
-Operating System families
+Operating System versions
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate
 Unknown,8,40,0%,5,00:15:01,0%
-Windows,3,3,0%,1,00:00:00,100%
+Windows XP,3,3,0%,1,00:00:00,100%
 
-Visitor Browser
+Browsers
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate
 Unknown,8,40,0%,5,00:15:01,0%
 Firefox,2,2,0%,1,00:00:00,100%
@@ -45,16 +45,16 @@ Unknown,8,40,0%,5,00:15:01,0%
 Firefox 3.6,2,2,0%,1,00:00:00,100%
 Opera 9.63,1,1,0%,1,00:00:00,100%
 
-Visitor Configuration
+Configurations
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate
 Unknown / Unknown / 800x300,8,40,0%,5,00:15:01,0%
 Windows / Firefox / 1024x768,2,2,0%,1,00:00:00,100%
 Windows / Opera / 800x300,1,1,0%,1,00:00:00,100%
 
-Operating System versions
+Operating System families
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate
 Unknown,8,40,0%,5,00:15:01,0%
-Windows XP,3,3,0%,1,00:00:00,100%
+Windows,3,3,0%,1,00:00:00,100%
 
 Browser engines
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate
@@ -172,34 +172,7 @@ Returning Visits
 nb_uniq_visitors_returning,nb_users_returning,nb_visits_returning,nb_actions_returning,max_actions_returning,bounce_rate_returning,nb_actions_per_visit_returning,avg_time_on_site_returning
 2,0,9,41,5,11%,4.6,00:13:21
 
-Visits by Server Time
-label,nb_visits,nb_actions,nb_actions_per_visit,avg_time_on_site,bounce_rate,revenue
-0h,1,1,1,00:00:00,100%,$ 0
-1h,0,0,0,00:00:00,0%,$ 0
-2h,0,0,0,00:00:00,0%,$ 0
-3h,0,0,0,00:00:00,0%,$ 0
-4h,0,0,0,00:00:00,0%,$ 0
-5h,0,0,0,00:00:00,0%,$ 0
-6h,0,0,0,00:00:00,0%,$ 0
-7h,0,0,0,00:00:00,0%,$ 0
-8h,0,0,0,00:00:00,0%,$ 0
-9h,0,0,0,00:00:00,0%,$ 0
-10h,0,0,0,00:00:00,0%,$ 0
-11h,8,40,5,00:15:01,0%,$ 0
-12h,1,1,1,00:00:00,100%,$ 0
-13h,0,0,0,00:00:00,0%,$ 0
-14h,0,0,0,00:00:00,0%,$ 0
-15h,0,0,0,00:00:00,0%,$ 0
-16h,0,0,0,00:00:00,0%,$ 0
-17h,0,0,0,00:00:00,0%,$ 0
-18h,0,0,0,00:00:00,0%,$ 0
-19h,0,0,0,00:00:00,0%,$ 0
-20h,0,0,0,00:00:00,0%,$ 0
-21h,0,0,0,00:00:00,0%,$ 0
-22h,0,0,0,00:00:00,0%,$ 0
-23h,1,1,1,00:00:00,100%,$ 0
-
-Visits by Local Time
+Visits per local time
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate
 0h,0,0,0%,0,00:00:00,0%
 1h,0,0,0%,0,00:00:00,0%
@@ -225,6 +198,33 @@ label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site
 21h,0,0,0%,0,00:00:00,0%
 22h,0,0,0%,0,00:00:00,0%
 23h,0,0,0%,0,00:00:00,0%
+
+Visits per server time
+label,nb_visits,nb_actions,nb_actions_per_visit,avg_time_on_site,bounce_rate,revenue
+0h,1,1,1,00:00:00,100%,$ 0
+1h,0,0,0,00:00:00,0%,$ 0
+2h,0,0,0,00:00:00,0%,$ 0
+3h,0,0,0,00:00:00,0%,$ 0
+4h,0,0,0,00:00:00,0%,$ 0
+5h,0,0,0,00:00:00,0%,$ 0
+6h,0,0,0,00:00:00,0%,$ 0
+7h,0,0,0,00:00:00,0%,$ 0
+8h,0,0,0,00:00:00,0%,$ 0
+9h,0,0,0,00:00:00,0%,$ 0
+10h,0,0,0,00:00:00,0%,$ 0
+11h,8,40,5,00:15:01,0%,$ 0
+12h,1,1,1,00:00:00,100%,$ 0
+13h,0,0,0,00:00:00,0%,$ 0
+14h,0,0,0,00:00:00,0%,$ 0
+15h,0,0,0,00:00:00,0%,$ 0
+16h,0,0,0,00:00:00,0%,$ 0
+17h,0,0,0,00:00:00,0%,$ 0
+18h,0,0,0,00:00:00,0%,$ 0
+19h,0,0,0,00:00:00,0%,$ 0
+20h,0,0,0,00:00:00,0%,$ 0
+21h,0,0,0,00:00:00,0%,$ 0
+22h,0,0,0,00:00:00,0%,$ 0
+23h,1,1,1,00:00:00,100%,$ 0
 
 Visits by Day of Week
 label,nb_visits,nb_actions,conversion_rate,nb_actions_per_visit,avg_time_on_site,bounce_rate

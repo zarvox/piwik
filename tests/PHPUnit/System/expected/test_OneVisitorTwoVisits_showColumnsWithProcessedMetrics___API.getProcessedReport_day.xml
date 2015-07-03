@@ -5,7 +5,7 @@
 	<metadata>
 		<category>Visitors</category>
 		<subcategory>Times</subcategory>
-		<name>Visits by Server Time</name>
+		<name>Visits per server time</name>
 		<module>VisitTime</module>
 		<action>getVisitInformationPerServerTime</action>
 		<dimension>Server time</dimension>

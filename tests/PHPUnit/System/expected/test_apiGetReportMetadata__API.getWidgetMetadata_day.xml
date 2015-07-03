@@ -15,7 +15,6 @@
 			<module>Live</module>
 			<action>widget</action>
 		</parameters>
-		<widget_url>?module=Live&amp;action=widget</widget_url>
 		<uniqueId>widgetLivewidget</uniqueId>
 	</row>
 	<row>
@@ -32,16 +31,13 @@
 		<parameters>
 			<module>Live</module>
 			<action>getSimpleLastVisitCount</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Live&amp;action=getSimpleLastVisitCount&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetLivegetSimpleLastVisitCountmoduleLiveactiongetSimpleLastVisitCountforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetLivegetSimpleLastVisitCount</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Evolution over the period</name>
+		<name>Visits Over Time</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -56,16 +52,12 @@
 		<action>getEvolutionGraph</action>
 		<order>5</order>
 		<parameters>
-			<module>VisitsSummary</module>
-			<action>getEvolutionGraph</action>
 			<forceView>1</forceView>
 			<viewDataTable>graphEvolution</viewDataTable>
-			<columns>
-				<row>nb_visits</row>
-			</columns>
+			<module>VisitsSummary</module>
+			<action>getEvolutionGraph</action>
 		</parameters>
-		<widget_url>?module=VisitsSummary&amp;action=getEvolutionGraph&amp;forceView=1&amp;viewDataTable=graphEvolution&amp;columns%5B0%5D=nb_visits</widget_url>
-		<uniqueId>widgetVisitsSummarygetEvolutionGraphmoduleVisitsSummaryactiongetEvolutionGraphforceView1viewDataTablegraphEvolutioncolumnsArray</uniqueId>
+		<uniqueId>widgetVisitsSummarygetEvolutionGraphforceView1viewDataTablegraphEvolution</uniqueId>
 		<viewDataTable>graphEvolution</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -85,14 +77,13 @@
 		<action>getLastVisitsDetails</action>
 		<order>10</order>
 		<parameters>
-			<module>Live</module>
-			<action>getLastVisitsDetails</action>
 			<forceView>1</forceView>
 			<viewDataTable>Piwik\Plugins\Live\VisitorLog</viewDataTable>
+			<module>Live</module>
+			<action>getLastVisitsDetails</action>
 			<small>1</small>
 		</parameters>
-		<widget_url>?module=Live&amp;action=getLastVisitsDetails&amp;forceView=1&amp;viewDataTable=Piwik%5CPlugins%5CLive%5CVisitorLog&amp;small=1</widget_url>
-		<uniqueId>widgetLivegetLastVisitsDetailsmoduleLiveactiongetLastVisitsDetailsforceView1viewDataTablePiwik%5CPlugins%5CLive%5CVisitorLogsmall1</uniqueId>
+		<uniqueId>widgetLivegetLastVisitsDetailsforceView1viewDataTablePiwik%5CPlugins%5CLive%5CVisitorLogsmall1</uniqueId>
 		<viewDataTable>Piwik\Plugins\Live\VisitorLog</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -114,11 +105,8 @@
 		<parameters>
 			<module>CustomVariables</module>
 			<action>getCustomVariables</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=CustomVariables&amp;action=getCustomVariables&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetCustomVariablesgetCustomVariablesmoduleCustomVariablesactiongetCustomVariablesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetCustomVariablesgetCustomVariables</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -140,11 +128,8 @@
 		<parameters>
 			<module>DevicesDetection</module>
 			<action>getModel</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getModel&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetModelmoduleDevicesDetectionactiongetModelforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetModel</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -166,11 +151,8 @@
 		<parameters>
 			<module>DevicesDetection</module>
 			<action>getType</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getType&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetTypemoduleDevicesDetectionactiongetTypeforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetType</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -192,11 +174,8 @@
 		<parameters>
 			<module>Resolution</module>
 			<action>getResolution</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Resolution&amp;action=getResolution&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetResolutiongetResolutionmoduleResolutionactiongetResolutionforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetResolutiongetResolution</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -218,16 +197,13 @@
 		<parameters>
 			<module>DevicesDetection</module>
 			<action>getBrand</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getBrand&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetBrandmoduleDevicesDetectionactiongetBrandforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetBrand</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Operating System families</name>
+		<name>Operating System versions</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -239,21 +215,18 @@
 			<id>DevicesDetection_Software</id>
 		</subcategory>
 		<module>DevicesDetection</module>
-		<action>getOsFamilies</action>
+		<action>getOsVersions</action>
 		<order>102</order>
 		<parameters>
 			<module>DevicesDetection</module>
-			<action>getOsFamilies</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
+			<action>getOsVersions</action>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getOsFamilies&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetOsFamiliesmoduleDevicesDetectionactiongetOsFamiliesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetOsVersions</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Visitor Browser</name>
+		<name>Browsers</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -270,11 +243,8 @@
 		<parameters>
 			<module>DevicesDetection</module>
 			<action>getBrowsers</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getBrowsers&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetBrowsersmoduleDevicesDetectionactiongetBrowsersforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetBrowsers</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -294,13 +264,12 @@
 			<action>renderWidgetContainer</action>
 			<containerId>VisitOverviewWithGraph</containerId>
 		</parameters>
-		<widget_url>?module=CoreHome&amp;action=renderWidgetContainer&amp;containerId=VisitOverviewWithGraph</widget_url>
 		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdVisitOverviewWithGraph</uniqueId>
 		<layout />
 		<isContainer>1</isContainer>
 	</row>
 	<row>
-		<name>Report</name>
+		<name>Visits Overview</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -315,13 +284,12 @@
 		<action>get</action>
 		<order>10</order>
 		<parameters>
-			<module>VisitsSummary</module>
-			<action>get</action>
 			<forceView>1</forceView>
 			<viewDataTable>sparklines</viewDataTable>
+			<module>VisitsSummary</module>
+			<action>get</action>
 		</parameters>
-		<widget_url>?module=VisitsSummary&amp;action=get&amp;forceView=1&amp;viewDataTable=sparklines</widget_url>
-		<uniqueId>widgetVisitsSummarygetmoduleVisitsSummaryactiongetforceView1viewDataTablesparklines</uniqueId>
+		<uniqueId>widgetVisitsSummarygetforceView1viewDataTablesparklines</uniqueId>
 		<viewDataTable>sparklines</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -343,16 +311,13 @@
 		<parameters>
 			<module>DevicesDetection</module>
 			<action>getBrowserVersions</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getBrowserVersions&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetBrowserVersionsmoduleDevicesDetectionactiongetBrowserVersionsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetBrowserVersions</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Visitor Configuration</name>
+		<name>Configurations</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -369,11 +334,8 @@
 		<parameters>
 			<module>Resolution</module>
 			<action>getConfiguration</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Resolution&amp;action=getConfiguration&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetResolutiongetConfigurationmoduleResolutionactiongetConfigurationforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetResolutiongetConfiguration</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -395,11 +357,8 @@
 		<parameters>
 			<module>DevicePlugins</module>
 			<action>getPlugin</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicePlugins&amp;action=getPlugin&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicePluginsgetPluginmoduleDevicePluginsactiongetPluginforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicePluginsgetPlugin</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -419,18 +378,16 @@
 		<action>getBrowserEngines</action>
 		<order>110</order>
 		<parameters>
+			<viewDataTable>graphPie</viewDataTable>
 			<module>DevicesDetection</module>
 			<action>getBrowserEngines</action>
-			<forceView>0</forceView>
-			<viewDataTable>graphPie</viewDataTable>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getBrowserEngines&amp;forceView=0&amp;viewDataTable=graphPie</widget_url>
-		<uniqueId>widgetDevicesDetectiongetBrowserEnginesmoduleDevicesDetectionactiongetBrowserEnginesforceView0viewDataTablegraphPie</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetBrowserEnginesviewDataTablegraphPie</uniqueId>
 		<viewDataTable>graphPie</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Operating System versions</name>
+		<name>Operating System families</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -442,16 +399,13 @@
 			<id>DevicesDetection_Software</id>
 		</subcategory>
 		<module>DevicesDetection</module>
-		<action>getOsVersions</action>
+		<action>getOsFamilies</action>
 		<order>108</order>
 		<parameters>
 			<module>DevicesDetection</module>
-			<action>getOsVersions</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
+			<action>getOsFamilies</action>
 		</parameters>
-		<widget_url>?module=DevicesDetection&amp;action=getOsVersions&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetDevicesDetectiongetOsVersionsmoduleDevicesDetectionactiongetOsVersionsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetDevicesDetectiongetOsFamilies</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -473,11 +427,8 @@
 		<parameters>
 			<module>UserLanguage</module>
 			<action>getLanguage</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=UserLanguage&amp;action=getLanguage&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetUserLanguagegetLanguagemoduleUserLanguageactiongetLanguageforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetUserLanguagegetLanguage</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -499,11 +450,8 @@
 		<parameters>
 			<module>UserCountry</module>
 			<action>getRegion</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=UserCountry&amp;action=getRegion&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetUserCountrygetRegionmoduleUserCountryactiongetRegionforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetUserCountrygetRegion</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -525,11 +473,8 @@
 		<parameters>
 			<module>UserCountry</module>
 			<action>getCountry</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=UserCountry&amp;action=getCountry&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetUserCountrygetCountrymoduleUserCountryactiongetCountryforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetUserCountrygetCountry</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -551,11 +496,8 @@
 		<parameters>
 			<module>UserLanguage</module>
 			<action>getLanguageCode</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=UserLanguage&amp;action=getLanguageCode&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetUserLanguagegetLanguageCodemoduleUserLanguageactiongetLanguageCodeforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetUserLanguagegetLanguageCode</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -577,11 +519,8 @@
 		<parameters>
 			<module>UserCountry</module>
 			<action>getContinent</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=UserCountry&amp;action=getContinent&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetUserCountrygetContinentmoduleUserCountryactiongetContinentforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetUserCountrygetContinent</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -600,7 +539,6 @@
 			<module>Live</module>
 			<action>getVisitorProfilePopup</action>
 		</parameters>
-		<widget_url>?module=Live&amp;action=getVisitorProfilePopup</widget_url>
 		<uniqueId>widgetLivegetVisitorProfilePopup</uniqueId>
 	</row>
 	<row>
@@ -621,11 +559,8 @@
 		<parameters>
 			<module>Provider</module>
 			<action>getProvider</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Provider&amp;action=getProvider&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetProvidergetProvidermoduleProvideractiongetProviderforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetProvidergetProvider</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -647,11 +582,8 @@
 		<parameters>
 			<module>UserCountry</module>
 			<action>getCity</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=UserCountry&amp;action=getCity&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetUserCountrygetCitymoduleUserCountryactiongetCityforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetUserCountrygetCity</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -674,63 +606,7 @@
 			<module>UserCountryMap</module>
 			<action>visitorMap</action>
 		</parameters>
-		<widget_url>?module=UserCountryMap&amp;action=visitorMap</widget_url>
 		<uniqueId>widgetUserCountryMapvisitorMap</uniqueId>
-	</row>
-	<row>
-		<name>Visits per visit duration</name>
-		<category>
-			<name>Visitors</name>
-			<order>5</order>
-			<id>General_Visitors</id>
-		</category>
-		<subcategory>
-			<name>Engagement</name>
-			<order>30</order>
-			<id>VisitorInterest_Engagement</id>
-		</subcategory>
-		<module>VisitorInterest</module>
-		<action>getNumberOfVisitsPerVisitDuration</action>
-		<order>115</order>
-		<parameters>
-			<module>VisitorInterest</module>
-			<action>getNumberOfVisitsPerVisitDuration</action>
-			<forceView>0</forceView>
-			<viewDataTable>cloud</viewDataTable>
-		</parameters>
-		<widget_url>?module=VisitorInterest&amp;action=getNumberOfVisitsPerVisitDuration&amp;forceView=0&amp;viewDataTable=cloud</widget_url>
-		<uniqueId>widgetVisitorInterestgetNumberOfVisitsPerVisitDurationmoduleVisitorInterestactiongetNumberOfVisitsPerVisitDurationforceView0viewDataTablecloud</uniqueId>
-		<viewDataTable>cloud</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Returning Visits Over Time</name>
-		<category>
-			<name>Visitors</name>
-			<order>5</order>
-			<id>General_Visitors</id>
-		</category>
-		<subcategory>
-			<name>Engagement</name>
-			<order>30</order>
-			<id>VisitorInterest_Engagement</id>
-		</subcategory>
-		<module>VisitFrequency</module>
-		<action>getEvolutionGraph</action>
-		<order>1</order>
-		<parameters>
-			<module>VisitFrequency</module>
-			<action>getEvolutionGraph</action>
-			<forceView>1</forceView>
-			<viewDataTable>graphEvolution</viewDataTable>
-			<columns>
-				<row>nb_visits_returning</row>
-			</columns>
-		</parameters>
-		<widget_url>?module=VisitFrequency&amp;action=getEvolutionGraph&amp;forceView=1&amp;viewDataTable=graphEvolution&amp;columns%5B0%5D=nb_visits_returning</widget_url>
-		<uniqueId>widgetVisitFrequencygetEvolutionGraphmoduleVisitFrequencyactiongetEvolutionGraphforceView1viewDataTablegraphEvolutioncolumnsArray</uniqueId>
-		<viewDataTable>graphEvolution</viewDataTable>
-		<isReport>1</isReport>
 	</row>
 	<row>
 		<name>Visits by Days Since Last Visit</name>
@@ -750,12 +626,78 @@
 		<parameters>
 			<module>VisitorInterest</module>
 			<action>getNumberOfVisitsByDaysSinceLast</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=VisitorInterest&amp;action=getNumberOfVisitsByDaysSinceLast&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetVisitorInterestgetNumberOfVisitsByDaysSinceLastmoduleVisitorInterestactiongetNumberOfVisitsByDaysSinceLastforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetVisitorInterestgetNumberOfVisitsByDaysSinceLast</uniqueId>
 		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Visits per visit duration</name>
+		<category>
+			<name>Visitors</name>
+			<order>5</order>
+			<id>General_Visitors</id>
+		</category>
+		<subcategory>
+			<name>Engagement</name>
+			<order>30</order>
+			<id>VisitorInterest_Engagement</id>
+		</subcategory>
+		<module>VisitorInterest</module>
+		<action>getNumberOfVisitsPerVisitDuration</action>
+		<order>115</order>
+		<parameters>
+			<viewDataTable>cloud</viewDataTable>
+			<module>VisitorInterest</module>
+			<action>getNumberOfVisitsPerVisitDuration</action>
+		</parameters>
+		<uniqueId>widgetVisitorInterestgetNumberOfVisitsPerVisitDurationviewDataTablecloud</uniqueId>
+		<viewDataTable>cloud</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Frequency Overview</name>
+		<category>
+			<name>Visitors</name>
+			<order>5</order>
+			<id>General_Visitors</id>
+		</category>
+		<subcategory>
+			<name>Engagement</name>
+			<order>30</order>
+			<id>VisitorInterest_Engagement</id>
+		</subcategory>
+		<module>VisitFrequency</module>
+		<action>get</action>
+		<order>2</order>
+		<parameters>
+			<forceView>1</forceView>
+			<viewDataTable>sparklines</viewDataTable>
+			<module>VisitFrequency</module>
+			<action>get</action>
+		</parameters>
+		<uniqueId>widgetVisitFrequencygetforceView1viewDataTablesparklines</uniqueId>
+		<viewDataTable>sparklines</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Visits by Day of Week</name>
+		<category>
+			<name>Visitors</name>
+			<order>5</order>
+			<id>General_Visitors</id>
+		</category>
+		<subcategory />
+		<module>VisitTime</module>
+		<action>getByDayOfWeek</action>
+		<order>125</order>
+		<parameters>
+			<viewDataTable>graphVerticalBar</viewDataTable>
+			<module>VisitTime</module>
+			<action>getByDayOfWeek</action>
+		</parameters>
+		<uniqueId>widgetVisitTimegetByDayOfWeekviewDataTablegraphVerticalBar</uniqueId>
+		<viewDataTable>graphVerticalBar</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
@@ -776,11 +718,8 @@
 		<parameters>
 			<module>VisitorInterest</module>
 			<action>getNumberOfVisitsByVisitCount</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=VisitorInterest&amp;action=getNumberOfVisitsByVisitCount&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetVisitorInterestgetNumberOfVisitsByVisitCountmoduleVisitorInterestactiongetNumberOfVisitsByVisitCountforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetVisitorInterestgetNumberOfVisitsByVisitCount</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -800,18 +739,41 @@
 		<action>getNumberOfVisitsPerPage</action>
 		<order>120</order>
 		<parameters>
+			<viewDataTable>cloud</viewDataTable>
 			<module>VisitorInterest</module>
 			<action>getNumberOfVisitsPerPage</action>
-			<forceView>0</forceView>
-			<viewDataTable>cloud</viewDataTable>
 		</parameters>
-		<widget_url>?module=VisitorInterest&amp;action=getNumberOfVisitsPerPage&amp;forceView=0&amp;viewDataTable=cloud</widget_url>
-		<uniqueId>widgetVisitorInterestgetNumberOfVisitsPerPagemoduleVisitorInterestactiongetNumberOfVisitsPerPageforceView0viewDataTablecloud</uniqueId>
+		<uniqueId>widgetVisitorInterestgetNumberOfVisitsPerPageviewDataTablecloud</uniqueId>
 		<viewDataTable>cloud</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Visits by Server Time</name>
+		<name>Returning Visits Over Time</name>
+		<category>
+			<name>Visitors</name>
+			<order>5</order>
+			<id>General_Visitors</id>
+		</category>
+		<subcategory>
+			<name>Engagement</name>
+			<order>30</order>
+			<id>VisitorInterest_Engagement</id>
+		</subcategory>
+		<module>VisitFrequency</module>
+		<action>getEvolutionGraph</action>
+		<order>1</order>
+		<parameters>
+			<forceView>1</forceView>
+			<viewDataTable>graphEvolution</viewDataTable>
+			<module>VisitFrequency</module>
+			<action>getEvolutionGraph</action>
+		</parameters>
+		<uniqueId>widgetVisitFrequencygetEvolutionGraphforceView1viewDataTablegraphEvolution</uniqueId>
+		<viewDataTable>graphEvolution</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Visits per server time</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -824,20 +786,18 @@
 		</subcategory>
 		<module>VisitTime</module>
 		<action>getVisitInformationPerServerTime</action>
-		<order>115</order>
+		<order>120</order>
 		<parameters>
+			<viewDataTable>graphVerticalBar</viewDataTable>
 			<module>VisitTime</module>
 			<action>getVisitInformationPerServerTime</action>
-			<forceView>0</forceView>
-			<viewDataTable>graphVerticalBar</viewDataTable>
 		</parameters>
-		<widget_url>?module=VisitTime&amp;action=getVisitInformationPerServerTime&amp;forceView=0&amp;viewDataTable=graphVerticalBar</widget_url>
-		<uniqueId>widgetVisitTimegetVisitInformationPerServerTimemoduleVisitTimeactiongetVisitInformationPerServerTimeforceView0viewDataTablegraphVerticalBar</uniqueId>
+		<uniqueId>widgetVisitTimegetVisitInformationPerServerTimeviewDataTablegraphVerticalBar</uniqueId>
 		<viewDataTable>graphVerticalBar</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Visits by Local Time</name>
+		<name>Visits per local time</name>
 		<category>
 			<name>Visitors</name>
 			<order>5</order>
@@ -850,15 +810,13 @@
 		</subcategory>
 		<module>VisitTime</module>
 		<action>getVisitInformationPerLocalTime</action>
-		<order>120</order>
+		<order>115</order>
 		<parameters>
+			<viewDataTable>graphVerticalBar</viewDataTable>
 			<module>VisitTime</module>
 			<action>getVisitInformationPerLocalTime</action>
-			<forceView>0</forceView>
-			<viewDataTable>graphVerticalBar</viewDataTable>
 		</parameters>
-		<widget_url>?module=VisitTime&amp;action=getVisitInformationPerLocalTime&amp;forceView=0&amp;viewDataTable=graphVerticalBar</widget_url>
-		<uniqueId>widgetVisitTimegetVisitInformationPerLocalTimemoduleVisitTimeactiongetVisitInformationPerLocalTimeforceView0viewDataTablegraphVerticalBar</uniqueId>
+		<uniqueId>widgetVisitTimegetVisitInformationPerLocalTimeviewDataTablegraphVerticalBar</uniqueId>
 		<viewDataTable>graphVerticalBar</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -881,7 +839,6 @@
 			<module>UserCountryMap</module>
 			<action>realtimeMap</action>
 		</parameters>
-		<widget_url>?module=UserCountryMap&amp;action=realtimeMap</widget_url>
 		<uniqueId>widgetUserCountryMaprealtimeMap</uniqueId>
 	</row>
 	<row>
@@ -902,16 +859,13 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getPageUrls</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getPageUrls&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetPageUrlsmoduleActionsactiongetPageUrlsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetActionsgetPageUrls</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Entry Pages</name>
+		<name>Entry pages</name>
 		<category>
 			<name>Actions</name>
 			<order>10</order>
@@ -928,16 +882,13 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getEntryPageUrls</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getEntryPageUrls&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetEntryPageUrlsmoduleActionsactiongetEntryPageUrlsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetActionsgetEntryPageUrls</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Exit Pages</name>
+		<name>Exit pages</name>
 		<category>
 			<name>Actions</name>
 			<order>10</order>
@@ -954,16 +905,13 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getExitPageUrls</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getExitPageUrls&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetExitPageUrlsmoduleActionsactiongetExitPageUrlsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetActionsgetExitPageUrls</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Page Titles</name>
+		<name>Page titles</name>
 		<category>
 			<name>Actions</name>
 			<order>10</order>
@@ -980,115 +928,8 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getPageTitles</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getPageTitles&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetPageTitlesmoduleActionsactiongetPageTitlesforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Search Keywords with No Results</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory>
-			<name>Site Search</name>
-			<order>25</order>
-			<id>Actions_SubmenuSitesearch</id>
-		</subcategory>
-		<module>Actions</module>
-		<action>getSiteSearchNoResultKeywords</action>
-		<order>118</order>
-		<parameters>
-			<module>Actions</module>
-			<action>getSiteSearchNoResultKeywords</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-		</parameters>
-		<widget_url>?module=Actions&amp;action=getSiteSearchNoResultKeywords&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetSiteSearchNoResultKeywordsmoduleActionsactiongetSiteSearchNoResultKeywordsforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Pages Following a Site Search</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory>
-			<name>Site Search</name>
-			<order>25</order>
-			<id>Actions_SubmenuSitesearch</id>
-		</subcategory>
-		<module>Actions</module>
-		<action>getPageUrlsFollowingSiteSearch</action>
-		<order>116</order>
-		<parameters>
-			<module>Actions</module>
-			<action>getPageUrlsFollowingSiteSearch</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-		</parameters>
-		<widget_url>?module=Actions&amp;action=getPageUrlsFollowingSiteSearch&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetPageUrlsFollowingSiteSearchmoduleActionsactiongetPageUrlsFollowingSiteSearchforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Page Titles Following a Site Search</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory>
-			<name>Site Search</name>
-			<order>25</order>
-			<id>Actions_SubmenuSitesearch</id>
-		</subcategory>
-		<module>Actions</module>
-		<action>getPageTitlesFollowingSiteSearch</action>
-		<order>119</order>
-		<parameters>
-			<module>Actions</module>
-			<action>getPageTitlesFollowingSiteSearch</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-		</parameters>
-		<widget_url>?module=Actions&amp;action=getPageTitlesFollowingSiteSearch&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetPageTitlesFollowingSiteSearchmoduleActionsactiongetPageTitlesFollowingSiteSearchforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Search Categories</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory>
-			<name>Site Search</name>
-			<order>25</order>
-			<id>Actions_SubmenuSitesearch</id>
-		</subcategory>
-		<module>Actions</module>
-		<action>getSiteSearchCategories</action>
-		<order>120</order>
-		<parameters>
-			<module>Actions</module>
-			<action>getSiteSearchCategories</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-		</parameters>
-		<widget_url>?module=Actions&amp;action=getSiteSearchCategories&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetSiteSearchCategoriesmoduleActionsactiongetSiteSearchCategoriesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetActionsgetPageTitles</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1110,11 +951,138 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getSiteSearchKeywords</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getSiteSearchKeywords&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetSiteSearchKeywordsmoduleActionsactiongetSiteSearchKeywordsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetActionsgetSiteSearchKeywords</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Search Keywords with No Results</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory>
+			<name>Site Search</name>
+			<order>25</order>
+			<id>Actions_SubmenuSitesearch</id>
+		</subcategory>
+		<module>Actions</module>
+		<action>getSiteSearchNoResultKeywords</action>
+		<order>118</order>
+		<parameters>
+			<module>Actions</module>
+			<action>getSiteSearchNoResultKeywords</action>
+		</parameters>
+		<uniqueId>widgetActionsgetSiteSearchNoResultKeywords</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Page Titles Following a Site Search</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory>
+			<name>Site Search</name>
+			<order>25</order>
+			<id>Actions_SubmenuSitesearch</id>
+		</subcategory>
+		<module>Actions</module>
+		<action>getPageTitlesFollowingSiteSearch</action>
+		<order>119</order>
+		<parameters>
+			<module>Actions</module>
+			<action>getPageTitlesFollowingSiteSearch</action>
+		</parameters>
+		<uniqueId>widgetActionsgetPageTitlesFollowingSiteSearch</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Pages Following a Site Search</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory>
+			<name>Site Search</name>
+			<order>25</order>
+			<id>Actions_SubmenuSitesearch</id>
+		</subcategory>
+		<module>Actions</module>
+		<action>getPageUrlsFollowingSiteSearch</action>
+		<order>116</order>
+		<parameters>
+			<module>Actions</module>
+			<action>getPageUrlsFollowingSiteSearch</action>
+		</parameters>
+		<uniqueId>widgetActionsgetPageUrlsFollowingSiteSearch</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Search Categories</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory>
+			<name>Site Search</name>
+			<order>25</order>
+			<id>Actions_SubmenuSitesearch</id>
+		</subcategory>
+		<module>Actions</module>
+		<action>getSiteSearchCategories</action>
+		<order>120</order>
+		<parameters>
+			<module>Actions</module>
+			<action>getSiteSearchCategories</action>
+		</parameters>
+		<uniqueId>widgetActionsgetSiteSearchCategories</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Entry Page Titles</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory />
+		<module>Actions</module>
+		<action>getEntryPageTitles</action>
+		<order>106</order>
+		<parameters>
+			<module>Actions</module>
+			<action>getEntryPageTitles</action>
+		</parameters>
+		<uniqueId>widgetActionsgetEntryPageTitles</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Exit page titles</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory />
+		<module>Actions</module>
+		<action>getExitPageTitles</action>
+		<order>107</order>
+		<parameters>
+			<module>Actions</module>
+			<action>getExitPageTitles</action>
+		</parameters>
+		<uniqueId>widgetActionsgetExitPageTitles</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1136,11 +1104,8 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getOutlinks</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getOutlinks&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetOutlinksmoduleActionsactiongetOutlinksforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetActionsgetOutlinks</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1162,60 +1127,8 @@
 		<parameters>
 			<module>Actions</module>
 			<action>getDownloads</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Actions&amp;action=getDownloads&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetDownloadsmoduleActionsactiongetDownloadsforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Exit Page Titles</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory />
-		<module>Actions</module>
-		<action>getExitPageTitles</action>
-		<order>107</order>
-		<parameters>
-			<module>Actions</module>
-			<action>getExitPageTitles</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-		</parameters>
-		<widget_url>?module=Actions&amp;action=getExitPageTitles&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetExitPageTitlesmoduleActionsactiongetExitPageTitlesforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Event Categories</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory>
-			<name>Events</name>
-			<order>40</order>
-			<id>Events_Events</id>
-		</subcategory>
-		<module>Events</module>
-		<action>getCategory</action>
-		<order>100</order>
-		<parameters>
-			<module>Events</module>
-			<action>getCategory</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-			<secondaryDimension>eventAction</secondaryDimension>
-		</parameters>
-		<widget_url>?module=Events&amp;action=getCategory&amp;forceView=0&amp;viewDataTable=table&amp;secondaryDimension=eventAction</widget_url>
-		<uniqueId>widgetEventsgetCategorymoduleEventsactiongetCategoryforceView0viewDataTabletablesecondaryDimensioneventAction</uniqueId>
+		<uniqueId>widgetActionsgetDownloads</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1237,12 +1150,33 @@
 		<parameters>
 			<module>Events</module>
 			<action>getName</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 			<secondaryDimension>eventAction</secondaryDimension>
 		</parameters>
-		<widget_url>?module=Events&amp;action=getName&amp;forceView=0&amp;viewDataTable=table&amp;secondaryDimension=eventAction</widget_url>
-		<uniqueId>widgetEventsgetNamemoduleEventsactiongetNameforceView0viewDataTabletablesecondaryDimensioneventAction</uniqueId>
+		<uniqueId>widgetEventsgetNamesecondaryDimensioneventAction</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Event Categories</name>
+		<category>
+			<name>Actions</name>
+			<order>10</order>
+			<id>General_Actions</id>
+		</category>
+		<subcategory>
+			<name>Events</name>
+			<order>40</order>
+			<id>Events_Events</id>
+		</subcategory>
+		<module>Events</module>
+		<action>getCategory</action>
+		<order>100</order>
+		<parameters>
+			<module>Events</module>
+			<action>getCategory</action>
+			<secondaryDimension>eventAction</secondaryDimension>
+		</parameters>
+		<uniqueId>widgetEventsgetCategorysecondaryDimensioneventAction</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1264,12 +1198,9 @@
 		<parameters>
 			<module>Events</module>
 			<action>getAction</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 			<secondaryDimension>eventName</secondaryDimension>
 		</parameters>
-		<widget_url>?module=Events&amp;action=getAction&amp;forceView=0&amp;viewDataTable=table&amp;secondaryDimension=eventName</widget_url>
-		<uniqueId>widgetEventsgetActionmoduleEventsactiongetActionforceView0viewDataTabletablesecondaryDimensioneventName</uniqueId>
+		<uniqueId>widgetEventsgetActionsecondaryDimensioneventName</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1291,11 +1222,8 @@
 		<parameters>
 			<module>Contents</module>
 			<action>getContentNames</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Contents&amp;action=getContentNames&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetContentsgetContentNamesmoduleContentsactiongetContentNamesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetContentsgetContentNames</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1317,116 +1245,9 @@
 		<parameters>
 			<module>Contents</module>
 			<action>getContentPieces</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Contents&amp;action=getContentPieces&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetContentsgetContentPiecesmoduleContentsactiongetContentPiecesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetContentsgetContentPieces</uniqueId>
 		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Entry Page Titles</name>
-		<category>
-			<name>Actions</name>
-			<order>10</order>
-			<id>General_Actions</id>
-		</category>
-		<subcategory />
-		<module>Actions</module>
-		<action>getEntryPageTitles</action>
-		<order>106</order>
-		<parameters>
-			<module>Actions</module>
-			<action>getEntryPageTitles</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-		</parameters>
-		<widget_url>?module=Actions&amp;action=getEntryPageTitles&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetActionsgetEntryPageTitlesmoduleActionsactiongetEntryPageTitlesforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Referrer Type</name>
-		<category>
-			<name>Referrers</name>
-			<order>15</order>
-			<id>Referrers_Referrers</id>
-		</category>
-		<subcategory>
-			<name>Overview</name>
-			<order>2</order>
-			<id>General_Overview</id>
-		</subcategory>
-		<module>Referrers</module>
-		<action>getSparklines</action>
-		<order>10</order>
-		<parameters>
-			<module>Referrers</module>
-			<action>getSparklines</action>
-			<forceView>1</forceView>
-			<viewDataTable>sparklines</viewDataTable>
-		</parameters>
-		<widget_url>?module=Referrers&amp;action=getSparklines&amp;forceView=1&amp;viewDataTable=sparklines</widget_url>
-		<uniqueId>widgetReferrersgetSparklinesmoduleReferrersactiongetSparklinesforceView1viewDataTablesparklines</uniqueId>
-		<viewDataTable>sparklines</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Evolution over the period</name>
-		<category>
-			<name>Referrers</name>
-			<order>15</order>
-			<id>Referrers_Referrers</id>
-		</category>
-		<subcategory>
-			<name>Overview</name>
-			<order>2</order>
-			<id>General_Overview</id>
-		</subcategory>
-		<module>Referrers</module>
-		<action>getEvolutionGraph</action>
-		<order>101</order>
-		<parameters>
-			<module>Referrers</module>
-			<action>getEvolutionGraph</action>
-			<forceView>1</forceView>
-			<viewDataTable>graphEvolution</viewDataTable>
-			<columns>
-				<row>nb_visits</row>
-			</columns>
-			<typeReferrer>1</typeReferrer>
-		</parameters>
-		<widget_url>?module=Referrers&amp;action=getEvolutionGraph&amp;forceView=1&amp;viewDataTable=graphEvolution&amp;columns%5B0%5D=nb_visits&amp;typeReferrer=1</widget_url>
-		<uniqueId>widgetReferrersgetEvolutionGraphmoduleReferrersactiongetEvolutionGraphforceView1viewDataTablegraphEvolutioncolumnsArraytypeReferrer1</uniqueId>
-		<viewDataTable>graphEvolution</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Referrers</name>
-		<category>
-			<name>Referrers</name>
-			<order>15</order>
-			<id>Referrers_Referrers</id>
-		</category>
-		<subcategory>
-			<name>All Referrers</name>
-			<order>5</order>
-			<id>Referrers_WidgetGetAll</id>
-		</subcategory>
-		<module>Referrers</module>
-		<action>getAll</action>
-		<order>102</order>
-		<parameters>
-			<module>Referrers</module>
-			<action>getAll</action>
-			<forceView>0</forceView>
-			<viewDataTable>tableAllColumns</viewDataTable>
-		</parameters>
-		<widget_url>?module=Referrers&amp;action=getAll&amp;forceView=0&amp;viewDataTable=tableAllColumns</widget_url>
-		<uniqueId>widgetReferrersgetAllmoduleReferrersactiongetAllforceView0viewDataTabletableAllColumns</uniqueId>
-		<viewDataTable>tableAllColumns</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
@@ -1445,40 +1266,36 @@
 		<action>getReferrerType</action>
 		<order>101</order>
 		<parameters>
+			<viewDataTable>tableAllColumns</viewDataTable>
 			<module>Referrers</module>
 			<action>getReferrerType</action>
-			<forceView>0</forceView>
-			<viewDataTable>tableAllColumns</viewDataTable>
 		</parameters>
-		<widget_url>?module=Referrers&amp;action=getReferrerType&amp;forceView=0&amp;viewDataTable=tableAllColumns</widget_url>
-		<uniqueId>widgetReferrersgetReferrerTypemoduleReferrersactiongetReferrerTypeforceView0viewDataTabletableAllColumns</uniqueId>
+		<uniqueId>widgetReferrersgetReferrerTypeviewDataTabletableAllColumns</uniqueId>
 		<viewDataTable>tableAllColumns</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Keywords</name>
+		<name>Referrers</name>
 		<category>
 			<name>Referrers</name>
 			<order>15</order>
 			<id>Referrers_Referrers</id>
 		</category>
 		<subcategory>
-			<name>Search Engines &amp; Keywords</name>
-			<order>10</order>
-			<id>Referrers_SubmenuSearchEngines</id>
+			<name>All Referrers</name>
+			<order>5</order>
+			<id>Referrers_WidgetGetAll</id>
 		</subcategory>
 		<module>Referrers</module>
-		<action>getKeywords</action>
-		<order>103</order>
+		<action>getAll</action>
+		<order>102</order>
 		<parameters>
+			<viewDataTable>tableAllColumns</viewDataTable>
 			<module>Referrers</module>
-			<action>getKeywords</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
+			<action>getAll</action>
 		</parameters>
-		<widget_url>?module=Referrers&amp;action=getKeywords&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetReferrersgetKeywordsmoduleReferrersactiongetKeywordsforceView0viewDataTabletable</uniqueId>
-		<viewDataTable>table</viewDataTable>
+		<uniqueId>widgetReferrersgetAllviewDataTabletableAllColumns</uniqueId>
+		<viewDataTable>tableAllColumns</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
@@ -1499,11 +1316,31 @@
 		<parameters>
 			<module>Referrers</module>
 			<action>getSearchEngines</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Referrers&amp;action=getSearchEngines&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetReferrersgetSearchEnginesmoduleReferrersactiongetSearchEnginesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetReferrersgetSearchEngines</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Keywords</name>
+		<category>
+			<name>Referrers</name>
+			<order>15</order>
+			<id>Referrers_Referrers</id>
+		</category>
+		<subcategory>
+			<name>Search Engines &amp; Keywords</name>
+			<order>10</order>
+			<id>Referrers_SubmenuSearchEngines</id>
+		</subcategory>
+		<module>Referrers</module>
+		<action>getKeywords</action>
+		<order>103</order>
+		<parameters>
+			<module>Referrers</module>
+			<action>getKeywords</action>
+		</parameters>
+		<uniqueId>widgetReferrersgetKeywords</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1523,18 +1360,16 @@
 		<action>getSocials</action>
 		<order>111</order>
 		<parameters>
+			<viewDataTable>graphPie</viewDataTable>
 			<module>Referrers</module>
 			<action>getSocials</action>
-			<forceView>0</forceView>
-			<viewDataTable>graphPie</viewDataTable>
 		</parameters>
-		<widget_url>?module=Referrers&amp;action=getSocials&amp;forceView=0&amp;viewDataTable=graphPie</widget_url>
-		<uniqueId>widgetReferrersgetSocialsmoduleReferrersactiongetSocialsforceView0viewDataTablegraphPie</uniqueId>
+		<uniqueId>widgetReferrersgetSocialsviewDataTablegraphPie</uniqueId>
 		<viewDataTable>graphPie</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Referrer Websites</name>
+		<name>Websites</name>
 		<category>
 			<name>Referrers</name>
 			<order>15</order>
@@ -1551,11 +1386,8 @@
 		<parameters>
 			<module>Referrers</module>
 			<action>getWebsites</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Referrers&amp;action=getWebsites&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetReferrersgetWebsitesmoduleReferrersactiongetWebsitesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetReferrersgetWebsites</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1577,13 +1409,34 @@
 		<parameters>
 			<module>Referrers</module>
 			<action>getCampaigns</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=Referrers&amp;action=getCampaigns&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetReferrersgetCampaignsmoduleReferrersactiongetCampaignsforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetReferrersgetCampaigns</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Overview</name>
+		<category>
+			<name>Ecommerce</name>
+			<order>20</order>
+			<id>Goals_Ecommerce</id>
+		</category>
+		<subcategory>
+			<name>Overview</name>
+			<order>2</order>
+			<id>General_Overview</id>
+		</subcategory>
+		<module>CoreHome</module>
+		<action>renderWidgetContainer</action>
+		<order>9</order>
+		<parameters>
+			<module>CoreHome</module>
+			<action>renderWidgetContainer</action>
+			<containerId>Goals_EcommerceGeneral_Overview</containerId>
+		</parameters>
+		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdGoals_EcommerceGeneral_Overview</uniqueId>
+		<layout />
+		<isContainer>1</isContainer>
 	</row>
 	<row>
 		<name>Ecommerce Log</name>
@@ -1604,35 +1457,7 @@
 			<module>Ecommerce</module>
 			<action>getEcommerceLog</action>
 		</parameters>
-		<widget_url>?module=Ecommerce&amp;action=getEcommerceLog</widget_url>
 		<uniqueId>widgetEcommercegetEcommerceLog</uniqueId>
-	</row>
-	<row>
-		<name>Product SKU</name>
-		<category>
-			<name>Ecommerce</name>
-			<order>20</order>
-			<id>Goals_Ecommerce</id>
-		</category>
-		<subcategory>
-			<name>Products</name>
-			<order>10</order>
-			<id>Goals_Products</id>
-		</subcategory>
-		<module>Goals</module>
-		<action>getItemsSku</action>
-		<order>130</order>
-		<parameters>
-			<module>Goals</module>
-			<action>getItemsSku</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
-			<abandonedCarts>1</abandonedCarts>
-		</parameters>
-		<widget_url>?module=Goals&amp;action=getItemsSku&amp;forceView=0&amp;viewDataTable=table&amp;abandonedCarts=1</widget_url>
-		<uniqueId>widgetGoalsgetItemsSkumoduleGoalsactiongetItemsSkuforceView0viewDataTabletableabandonedCarts1</uniqueId>
-		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
 	</row>
 	<row>
 		<name>Product Name</name>
@@ -1652,12 +1477,9 @@
 		<parameters>
 			<module>Goals</module>
 			<action>getItemsName</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 			<abandonedCarts>1</abandonedCarts>
 		</parameters>
-		<widget_url>?module=Goals&amp;action=getItemsName&amp;forceView=0&amp;viewDataTable=table&amp;abandonedCarts=1</widget_url>
-		<uniqueId>widgetGoalsgetItemsNamemoduleGoalsactiongetItemsNameforceView0viewDataTabletableabandonedCarts1</uniqueId>
+		<uniqueId>widgetGoalsgetItemsNameabandonedCarts1</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1679,75 +1501,57 @@
 		<parameters>
 			<module>Goals</module>
 			<action>getItemsCategory</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 			<abandonedCarts>1</abandonedCarts>
 		</parameters>
-		<widget_url>?module=Goals&amp;action=getItemsCategory&amp;forceView=0&amp;viewDataTable=table&amp;abandonedCarts=1</widget_url>
-		<uniqueId>widgetGoalsgetItemsCategorymoduleGoalsactiongetItemsCategoryforceView0viewDataTabletableabandonedCarts1</uniqueId>
+		<uniqueId>widgetGoalsgetItemsCategoryabandonedCarts1</uniqueId>
+		<viewDataTable>table</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Product SKU</name>
+		<category>
+			<name>Ecommerce</name>
+			<order>20</order>
+			<id>Goals_Ecommerce</id>
+		</category>
+		<subcategory>
+			<name>Products</name>
+			<order>10</order>
+			<id>Goals_Products</id>
+		</subcategory>
+		<module>Goals</module>
+		<action>getItemsSku</action>
+		<order>130</order>
+		<parameters>
+			<module>Goals</module>
+			<action>getItemsSku</action>
+			<abandonedCarts>1</abandonedCarts>
+		</parameters>
+		<uniqueId>widgetGoalsgetItemsSkuabandonedCarts1</uniqueId>
 		<viewDataTable>table</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
 		<name>Overview</name>
 		<category>
-			<name>Ecommerce</name>
-			<order>20</order>
-			<id>Goals_Ecommerce</id>
-		</category>
-		<subcategory />
-		<module>CoreHome</module>
-		<action>renderWidgetContainer</action>
-		<order>2</order>
-		<parameters>
-			<module>CoreHome</module>
-			<action>renderWidgetContainer</action>
-			<containerId>Goals_EcommerceGeneral_Overview</containerId>
-		</parameters>
-		<widget_url>?module=CoreHome&amp;action=renderWidgetContainer&amp;containerId=Goals_EcommerceGeneral_Overview</widget_url>
-		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdGoals_EcommerceGeneral_Overview</uniqueId>
-		<layout />
-		<isContainer>1</isContainer>
-	</row>
-	<row>
-		<name>Overview</name>
-		<category>
 			<name>Goals</name>
 			<order>25</order>
 			<id>Goals_Goals</id>
 		</category>
-		<subcategory />
+		<subcategory>
+			<name>Overview</name>
+			<order>2</order>
+			<id>General_Overview</id>
+		</subcategory>
 		<module>CoreHome</module>
 		<action>renderWidgetContainer</action>
-		<order>1</order>
+		<order>6</order>
 		<parameters>
 			<module>CoreHome</module>
 			<action>renderWidgetContainer</action>
 			<containerId>Goals_GoalsGeneral_Overview</containerId>
 		</parameters>
-		<widget_url>?module=CoreHome&amp;action=renderWidgetContainer&amp;containerId=Goals_GoalsGeneral_Overview</widget_url>
 		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdGoals_GoalsGeneral_Overview</uniqueId>
-		<layout />
-		<isContainer>1</isContainer>
-	</row>
-	<row>
-		<name>triggered js</name>
-		<category>
-			<name>Goals</name>
-			<order>25</order>
-			<id>Goals_Goals</id>
-		</category>
-		<subcategory />
-		<module>CoreHome</module>
-		<action>renderWidgetContainer</action>
-		<order>5</order>
-		<parameters>
-			<module>CoreHome</module>
-			<action>renderWidgetContainer</action>
-			<containerId>Goals_Goals3</containerId>
-		</parameters>
-		<widget_url>?module=CoreHome&amp;action=renderWidgetContainer&amp;containerId=Goals_Goals3</widget_url>
-		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdGoals_Goals3</uniqueId>
 		<layout />
 		<isContainer>1</isContainer>
 	</row>
@@ -1758,17 +1562,21 @@
 			<order>25</order>
 			<id>Goals_Goals</id>
 		</category>
-		<subcategory />
+		<subcategory>
+			<name>Goal 1 - Thank you</name>
+			<order>900</order>
+			<id>1</id>
+		</subcategory>
 		<module>CoreHome</module>
 		<action>renderWidgetContainer</action>
-		<order>3</order>
+		<order>13</order>
 		<parameters>
 			<module>CoreHome</module>
 			<action>renderWidgetContainer</action>
+			<idGoal>1</idGoal>
 			<containerId>Goals_Goals1</containerId>
 		</parameters>
-		<widget_url>?module=CoreHome&amp;action=renderWidgetContainer&amp;containerId=Goals_Goals1</widget_url>
-		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdGoals_Goals1</uniqueId>
+		<uniqueId>widgetCoreHomerenderWidgetContaineridGoal1containerIdGoals_Goals1</uniqueId>
 		<layout />
 		<isContainer>1</isContainer>
 	</row>
@@ -1779,17 +1587,46 @@
 			<order>25</order>
 			<id>Goals_Goals</id>
 		</category>
-		<subcategory />
+		<subcategory>
+			<name>Goal 2 - Hello</name>
+			<order>901</order>
+			<id>2</id>
+		</subcategory>
 		<module>CoreHome</module>
 		<action>renderWidgetContainer</action>
-		<order>4</order>
+		<order>17</order>
 		<parameters>
 			<module>CoreHome</module>
 			<action>renderWidgetContainer</action>
+			<idGoal>2</idGoal>
 			<containerId>Goals_Goals2</containerId>
 		</parameters>
-		<widget_url>?module=CoreHome&amp;action=renderWidgetContainer&amp;containerId=Goals_Goals2</widget_url>
-		<uniqueId>widgetCoreHomerenderWidgetContainercontainerIdGoals_Goals2</uniqueId>
+		<uniqueId>widgetCoreHomerenderWidgetContaineridGoal2containerIdGoals_Goals2</uniqueId>
+		<layout />
+		<isContainer>1</isContainer>
+	</row>
+	<row>
+		<name>triggered js</name>
+		<category>
+			<name>Goals</name>
+			<order>25</order>
+			<id>Goals_Goals</id>
+		</category>
+		<subcategory>
+			<name>triggered js</name>
+			<order>902</order>
+			<id>3</id>
+		</subcategory>
+		<module>CoreHome</module>
+		<action>renderWidgetContainer</action>
+		<order>22</order>
+		<parameters>
+			<module>CoreHome</module>
+			<action>renderWidgetContainer</action>
+			<idGoal>3</idGoal>
+			<containerId>Goals_Goals3</containerId>
+		</parameters>
+		<uniqueId>widgetCoreHomerenderWidgetContaineridGoal3containerIdGoals_Goals3</uniqueId>
 		<layout />
 		<isContainer>1</isContainer>
 	</row>
@@ -1811,38 +1648,9 @@
 		<parameters>
 			<module>ExampleUI</module>
 			<action>getTemperatures</action>
-			<forceView>0</forceView>
-			<viewDataTable>table</viewDataTable>
 		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getTemperatures&amp;forceView=0&amp;viewDataTable=table</widget_url>
-		<uniqueId>widgetExampleUIgetTemperaturesmoduleExampleUIactiongetTemperaturesforceView0viewDataTabletable</uniqueId>
+		<uniqueId>widgetExampleUIgetTemperatures</uniqueId>
 		<viewDataTable>table</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Treemap example</name>
-		<category>
-			<name>UI Framework</name>
-			<order>90</order>
-			<id>ExampleUI_UiFramework</id>
-		</category>
-		<subcategory>
-			<name>Treemap</name>
-			<order>99</order>
-			<id>Treemap</id>
-		</subcategory>
-		<module>ExampleUI</module>
-		<action>getTemperatures</action>
-		<order>210</order>
-		<parameters>
-			<module>ExampleUI</module>
-			<action>getTemperatures</action>
-			<forceView>1</forceView>
-			<viewDataTable>infoviz-treemap</viewDataTable>
-		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getTemperatures&amp;forceView=1&amp;viewDataTable=infoviz-treemap</widget_url>
-		<uniqueId>widgetExampleUIgetTemperaturesmoduleExampleUIactiongetTemperaturesforceView1viewDataTableinfoviz-treemap</uniqueId>
-		<viewDataTable>infoviz-treemap</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
@@ -1861,70 +1669,13 @@
 		<action>getTemperatures</action>
 		<order>210</order>
 		<parameters>
-			<module>ExampleUI</module>
-			<action>getTemperatures</action>
 			<forceView>1</forceView>
 			<viewDataTable>graphVerticalBar</viewDataTable>
+			<module>ExampleUI</module>
+			<action>getTemperatures</action>
 		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getTemperatures&amp;forceView=1&amp;viewDataTable=graphVerticalBar</widget_url>
-		<uniqueId>widgetExampleUIgetTemperaturesmoduleExampleUIactiongetTemperaturesforceView1viewDataTablegraphVerticalBar</uniqueId>
+		<uniqueId>widgetExampleUIgetTemperaturesforceView1viewDataTablegraphVerticalBar</uniqueId>
 		<viewDataTable>graphVerticalBar</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Pie graph</name>
-		<category>
-			<name>UI Framework</name>
-			<order>90</order>
-			<id>ExampleUI_UiFramework</id>
-		</category>
-		<subcategory>
-			<name>Pie graph</name>
-			<order>99</order>
-			<id>Pie graph</id>
-		</subcategory>
-		<module>ExampleUI</module>
-		<action>getPlanetRatios</action>
-		<order>212</order>
-		<parameters>
-			<module>ExampleUI</module>
-			<action>getPlanetRatios</action>
-			<forceView>0</forceView>
-			<viewDataTable>graphPie</viewDataTable>
-		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getPlanetRatios&amp;forceView=0&amp;viewDataTable=graphPie</widget_url>
-		<uniqueId>widgetExampleUIgetPlanetRatiosmoduleExampleUIactiongetPlanetRatiosforceView0viewDataTablegraphPie</uniqueId>
-		<viewDataTable>graphPie</viewDataTable>
-		<isReport>1</isReport>
-	</row>
-	<row>
-		<name>Evolution of server temperatures over the last few days</name>
-		<category>
-			<name>UI Framework</name>
-			<order>90</order>
-			<id>ExampleUI_UiFramework</id>
-		</category>
-		<subcategory>
-			<name>Evolution Graph</name>
-			<order>99</order>
-			<id>Evolution Graph</id>
-		</subcategory>
-		<module>ExampleUI</module>
-		<action>getTemperaturesEvolution</action>
-		<order>211</order>
-		<parameters>
-			<module>ExampleUI</module>
-			<action>getTemperaturesEvolution</action>
-			<forceView>1</forceView>
-			<viewDataTable>graphEvolution</viewDataTable>
-			<columns>
-				<row>server1</row>
-				<row>server2</row>
-			</columns>
-		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getTemperaturesEvolution&amp;forceView=1&amp;viewDataTable=graphEvolution&amp;columns%5B0%5D=server1&amp;columns%5B1%5D=server2</widget_url>
-		<uniqueId>widgetExampleUIgetTemperaturesEvolutionmoduleExampleUIactiongetTemperaturesEvolutionforceView1viewDataTablegraphEvolutioncolumnsArray</uniqueId>
-		<viewDataTable>graphEvolution</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
@@ -1943,14 +1694,38 @@
 		<action>getTemperaturesEvolution</action>
 		<order>211</order>
 		<parameters>
-			<module>ExampleUI</module>
-			<action>getTemperaturesEvolution</action>
 			<forceView>1</forceView>
 			<viewDataTable>sparklines</viewDataTable>
+			<module>ExampleUI</module>
+			<action>getTemperaturesEvolution</action>
 		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getTemperaturesEvolution&amp;forceView=1&amp;viewDataTable=sparklines</widget_url>
-		<uniqueId>widgetExampleUIgetTemperaturesEvolutionmoduleExampleUIactiongetTemperaturesEvolutionforceView1viewDataTablesparklines</uniqueId>
+		<uniqueId>widgetExampleUIgetTemperaturesEvolutionforceView1viewDataTablesparklines</uniqueId>
 		<viewDataTable>sparklines</viewDataTable>
+		<isReport>1</isReport>
+	</row>
+	<row>
+		<name>Treemap example</name>
+		<category>
+			<name>UI Framework</name>
+			<order>90</order>
+			<id>ExampleUI_UiFramework</id>
+		</category>
+		<subcategory>
+			<name>Treemap</name>
+			<order>99</order>
+			<id>Treemap</id>
+		</subcategory>
+		<module>ExampleUI</module>
+		<action>getTemperatures</action>
+		<order>210</order>
+		<parameters>
+			<forceView>1</forceView>
+			<viewDataTable>infoviz-treemap</viewDataTable>
+			<module>ExampleUI</module>
+			<action>getTemperatures</action>
+		</parameters>
+		<uniqueId>widgetExampleUIgetTemperaturesforceView1viewDataTableinfoviz-treemap</uniqueId>
+		<viewDataTable>infoviz-treemap</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
@@ -1969,13 +1744,12 @@
 		<action>getPlanetRatios</action>
 		<order>5</order>
 		<parameters>
-			<module>ExampleUI</module>
-			<action>getPlanetRatios</action>
 			<forceView>1</forceView>
 			<viewDataTable>cloud</viewDataTable>
+			<module>ExampleUI</module>
+			<action>getPlanetRatios</action>
 		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getPlanetRatios&amp;forceView=1&amp;viewDataTable=cloud</widget_url>
-		<uniqueId>widgetExampleUIgetPlanetRatiosmoduleExampleUIactiongetPlanetRatiosforceView1viewDataTablecloud</uniqueId>
+		<uniqueId>widgetExampleUIgetPlanetRatiosforceView1viewDataTablecloud</uniqueId>
 		<viewDataTable>cloud</viewDataTable>
 		<isReport>1</isReport>
 	</row>
@@ -1995,159 +1769,66 @@
 		<action>getPlanetRatiosWithLogos</action>
 		<order>213</order>
 		<parameters>
+			<viewDataTable>cloud</viewDataTable>
 			<module>ExampleUI</module>
 			<action>getPlanetRatiosWithLogos</action>
-			<forceView>0</forceView>
-			<viewDataTable>cloud</viewDataTable>
 		</parameters>
-		<widget_url>?module=ExampleUI&amp;action=getPlanetRatiosWithLogos&amp;forceView=0&amp;viewDataTable=cloud</widget_url>
-		<uniqueId>widgetExampleUIgetPlanetRatiosWithLogosmoduleExampleUIactiongetPlanetRatiosWithLogosforceView0viewDataTablecloud</uniqueId>
+		<uniqueId>widgetExampleUIgetPlanetRatiosWithLogosviewDataTablecloud</uniqueId>
 		<viewDataTable>cloud</viewDataTable>
 		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>Movers and Shakers</name>
+		<name>Evolution of server temperatures over the last few days</name>
 		<category>
-			<name>Insights</name>
-			<order>99</order>
-			<id>Insights_WidgetCategory</id>
+			<name>UI Framework</name>
+			<order>90</order>
+			<id>ExampleUI_UiFramework</id>
 		</category>
-		<subcategory />
-		<module>Insights</module>
-		<action>getOverallMoversAndShakers</action>
-		<order>99</order>
+		<subcategory>
+			<name>Evolution Graph</name>
+			<order>99</order>
+			<id>Evolution Graph</id>
+		</subcategory>
+		<module>ExampleUI</module>
+		<action>getTemperaturesEvolution</action>
+		<order>211</order>
 		<parameters>
-			<module>Insights</module>
-			<action>getOverallMoversAndShakers</action>
+			<forceView>1</forceView>
+			<viewDataTable>graphEvolution</viewDataTable>
+			<module>ExampleUI</module>
+			<action>getTemperaturesEvolution</action>
+			<columns>
+				<row>server1</row>
+				<row>server2</row>
+			</columns>
 		</parameters>
-		<widget_url>?module=Insights&amp;action=getOverallMoversAndShakers</widget_url>
-		<uniqueId>widgetInsightsgetOverallMoversAndShakers</uniqueId>
+		<uniqueId>widgetExampleUIgetTemperaturesEvolutionforceView1viewDataTablegraphEvolutioncolumnsArray</uniqueId>
+		<viewDataTable>graphEvolution</viewDataTable>
+		<isReport>1</isReport>
 	</row>
 	<row>
-		<name>SEO Rankings</name>
+		<name>Pie graph</name>
 		<category>
-			<name>SEO</name>
-			<order>99</order>
-			<id>SEO</id>
+			<name>UI Framework</name>
+			<order>90</order>
+			<id>ExampleUI_UiFramework</id>
 		</category>
-		<subcategory />
-		<module>SEO</module>
-		<action>getRank</action>
-		<order>99</order>
-		<parameters>
-			<module>SEO</module>
-			<action>getRank</action>
-		</parameters>
-		<widget_url>?module=SEO&amp;action=getRank</widget_url>
-		<uniqueId>widgetSEOgetRank</uniqueId>
-	</row>
-	<row>
-		<name>Piwik Changelog</name>
-		<category>
-			<name>Example Widgets</name>
+		<subcategory>
+			<name>Pie graph</name>
 			<order>99</order>
-			<id>Example Widgets</id>
-		</category>
-		<subcategory />
-		<module>ExampleRssWidget</module>
-		<action>rssChangelog</action>
-		<order>99</order>
+			<id>Pie graph</id>
+		</subcategory>
+		<module>ExampleUI</module>
+		<action>getPlanetRatios</action>
+		<order>212</order>
 		<parameters>
-			<module>ExampleRssWidget</module>
-			<action>rssChangelog</action>
+			<viewDataTable>graphPie</viewDataTable>
+			<module>ExampleUI</module>
+			<action>getPlanetRatios</action>
 		</parameters>
-		<widget_url>?module=ExampleRssWidget&amp;action=rssChangelog</widget_url>
-		<uniqueId>widgetExampleRssWidgetrssChangelog</uniqueId>
-	</row>
-	<row>
-		<name>Support Piwik!</name>
-		<category>
-			<name>Example Widgets</name>
-			<order>99</order>
-			<id>Example Widgets</id>
-		</category>
-		<subcategory />
-		<module>CoreHome</module>
-		<action>getDonateForm</action>
-		<order>5</order>
-		<parameters>
-			<module>CoreHome</module>
-			<action>getDonateForm</action>
-		</parameters>
-		<widget_url>?module=CoreHome&amp;action=getDonateForm</widget_url>
-		<uniqueId>widgetCoreHomegetDonateForm</uniqueId>
-	</row>
-	<row>
-		<name>Top Keywords for Page URL</name>
-		<category>
-			<name>SEO</name>
-			<order>99</order>
-			<id>SEO</id>
-		</category>
-		<subcategory />
-		<module>Referrers</module>
-		<action>getKeywordsForPage</action>
-		<order>99</order>
-		<parameters>
-			<module>Referrers</module>
-			<action>getKeywordsForPage</action>
-		</parameters>
-		<widget_url>?module=Referrers&amp;action=getKeywordsForPage</widget_url>
-		<uniqueId>widgetReferrersgetKeywordsForPage</uniqueId>
-	</row>
-	<row>
-		<name>Welcome!</name>
-		<category>
-			<name>Example Widgets</name>
-			<order>99</order>
-			<id>Example Widgets</id>
-		</category>
-		<subcategory />
-		<module>CoreHome</module>
-		<action>getPromoVideo</action>
-		<order>10</order>
-		<parameters>
-			<module>CoreHome</module>
-			<action>getPromoVideo</action>
-		</parameters>
-		<widget_url>?module=CoreHome&amp;action=getPromoVideo</widget_url>
-		<uniqueId>widgetCoreHomegetPromoVideo</uniqueId>
-	</row>
-	<row>
-		<name>Example Widget Name</name>
-		<category>
-			<name>Example Widgets</name>
-			<order>99</order>
-			<id>Example Widgets</id>
-		</category>
-		<subcategory />
-		<module>ExamplePlugin</module>
-		<action>myExampleWidget</action>
-		<order>99</order>
-		<parameters>
-			<module>ExamplePlugin</module>
-			<action>myExampleWidget</action>
-		</parameters>
-		<widget_url>?module=ExamplePlugin&amp;action=myExampleWidget</widget_url>
-		<uniqueId>widgetExamplePluginmyExampleWidget</uniqueId>
-	</row>
-	<row>
-		<name>Piwik.org Blog</name>
-		<category>
-			<name>Example Widgets</name>
-			<order>99</order>
-			<id>Example Widgets</id>
-		</category>
-		<subcategory />
-		<module>ExampleRssWidget</module>
-		<action>rssPiwik</action>
-		<order>99</order>
-		<parameters>
-			<module>ExampleRssWidget</module>
-			<action>rssPiwik</action>
-		</parameters>
-		<widget_url>?module=ExampleRssWidget&amp;action=rssPiwik</widget_url>
-		<uniqueId>widgetExampleRssWidgetrssPiwik</uniqueId>
+		<uniqueId>widgetExampleUIgetPlanetRatiosviewDataTablegraphPie</uniqueId>
+		<viewDataTable>graphPie</viewDataTable>
+		<isReport>1</isReport>
 	</row>
 	<row>
 		<name>Insights Overview</name>
@@ -2164,7 +1845,142 @@
 			<module>Insights</module>
 			<action>getInsightsOverview</action>
 		</parameters>
-		<widget_url>?module=Insights&amp;action=getInsightsOverview</widget_url>
 		<uniqueId>widgetInsightsgetInsightsOverview</uniqueId>
+	</row>
+	<row>
+		<name>Top Keywords for Page URL</name>
+		<category>
+			<name>SEO</name>
+			<order>99</order>
+			<id>SEO</id>
+		</category>
+		<subcategory />
+		<module>Referrers</module>
+		<action>getKeywordsForPage</action>
+		<order>99</order>
+		<parameters>
+			<module>Referrers</module>
+			<action>getKeywordsForPage</action>
+		</parameters>
+		<uniqueId>widgetReferrersgetKeywordsForPage</uniqueId>
+	</row>
+	<row>
+		<name>Piwik Changelog</name>
+		<category>
+			<name>Example Widgets</name>
+			<order>99</order>
+			<id>Example Widgets</id>
+		</category>
+		<subcategory />
+		<module>ExampleRssWidget</module>
+		<action>rssChangelog</action>
+		<order>99</order>
+		<parameters>
+			<module>ExampleRssWidget</module>
+			<action>rssChangelog</action>
+		</parameters>
+		<uniqueId>widgetExampleRssWidgetrssChangelog</uniqueId>
+	</row>
+	<row>
+		<name>Movers and Shakers</name>
+		<category>
+			<name>Insights</name>
+			<order>99</order>
+			<id>Insights_WidgetCategory</id>
+		</category>
+		<subcategory />
+		<module>Insights</module>
+		<action>getOverallMoversAndShakers</action>
+		<order>99</order>
+		<parameters>
+			<module>Insights</module>
+			<action>getOverallMoversAndShakers</action>
+		</parameters>
+		<uniqueId>widgetInsightsgetOverallMoversAndShakers</uniqueId>
+	</row>
+	<row>
+		<name>Example Widget Name</name>
+		<category>
+			<name>Example Widgets</name>
+			<order>99</order>
+			<id>Example Widgets</id>
+		</category>
+		<subcategory />
+		<module>ExamplePlugin</module>
+		<action>myExampleWidget</action>
+		<order>99</order>
+		<parameters>
+			<module>ExamplePlugin</module>
+			<action>myExampleWidget</action>
+		</parameters>
+		<uniqueId>widgetExamplePluginmyExampleWidget</uniqueId>
+	</row>
+	<row>
+		<name>SEO Rankings</name>
+		<category>
+			<name>SEO</name>
+			<order>99</order>
+			<id>SEO</id>
+		</category>
+		<subcategory />
+		<module>SEO</module>
+		<action>getRank</action>
+		<order>99</order>
+		<parameters>
+			<module>SEO</module>
+			<action>getRank</action>
+		</parameters>
+		<uniqueId>widgetSEOgetRank</uniqueId>
+	</row>
+	<row>
+		<name>Piwik.org Blog</name>
+		<category>
+			<name>Example Widgets</name>
+			<order>99</order>
+			<id>Example Widgets</id>
+		</category>
+		<subcategory />
+		<module>ExampleRssWidget</module>
+		<action>rssPiwik</action>
+		<order>99</order>
+		<parameters>
+			<module>ExampleRssWidget</module>
+			<action>rssPiwik</action>
+		</parameters>
+		<uniqueId>widgetExampleRssWidgetrssPiwik</uniqueId>
+	</row>
+	<row>
+		<name>Welcome!</name>
+		<category>
+			<name>Example Widgets</name>
+			<order>99</order>
+			<id>Example Widgets</id>
+		</category>
+		<subcategory />
+		<module>CoreHome</module>
+		<action>getPromoVideo</action>
+		<order>10</order>
+		<parameters>
+			<module>CoreHome</module>
+			<action>getPromoVideo</action>
+		</parameters>
+		<uniqueId>widgetCoreHomegetPromoVideo</uniqueId>
+	</row>
+	<row>
+		<name>Support Piwik!</name>
+		<category>
+			<name>Example Widgets</name>
+			<order>99</order>
+			<id>Example Widgets</id>
+		</category>
+		<subcategory />
+		<module>CoreHome</module>
+		<action>getDonateForm</action>
+		<order>5</order>
+		<parameters>
+			<module>CoreHome</module>
+			<action>getDonateForm</action>
+		</parameters>
+		<uniqueId>widgetCoreHomegetDonateForm</uniqueId>
 	</row>
 </result>
