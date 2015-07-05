@@ -44,4 +44,11 @@ class GetVisitInformationPerServerTime extends Base
             $view->config->max_graph_elements = false;
         }
     }
+
+    public function getRelatedReports()
+    {
+        return array(
+            self::factory('VisitTime', 'getByDayOfWeek')
+        );
+    }
 }
