@@ -82,7 +82,8 @@ class Controller extends \Piwik\Plugin\Controller
             'period'  => $period,
             'date'    => $date,
             'segment' => $segment,
-            'deep'    => '1'
+            'deep'    => '1',
+            'filter_limit' => -1
         ));
 
         foreach ($widgets as $widget) {
