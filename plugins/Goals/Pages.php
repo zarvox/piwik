@@ -83,7 +83,7 @@ class Pages
             $widgets[] = $config;
         }
 
-        $container = $this->createWidgetizableWidgetContainer($subcategory, $widgets);
+        $container = $this->createWidgetizableWidgetContainer('GoalsOverview', $subcategory, $widgets);
         return array($container);
     }
 
@@ -132,7 +132,7 @@ class Pages
             $widgets[] = $config;
         }
 
-        $container = $this->createWidgetizableWidgetContainer($subcategory, $widgets);
+        $container = $this->createWidgetizableWidgetContainer('EcommerceOverview', $subcategory, $widgets);
         return array($container);
     }
 
@@ -164,7 +164,7 @@ class Pages
     {
         $widgets = array();
 
-        $idGoal = $goal['idgoal'];
+        $idGoal = (int) $goal['idgoal'];
         $name   = Common::sanitizeInputValue($goal['name']);
         $params = array('idGoal' => $idGoal);
 
@@ -199,7 +199,7 @@ class Pages
             $widgets[] = $config;
         }
 
-        $container = $this->createWidgetizableWidgetContainer($name, $widgets);
+        $container = $this->createWidgetizableWidgetContainer('Goal_' . $idGoal, $name, $widgets);
         $container->addParameters($params);
 
         $config = $this->factory->createContainerWidget('Goals' . $idGoal);
@@ -213,20 +213,13 @@ class Pages
         return array($container, $config);
     }
 
-    private function createWidgetizableWidgetContainer($pageName, $widgets)
+    private function createWidgetizableWidgetContainer($containerId, $pageName, $widgets)
     {
         /** @var \Piwik\Widget\WidgetConfig[] $widgets */
         $firstWidget = reset($widgets);
-
         /** @var \Piwik\Report\ReportWidgetConfig $firstWidget */
-        $id = $firstWidget->getCategoryId() . $firstWidget->getSubcategoryId();
 
-        if (!empty($pageName)) {
-            // make sure to not show two titles (one for this container and one for the first widget)
-            $firstWidget->setName('');
-        }
-
-        $config = $this->factory->createContainerWidget($id);
+        $config = $this->factory->createContainerWidget($containerId);
         $config->setName($pageName);
         $config->setCategoryId($firstWidget->getCategoryId());
         $config->setSubcategoryId($firstWidget->getSubcategoryId());

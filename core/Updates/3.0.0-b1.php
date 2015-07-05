@@ -176,7 +176,7 @@ class Updates_3_0_0_b1 extends Updates
                 'action' => 'widgetGoalReport',
                 'params' =>
                     array (
-                        'idGoal' => $goal['idgoal'],
+                        'idGoal' => (int) $goal['idgoal'],
                     ));
         }
 
@@ -272,11 +272,11 @@ class Updates_3_0_0_b1 extends Updates
                         'viewDataTable' => 'graphPie',
                     ),
             ),array (
-                'module' => 'CoreHome',
-                'action' => 'renderWidgetContainer',
+                'module' => 'Referrers',
+                'action' => 'getReferrerType',
                 'params' =>
                     array (
-                        'containerId' => 'Goals_EcommerceGeneral_Overview',
+                        'viewDataTable' => 'tableAllColumns',
                     ),
             ),array (
                 'module' => 'Referrers',
@@ -297,7 +297,7 @@ class Updates_3_0_0_b1 extends Updates
                 'action' => 'renderWidgetContainer',
                 'params' =>
                     array (
-                        'containerId' => 'Goals_GoalsGeneral_Overview'
+                        'containerId' => 'GoalsOverview'
                     ),
             ),array (
                 'module' => 'Goals',
@@ -325,7 +325,7 @@ class Updates_3_0_0_b1 extends Updates
                 'action' => 'renderWidgetContainer',
                 'params' =>
                     array (
-                        'containerId' => 'Goals_EcommerceGeneral_Overview',
+                        'containerId' => 'EcommerceOverview',
                     ),
             ),
         );
@@ -336,8 +336,8 @@ class Updates_3_0_0_b1 extends Updates
                 'action' => 'renderWidgetContainer',
                 'params' =>
                     array (
-                        'idGoal' => $goal['idgoal'],
-                        'containerId' => 'Goals_Goals' . $goal['idgoal'],
+                        'idGoal' => (int) $goal['idgoal'],
+                        'containerId' => 'Goal' . (int) $goal['idgoal'],
                     ));
         }
 

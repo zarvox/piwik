@@ -11,6 +11,7 @@ namespace Piwik\Plugins\Widgetize\tests\Integration;
 use Piwik\Container\StaticContainer;
 use Piwik\Http\ControllerResolver;
 use Piwik\Piwik;
+use Piwik\Plugins\API;
 use Piwik\Plugins\Goals;
 use Piwik\Plugins\Widgetize\tests\Fixtures\WidgetizeFixture;
 use Piwik\Tests\Framework\TestCase\SystemTestCase;
@@ -62,15 +63,17 @@ class WidgetTest extends SystemTestCase
 
         Piwik::postEvent('Platform.initialized'); // userCountryMap defines it's Widgets via this event currently
 
+        $widgets = API\API::getInstance()->getWidgetMetadata($_GET['idSite'], $_GET['period'], $_GET['date']);
+
         $currentUniqueIds = array();
-        foreach (WidgetsList::get()->getWidgetConfigs() as $widget) {
-            $currentUniqueIds[] = $widget->getUniqueId();
+        foreach ($widgets as $widget) {
+            $currentUniqueIds[] = $widget['uniqueId'];
         }
 
         $allWidgetNames = array_merge($namesOfWidgetsThatAreAPI, $currentUniqueIds);
-        $regressedWidgetNames = array_diff($allWidgetNames, $currentUniqueIds);
+        $regressedWidgetIds = array_diff($allWidgetNames, $currentUniqueIds);
 
-        $this->assertEmpty($regressedWidgetNames, 'The widgets list is no longer up to date. If you added or changed a widget please update `getWidgetsThatAreAPICurrently()`, if you removed a widget please add it to `getWidgetsThatAreDeprecatedButStillAPI()`. If the uniqueId changed you might need to create an update for Dashboards and Scheduled Reports! Different names: ' . var_export($regressedWidgetNames, 1));
+        $this->assertEmpty($regressedWidgetIds, 'The widgets list is no longer up to date. If you added or changed a widget please update `getWidgetsThatAreAPICurrently()`, if you removed a widget please add it to `getWidgetsThatAreDeprecatedButStillAPI()`. If the uniqueId changed you might need to create an update for Dashboards and Scheduled Reports! Different names: ' . var_export($regressedWidgetIds, 1));
     }
 
     /**
@@ -113,33 +116,6 @@ class WidgetTest extends SystemTestCase
     {
         return array(
             array (
-                'name' => '',
-                'uniqueId' => 'widgetDashboardembeddedIndexidDashboard1',
-                'parameters' =>
-                    array (
-                        'module' => 'Dashboard',
-                        'action' => 'embeddedIndex',
-                        'idDashboard' => 1,
-                    ),
-            ),array (
-                'name' => '',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdProducts',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Products',
-                    ),
-            ),array (
-                'name' => '',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdEvents',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Events',
-                    ),
-            ),array (
                 'name' => 'Visits Overview (with graph)',
                 'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdVisitOverviewWithGraph',
                 'parameters' =>
@@ -147,15 +123,6 @@ class WidgetTest extends SystemTestCase
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
                         'containerId' => 'VisitOverviewWithGraph',
-                    ),
-            ),array (
-                'name' => '',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdContents',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Contents',
                     ),
             ),array (
                 'name' => 'Support Piwik!',
@@ -188,14 +155,6 @@ class WidgetTest extends SystemTestCase
                     array (
                         'module' => 'Referrers',
                         'action' => 'getKeywordsForPage',
-                    ),
-            ),array (
-                'name' => 'Manage Goals',
-                'uniqueId' => 'widgetGoalseditGoals',
-                'parameters' =>
-                    array (
-                        'module' => 'Goals',
-                        'action' => 'editGoals',
                     ),
             ),array (
                 'name' => 'Ecommerce Log',
@@ -420,15 +379,6 @@ class WidgetTest extends SystemTestCase
                     array (
                         'module' => 'UserCountry',
                         'action' => 'getCountry',
-                    ),
-            ),array (
-                'name' => '',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdContinent',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Continent',
                     ),
             ),array (
                 'name' => 'Region',
@@ -665,30 +615,6 @@ class WidgetTest extends SystemTestCase
                         'action' => 'getReferrerType',
                     ),
             ),array (
-                'name' => 'Evolution over the period',
-                'uniqueId' => 'widgetReferrersgetEvolutionGraphforceView1viewDataTablegraphEvolutioncolumnsArray',
-                'parameters' =>
-                    array (
-                        'forceView' => 1,
-                        'viewDataTable' => 'graphEvolution',
-                        'module' => 'Referrers',
-                        'action' => 'getEvolutionGraph',
-                        'columns' =>
-                            array (
-                                0 => 'nb_visits',
-                            ),
-                    ),
-            ),array (
-                'name' => 'Referrer Type',
-                'uniqueId' => 'widgetReferrersgetSparklinesforceView1viewDataTablesparklines',
-                'parameters' =>
-                    array (
-                        'forceView' => 1,
-                        'viewDataTable' => 'sparklines',
-                        'module' => 'Referrers',
-                        'action' => 'getSparklines',
-                    ),
-            ),array (
                 'name' => 'Referrers',
                 'uniqueId' => 'widgetReferrersgetAllviewDataTabletableAllColumns',
                 'parameters' =>
@@ -740,107 +666,61 @@ class WidgetTest extends SystemTestCase
                     ),
             ),array (
                 'name' => 'Overview',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoals_GoalsGeneral_Overview',
+                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoalsOverview',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
-                        'containerId' => 'Goals_GoalsGeneral_Overview',
+                        'containerId' => 'GoalsOverview',
                     ),
             ),array (
                 'name' => 'Overview',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoals_EcommerceGeneral_Overview',
+                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdEcommerceOverview',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
-                        'containerId' => 'Goals_EcommerceGeneral_Overview',
-                    ),
-            ),array (
-                'name' => '',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoalecommerceOrdercontainerIdGoalsOrder',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'idGoal' => 'ecommerceOrder',
-                        'containerId' => 'GoalsOrder',
+                        'containerId' => 'EcommerceOverview',
                     ),
             ),array (
                 'name' => 'Download Software',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal1containerIdGoals_Goals1',
+                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal1containerIdGoal_1',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
                         'idGoal' => '1',
-                        'containerId' => 'Goals_Goals1',
-                    ),
-            ),array (
-                'name' => 'Goal Download Software conversions by type of visit',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoals1',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Goals1',
+                        'containerId' => 'Goal_1',
                     ),
             ),array (
                 'name' => 'Download Software2',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal2containerIdGoals_Goals2',
+                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal2containerIdGoal_2',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
                         'idGoal' => '2',
-                        'containerId' => 'Goals_Goals2',
-                    ),
-            ),array (
-                'name' => 'Goal Download Software2 conversions by type of visit',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoals2',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Goals2',
+                        'containerId' => 'Goal_2',
                     ),
             ),array (
                 'name' => 'Opens Contact Form',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal3containerIdGoals_Goals3',
+                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal3containerIdGoal_3',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
                         'idGoal' => '3',
-                        'containerId' => 'Goals_Goals3',
-                    ),
-            ),array (
-                'name' => 'Goal Opens Contact Form conversions by type of visit',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoals3',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Goals3',
+                        'containerId' => 'Goal_3',
                     ),
             ),array (
                 'name' => 'Visit Docs',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal4containerIdGoals_Goals4',
+                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal4containerIdGoal_4',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
                         'idGoal' => '4',
-                        'containerId' => 'Goals_Goals4',
-                    ),
-            ),array (
-                'name' => 'Goal Visit Docs conversions by type of visit',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoals4',
-                'parameters' =>
-                    array (
-                        'module' => 'CoreHome',
-                        'action' => 'renderWidgetContainer',
-                        'containerId' => 'Goals4',
+                        'containerId' => 'Goal_4',
                     ),
             ),array (
                 'name' => 'Data tables',
@@ -923,6 +803,294 @@ class WidgetTest extends SystemTestCase
                         'module' => 'ExampleUI',
                         'action' => 'getPlanetRatiosWithLogos',
                     )
+            ),array (
+                'name' => 'Continent',
+                'uniqueId' => 'widgetUserCountrygetContinent',
+                'parameters' =>
+                    array (
+                        'module' => 'UserCountry',
+                        'action' => 'getContinent',
+                    ),
+            ), array (
+                'name' => 'Event Categories',
+                'uniqueId' => 'widgetEventsgetCategorysecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getCategory',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Categories',
+                'uniqueId' => 'widgetEventsgetCategorysecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getCategory',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Actions',
+                'uniqueId' => 'widgetEventsgetActionsecondaryDimensioneventName',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getAction',
+                        'secondaryDimension' => 'eventName',
+                    ),
+            ), array (
+                'name' => 'Event Actions',
+                'uniqueId' => 'widgetEventsgetActionsecondaryDimensioneventName',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getAction',
+                        'secondaryDimension' => 'eventName',
+                    ),
+            ), array (
+                'name' => 'Event Actions',
+                'uniqueId' => 'widgetEventsgetActionsecondaryDimensioneventName',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getAction',
+                        'secondaryDimension' => 'eventName',
+                    ),
+            ), array (
+                'name' => 'Event Actions',
+                'uniqueId' => 'widgetEventsgetActionsecondaryDimensioneventName',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getAction',
+                        'secondaryDimension' => 'eventName',
+                    ),
+            ), array (
+                'name' => 'Event Names',
+                'uniqueId' => 'widgetEventsgetNamesecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getName',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Names',
+                'uniqueId' => 'widgetEventsgetNamesecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getName',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Names',
+                'uniqueId' => 'widgetEventsgetNamesecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getName',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Names',
+                'uniqueId' => 'widgetEventsgetNamesecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getName',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Categories',
+                'uniqueId' => 'widgetEventsgetCategorysecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getCategory',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Event Categories',
+                'uniqueId' => 'widgetEventsgetCategorysecondaryDimensioneventAction',
+                'parameters' =>
+                    array (
+                        'module' => 'Events',
+                        'action' => 'getCategory',
+                        'secondaryDimension' => 'eventAction',
+                    ),
+            ), array (
+                'name' => 'Content Piece',
+                'uniqueId' => 'widgetContentsgetContentPieces',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentPieces',
+                    ),
+            ), array (
+                'name' => 'Content Piece',
+                'uniqueId' => 'widgetContentsgetContentPieces',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentPieces',
+                    ),
+            ), array (
+                'name' => 'Content Name',
+                'uniqueId' => 'widgetContentsgetContentNames',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentNames',
+                    ),
+            ), array (
+                'name' => 'Content Name',
+                'uniqueId' => 'widgetContentsgetContentNames',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentNames',
+                    ),
+            ), array (
+                'name' => 'Content Name',
+                'uniqueId' => 'widgetContentsgetContentNames',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentNames',
+                    ),
+            ), array (
+                'name' => 'Content Name',
+                'uniqueId' => 'widgetContentsgetContentNames',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentNames',
+                    ),
+            ), array (
+                'name' => 'Content Piece',
+                'uniqueId' => 'widgetContentsgetContentPieces',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentPieces',
+                    ),
+            ), array (
+                'name' => 'Content Piece',
+                'uniqueId' => 'widgetContentsgetContentPieces',
+                'parameters' =>
+                    array (
+                        'module' => 'Contents',
+                        'action' => 'getContentPieces',
+                    ),
+            ), array (
+                'name' => 'Product SKU',
+                'uniqueId' => 'widgetGoalsgetItemsSkuabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsSku',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product SKU',
+                'uniqueId' => 'widgetGoalsgetItemsSkuabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsSku',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Category',
+                'uniqueId' => 'widgetGoalsgetItemsCategoryabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsCategory',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Category',
+                'uniqueId' => 'widgetGoalsgetItemsCategoryabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsCategory',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Name',
+                'uniqueId' => 'widgetGoalsgetItemsNameabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsName',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Name',
+                'uniqueId' => 'widgetGoalsgetItemsNameabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsName',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Name',
+                'uniqueId' => 'widgetGoalsgetItemsNameabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsName',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Name',
+                'uniqueId' => 'widgetGoalsgetItemsNameabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsName',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product SKU',
+                'uniqueId' => 'widgetGoalsgetItemsSkuabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsSku',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product SKU',
+                'uniqueId' => 'widgetGoalsgetItemsSkuabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsSku',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Category',
+                'uniqueId' => 'widgetGoalsgetItemsCategoryabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsCategory',
+                        'abandonedCarts' => '1',
+                    ),
+            ), array (
+                'name' => 'Product Category',
+                'uniqueId' => 'widgetGoalsgetItemsCategoryabandonedCarts1',
+                'parameters' =>
+                    array (
+                        'module' => 'Goals',
+                        'action' => 'getItemsCategory',
+                        'abandonedCarts' => '1',
+                    ),
             )
         );
     }
