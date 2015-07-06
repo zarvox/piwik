@@ -41,11 +41,9 @@ class Sparklines extends ViewDataTable
     {
         $view = new View('@CoreVisualizations/_dataTableViz_sparklines.twig');
 
-        $columns = $this->config->sparkline_metrics_to_display;
-
         $columnsList = array();
-        if (!empty($columns)) {
-            foreach ($columns as $cols) {
+        if (!empty($this->config->sparkline_metrics_to_display)) {
+            foreach ($this->config->sparkline_metrics_to_display as $cols) {
                 $columnsList = array_merge($cols, $columnsList);
             }
         }
@@ -55,8 +53,9 @@ class Sparklines extends ViewDataTable
         $data = $this->loadDataTableFromAPI();
 
         $this->applyFilters($data);
-        if (empty($columns)) {
-            $columns = $data->getColumns();
+
+        if (empty($this->config->sparkline_metrics_to_display)) {
+            $this->config->sparkline_metrics_to_display = $data->getColumns();
         }
 
         $translations = $this->config->translations;
@@ -64,7 +63,7 @@ class Sparklines extends ViewDataTable
         $firstRow = $data->getFirstRow();
 
         $sparklines = array();
-        foreach ($columns as $column) {
+        foreach ($this->config->sparkline_metrics_to_display as $column) {
             if ($column === 'label') {
                 continue;
             }

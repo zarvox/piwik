@@ -9,6 +9,7 @@
 namespace Piwik\Plugins\VisitsSummary\Reports;
 
 use Piwik\Common;
+use Piwik\DataTable;
 use Piwik\DataTable\DataTableInterface;
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
@@ -76,12 +77,29 @@ class Get extends \Piwik\Plugin\Report
             $view->requestConfig->apiMethodToRequestDataTable = 'API.get';
             $view->config->sparkline_metrics_to_display = $this->getSparklineColumns();
             $view->config->addTranslations($this->getSparklineTranslations());
+            $view->config->filters[] = function (DataTable $table) use ($view) {
+                $firstRow = $table->getFirstRow();
+
+                $firstRow->setColumn('nb_actions', 5);
+                if (($firstRow->getColumn('nb_pageviews')
+                    + $firstRow->getColumn('nb_downloads')
+                    + $firstRow->getColumn('nb_outlinks')) == 0
+                    && $firstRow->getColumn('nb_actions') > 0) {
+                    $view->config->removeSparklineMetricToDisplay(array('nb_downloads', 'nb_uniq_downloads'));
+                    $view->config->removeSparklineMetricToDisplay(array('nb_outlinks', 'nb_uniq_outlinks'));
+                    $view->config->removeSparklineMetricToDisplay(array('nb_pageviews', 'nb_uniq_pageviews'));
+                    $view->config->removeSparklineMetricToDisplay(array('nb_searches', 'nb_keywords'));
+                } else {
+                    $view->config->removeSparklineMetricToDisplay(array('nb_actions'));
+                }
+            };
         }
     }
 
     private function getSparklineTranslations()
     {
         $translations = array(
+            'nb_actions' => 'NbActionsDescription',
             'nb_visits' => 'NbVisitsDescription',
             'nb_users' => 'NbUsersDescription',
             'nb_uniq_visitors' => 'NbUniqueVisitors',
@@ -114,16 +132,18 @@ class Get extends \Piwik\Plugin\Report
         $currentDate   = Common::getRequestVar('date');
         $displayUniqueVisitors = SettingsPiwik::isUniqueVisitorsEnabled($currentPeriod);
 
+        // todo in theory this should be done in Actions Plugin, but then it'll be hard to change the "order"
+        $isActionPluginEnabled = Common::isActionsPluginEnabled();
+
         $columns = array(
             $displayUniqueVisitors ? array('nb_visits', 'nb_uniq_visitors') : array('nb_visits'),
         );
 
-        // todo in theory this should be done in Actions Plugin, but then it'll be hard to change the "order"
-        $isActionPluginEnabled = Common::isActionsPluginEnabled();
         if ($isActionPluginEnabled) {
+            $columns[] = array('nb_actions'); // either actions or pageviews will be displayed
             $columns[] = array('nb_pageviews', 'nb_uniq_pageviews');
         } else {
-            $columns[] = array();
+            $columns[] = array(); // make sure to still create a div on the right side for this, just leave it empty
         }
 
         $userId = new UserId();

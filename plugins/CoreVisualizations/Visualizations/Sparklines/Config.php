@@ -32,6 +32,15 @@ class Config extends \Piwik\ViewDataTable\Config
         $this->translations = Metrics::getDefaultMetricTranslations();
     }
 
+    public function removeSparklineMetricToDisplay($columns)
+    {
+        $index = array_search($columns, $this->sparkline_metrics_to_display);
+
+        if (false !== $index) {
+            array_splice($this->sparkline_metrics_to_display, $index, 1);
+        }
+    }
+
     public function addSparklineMetricsToDisplay($columns)
     {
         $this->sparkline_metrics_to_display[] = $columns;
