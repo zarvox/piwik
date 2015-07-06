@@ -15,7 +15,7 @@ enable_framed_settings=1
 
 [PluginsInstalled]
 PluginsInstalled[] = "Diagnostics"
-PluginsInstalled[] = "Login"
+PluginsInstalled[] = "SandstormLogin"
 PluginsInstalled[] = "CoreAdminHome"
 PluginsInstalled[] = "UsersManager"
 PluginsInstalled[] = "SitesManager"

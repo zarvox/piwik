@@ -23,24 +23,32 @@ function onMessageSandstorm(event) {
     console.log("message did not contain an rpcId, ignoring");
     return;
   }
-  var idx = sandstormRequests.indexOf(data.rpcId);
-  if (idx != -1) {
-    // RPC id was valid.  Remove it from the list of half-finished RPCs...
-    sandstormRequests.splice(idx, 1);
+  var handled = false;
+  for (var idx = 0 ; idx < sandstormRequests.length ; idx++) {
+    if (sandstormRequests[idx].rpcId == data.rpcId) {
+      // RPC id was valid.  Remove it from the list of half-finished RPCs...
+      thisRequest = sandstormRequests[idx];
+      handled = true;
+      sandstormRequests.splice(idx, 1);
 
-    // TODO: actually show the iframe.
-    console.log("got valid rpc reply: ");
-    console.log(data);
-    var tag = document.getElementById("embedme");
-    tag.src = data.uri;
-  } else {
+      console.log("got valid rpc reply: ");
+      console.log(data);
+      var tag = document.getElementById("embedme");
+      tag.src = data.uri;
+      // Guess at appropriate height of iframe based on number of newlines in template text.
+      var lineCount = (thisRequest.templateText.match(/\n/g) || []).length;
+      tag.style.height = String(15 * lineCount) + "px";
+      break;
+    }
+  }
+  if (!handled) {
     console.log("Got unexpected rpcId: " + data.rpcId);
   }
 }
 
 function requestOfferTemplate() {
   var rpcId = "rpc";
-  sandstormRequests.push(rpcId);
+  sandstormRequests.push({rpcId: rpcId, templateText: sandstormTemplate});
   window.parent.postMessage({
       renderTemplate: {
         rpcId: rpcId,
@@ -55,7 +63,7 @@ function requestOfferTemplate() {
 window.addEventListener("message", onMessageSandstorm, false);
 requestOfferTemplate();
 </script>
-    <iframe id="embedme" src="" style="border 0; width: 100%; height: auto;">
+    <iframe id="embedme" src="" style="border 0; width: 100%; height: 240px;" ></iframe>
 
     <p>{{ 'CoreAdminHome_JSTrackingIntro5'|translate('<a rel="noreferrer" target="_blank" href="http://piwik.org/docs/javascript-tracking/">','</a>')|raw }}</p>
 

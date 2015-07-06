@@ -74,18 +74,6 @@ Updater::recordComponentSuccessfullyUpdated('core', Version::VERSION);
 print("theoretically applied updates\n");
 flush();
 
-// TODO: skip creating superuser and just create users dynamically and set permissions.
-Access::doAsSuperUser(function () {
-	$login = "sandstorm";
-	$password = "sandstorm";
-	$email = "drew@sandstorm.io";
-	$api = APIUsersManager::getInstance();
-	$api->addUser($login, $password, $email);
-	$api->setSuperUserAccess($login, true);
-});
-print("created superuser\n");
-flush();
-
 // Create a default site.
 $siteIdsCount = Access::doAsSuperUser(function () {
 	return count(APISitesManager::getInstance()->getAllSitesId());

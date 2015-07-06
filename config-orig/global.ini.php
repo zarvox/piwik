@@ -537,11 +537,11 @@ enable_delete_old_data_settings_admin = 1
 enable_general_settings_admin = 1
 
 ; By setting this option to 0, it will disable the "Auto update" feature
-enable_auto_update = 1
+enable_auto_update = 0
 
 ; By setting this option to 0, no emails will be sent in case of an available core.
 ; If set to 0 it also disables the "sent plugin update emails" feature in general and the related setting in the UI.
-enable_update_communication = 1
+enable_update_communication = 0
 
 ; This controls whether the pivotBy query parameter can be used with any dimension or just subtable
 ; dimensions. If set to 1, it will fetch a report with a segment for each row of the table being pivoted.
@@ -755,7 +755,7 @@ Plugins[] = Provider
 Plugins[] = Feedback
 Plugins[] = Monolog
 
-Plugins[] = Login
+Plugins[] = SandstormLogin
 Plugins[] = UsersManager
 Plugins[] = SitesManager
 Plugins[] = Installation
@@ -785,7 +785,7 @@ Plugins[] = Intl
 
 [PluginsInstalled]
 PluginsInstalled[] = Diagnostics
-PluginsInstalled[] = Login
+PluginsInstalled[] = SandstormLogin
 PluginsInstalled[] = CoreAdminHome
 PluginsInstalled[] = UsersManager
 PluginsInstalled[] = SitesManager

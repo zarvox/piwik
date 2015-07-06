@@ -1,3 +1,19 @@
+Porting notes:
+
+    We make autologin work out of the box by making 'login' be $_SERVER['HTTP_X_SANDSTORM_USER_ID'];
+    INSERT INTO user(login, alias, email, token_auth) VALUES(
+                     $_SERVER['HTTP_X_SANDSTORM_USER_ID'],
+                     $_SERVER['HTTP_X_SANDSTORM_USERNAME'],
+                     "",
+                     ???????? TODO
+                     ) ON DUPLICATE KEY UPDATE superuser_access
+
+try {
+    
+}
+
+
+
 [database]
 host = "127.0.0.1"
 username = "root"
@@ -13,6 +29,9 @@ enable_framed_settings=1
 
 
 plugin "UsersManager" is probably something we should disable, preferring Sandstorm's delegation features instead.
+
+
+
 
 
 Setup flow: skip entirely?

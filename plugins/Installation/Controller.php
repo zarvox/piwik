@@ -553,7 +553,8 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         if (!SettingsPiwik::isPiwikInstalled()) {
             return;
         }
-        \Piwik\Plugins\Login\Controller::clearSession();
+        // SANDSTORM EDIT: we don't need to reach into Login's implementation to clear session
+        //\Piwik\Plugins\Login\Controller::clearSession();
         $message = Piwik::translate('Installation_InvalidStateError',
             array('<br /><strong>',
                   // piwik-is-already-installed is checked against in checkPiwikServerWorking

@@ -18,7 +18,7 @@ use Piwik\Piwik;
 use Piwik\Plugin\ControllerAdmin;
 use Piwik\Plugins\LanguagesManager\API as APILanguagesManager;
 use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\Login\SessionInitializer;
+//use Piwik\Plugins\Login\SessionInitializer;
 use Piwik\Plugins\SitesManager\API as APISitesManager;
 use Piwik\Plugins\UsersManager\API as APIUsersManager;
 use Piwik\SettingsPiwik;
@@ -441,13 +441,15 @@ class Controller extends ControllerAdmin
         }
 
         // logs the user in with the new password
-        if ($newPassword !== false) {
-            $sessionInitializer = new SessionInitializer();
-            $auth = StaticContainer::get('Piwik\Auth');
-            $auth->setLogin($userLogin);
-            $auth->setPassword($password);
-            $sessionInitializer->initSession($auth, $rememberMe = false);
-        }
+        // SANDSTORM EDIT: can't depend on Plugins\Login, so skip this
+        // We don't need passwords in Sandstorm anyway
+        //if ($newPassword !== false) {
+        //    $sessionInitializer = new SessionInitializer();
+        //    $auth = StaticContainer::get('Piwik\Auth');
+        //    $auth->setLogin($userLogin);
+        //    $auth->setPassword($password);
+        //    $sessionInitializer->initSession($auth, $rememberMe = false);
+        //}
     }
 
     /**
