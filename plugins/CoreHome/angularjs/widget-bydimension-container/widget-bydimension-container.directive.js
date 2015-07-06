@@ -25,16 +25,16 @@
 
                 return function (scope, element, attrs, ngModel) {
 
+                    var widgetsSorted = $filter('orderBy')(scope.container.widgets, 'order');
                     var widgetsByCategory = {};
 
-                    scope.container.widgets = $filter('orderBy')(scope.container.widgets, 'order');
-
-                    angular.forEach(scope.container.widgets, function (widget) {
+                    angular.forEach(widgetsSorted, function (widget) {
                         var category = widget.subcategory.name;
 
                         if (!widgetsByCategory[category]) {
                             widgetsByCategory[category] = {name: category, order: widget.order, widgets: []};
                         }
+
                         widgetsByCategory[category].widgets.push(widget);
                     });
 
