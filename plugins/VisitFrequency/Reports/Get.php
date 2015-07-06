@@ -64,7 +64,7 @@ class Get extends \Piwik\Plugin\Report
     public function configureView(ViewDataTable $view)
     {
         if ($view->isViewDataTableId(Sparklines::ID)) {
-            $view->requestConfig->apiMethodToRequestDataTable = 'API.get';
+            $view->requestConfig->apiMethodToRequestDataTable = 'VisitFrequency.get';
             $view->config->sparkline_metrics_to_display = $this->getSparklineColumns();
             $view->config->addTranslations($this->getSparklineTranslations());
         }

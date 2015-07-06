@@ -8,7 +8,6 @@
  */
 namespace Piwik\Plugins\VisitFrequency;
 
-use Piwik\API\Request;
 use Piwik\Common;
 use Piwik\FrontController;
 use Piwik\Piwik;
