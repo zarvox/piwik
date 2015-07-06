@@ -32,12 +32,20 @@ class Config extends \Piwik\ViewDataTable\Config
         $this->translations = Metrics::getDefaultMetricTranslations();
     }
 
-    public function removeSparklineMetricToDisplay($columns)
+    /**
+     * @param array|string $columns The columns to remove that was previously added
+     * @param array|string $replacementColumns  If given the removed columns will be replaced with these columns
+     */
+    public function removeSparklineMetricToDisplay($columns, $replacementColumns = null)
     {
         $index = array_search($columns, $this->sparkline_metrics_to_display);
 
         if (false !== $index) {
-            array_splice($this->sparkline_metrics_to_display, $index, 1);
+            if (isset($replacementColumns)) {
+                $replacementColumns = array($replacementColumns);
+            }
+
+            array_splice($this->sparkline_metrics_to_display, $index, 1, $replacementColumns);
         }
     }
 

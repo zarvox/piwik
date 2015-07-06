@@ -91,11 +91,6 @@ class Sparklines extends ViewDataTable
                     $value = 0;
                 }
 
-                if ($col === 'nb_users' && (!is_numeric($value) || 0 >= $value)) {
-                    $sparklines[] = $blankSparkline;
-                    continue;
-                }
-
                 $sparkline['metrics'][] = array(
                     'value' => $value,
                     'description' => isset($translations[$col]) ? $translations[$col] : $col

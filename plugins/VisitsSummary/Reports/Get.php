@@ -9,8 +9,10 @@
 namespace Piwik\Plugins\VisitsSummary\Reports;
 
 use Piwik\Common;
+use Piwik\Container\StaticContainer;
 use Piwik\DataTable;
 use Piwik\DataTable\DataTableInterface;
+use Piwik\Metrics\Formatter;
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
 use Piwik\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
@@ -80,7 +82,6 @@ class Get extends \Piwik\Plugin\Report
             $view->config->filters[] = function (DataTable $table) use ($view) {
                 $firstRow = $table->getFirstRow();
 
-                $firstRow->setColumn('nb_actions', 5);
                 if (($firstRow->getColumn('nb_pageviews')
                     + $firstRow->getColumn('nb_downloads')
                     + $firstRow->getColumn('nb_outlinks')) == 0
@@ -91,6 +92,20 @@ class Get extends \Piwik\Plugin\Report
                     $view->config->removeSparklineMetricToDisplay(array('nb_searches', 'nb_keywords'));
                 } else {
                     $view->config->removeSparklineMetricToDisplay(array('nb_actions'));
+                }
+
+                $nbUsers = $firstRow->getColumn('nb_users');
+                if (!is_numeric($nbUsers) || 0 >= $nbUsers) {
+                    $view->config->removeSparklineMetricToDisplay(array('nb_users'), '');
+                }
+
+                $avgGenerationTime = $firstRow->getColumn('avg_time_generation');
+                if (false === $avgGenerationTime) {
+                    // fix avgGenerationTime is not formatted if value is false
+                    /** @var Formatter $formatter */
+                    $formatter = StaticContainer::get('Piwik\Metrics\Formatter');
+                    $avgGenerationTime = $formatter->getPrettyTimeFromSeconds($avgGenerationTime, true);
+                    $firstRow->setColumn('avg_time_generation', $avgGenerationTime);
                 }
             };
         }
