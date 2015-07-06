@@ -40,21 +40,17 @@ cp -av /opt/app/config-orig/* /var/piwik/config/
 PIWIK_CONFIG_FILE=/var/piwik/config/config.ini.php
 if [ ! -f $PIWIK_CONFIG_FILE ] ; then
     echo "first run; adding default config"
-    #cp /opt/app/config-orig/config.ini.php.example $PIWIK_CONFIG_FILE
 
-    # Import schema.  This requires:
-    # 1) a fully-populated config, including DB settings
-    # 2) MySQL is up.
-    #time php /opt/app/sandstorm-setup.php
+    # Write config file
+    cp /opt/app/config-orig/config.ini.php.example $PIWIK_CONFIG_FILE
 
-    # TODO: INSERT INTO site(idsite, name, host) VALUES (1, "Analytics", "http://example.com")
-    #echo "Ran import script"
+    # Run through the Piwik setup flow with some default values, headless.
+    time php /opt/app/sandstorm-setup.php
+
+    # Apply updates that appear to only get pulled in when plugins are involved?
+    time php /opt/app/console core:update --yes -n -vv
+    echo "Ran update script"
 fi
-
-#time php /opt/app/console core:update --yes -n -vv
-#echo "Ran update script"
-
-#time php /opt/app/console customvariables:info
 
 # Spawn PHP
 /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf &

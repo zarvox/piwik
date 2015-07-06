@@ -17,10 +17,16 @@ if (!defined('PIWIK_PRINT_ERROR_BACKTRACE')) {
 }
 
 // Actually do something useful
+// Adapted from the interesting pieces of plugins/Installation/Controller.php
 use Piwik\Application\Environment;
+use Piwik\Access;
 use Piwik\Config;
 use Piwik\Db;
 use Piwik\DbHelper;
+use Piwik\Plugins\SitesManager\API as APISitesManager;
+use Piwik\Plugins\UsersManager\API as APIUsersManager;
+use Piwik\Updater;
+use Piwik\Version;
 
 $environment = new Environment(null);
 $environment->init();
@@ -36,10 +42,61 @@ $dbInfos = array(
 	'schema'        => Config::getInstance()->database['schema'],
 	'type'          => Config::getInstance()->database['type']
 );
+
 Db::createDatabaseObject($dbInfos);
 DbHelper::createDatabase("piwik");
 DbHelper::createTables("piwik");
+DbHelper::createAnonymousUser();
+print("Created DB tables\n");
+flush();
+
+// Apply updates/migrations
+Access::getInstance();
+$updatesPerformed = Access::doAsSuperUser(function () {
+	$updater = new Updater();
+	$componentsWithUpdateFile = $updater->getComponentUpdates();
+	print("components to update:\n");
+	print($componentsWithUpdateFile);
+	print("\n");
+	flush();
+
+	if (empty($componentsWithUpdateFile)) {
+		return false;
+	}
+	$result = $updater->updateComponents($componentsWithUpdateFile);
+	return $result;
+});
+print("updates performed:\n");
+print($updatesPerformed);
+print("\n");
+flush();
+Updater::recordComponentSuccessfullyUpdated('core', Version::VERSION);
+print("theoretically applied updates\n");
+flush();
+
+// TODO: skip creating superuser and just create users dynamically and set permissions.
+Access::doAsSuperUser(function () {
+	$login = "sandstorm";
+	$password = "sandstorm";
+	$email = "drew@sandstorm.io";
+	$api = APIUsersManager::getInstance();
+	$api->addUser($login, $password, $email);
+	$api->setSuperUserAccess($login, true);
+});
+print("created superuser\n");
+flush();
+
 // Create a default site.
-
-// Create a default user?  Nah, I don't think this is needed.
-
+$siteIdsCount = Access::doAsSuperUser(function () {
+	return count(APISitesManager::getInstance()->getAllSitesId());
+});
+if ($siteIdsCount <= 0) {
+	$name = "Website";
+	$url = "http://example.com";
+	$ecommerce = 0;
+	$result = Access::doAsSuperUser(function () use ($name, $url, $ecommerce) {
+		return APISitesManager::getInstance()->addSite($name, $url, $ecommerce);
+	});
+}
+print("created site, all done\n");
+flush();
