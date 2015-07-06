@@ -150,7 +150,9 @@ describe("SegmentSelectorEditorTest", function () {
                 });
             });
 
-            page.click('button.saveAndApply');
+            page.evaluate(function () {
+                $('button.saveAndApply').click();
+            });
 
             page.click('.segmentationContainer');
         }, done);
