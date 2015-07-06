@@ -44,14 +44,14 @@
                         finalWidgetsByCategory.push(category);
                     });
 
-                    scope.widgetsByCategory = $filter('orderBy')(finalWidgetsByCategory, 'order');;
+                    scope.widgetsByCategory = $filter('orderBy')(finalWidgetsByCategory, 'order');
 
                     scope.selectWidget = function (widget) {
                         scope.selectedWidget = widget;
                     }
 
-                    if (scope.container.widgets && scope.container.widgets.length) {
-                        scope.selectWidget(scope.container.widgets[0]);
+                    if (widgetsSorted && widgetsSorted.length) {
+                        scope.selectWidget(widgetsSorted[0]);
                     }
                 };
             }
