@@ -29,34 +29,15 @@ class Goals extends \Piwik\Plugin
         foreach ($dimensions as $dimension) {
             $group = $dimension['category'];
             // move "Custom Variables" report to the "Goals/Sales by User attribute" category
-            if ($dimension['module'] === 'CustomVariables') {
+            if ($dimension['module'] === 'CustomVariables'
+                || $dimension['action'] == 'getVisitInformationPerServerTime') {
                 $group = 'VisitsSummary_VisitsSummary';
             }
             unset($dimension['category']);
             $dimensionsByGroup[$group][] = $dimension;
         }
 
-        uksort($dimensionsByGroup, array('self', 'sortGoalDimensionsByModule'));
         return $dimensionsByGroup;
-    }
-
-    public static function sortGoalDimensionsByModule($a, $b)
-    {
-        static $order = null;
-
-        if (is_null($order)) {
-            $order = array(
-                'Referrers_Referrers',
-                'General_Visit',
-                'General_Visitors',
-                'VisitsSummary_VisitsSummary',
-                'VisitTime_ColumnServerTime',
-            );
-        }
-
-        $orderA = array_search($a, $order);
-        $orderB = array_search($b, $order);
-        return $orderA > $orderB;
     }
 
     public static function getGoalColumns($idGoal)

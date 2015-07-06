@@ -12,9 +12,9 @@
 (function () {
     angular.module('piwikApp').directive('piwikWidgetByDimensionContainer', piwikWidgetContainer);
 
-    piwikWidgetContainer.$inject = ['piwik'];
+    piwikWidgetContainer.$inject = ['piwik', '$filter'];
 
-    function piwikWidgetContainer(piwik){
+    function piwikWidgetContainer(piwik, $filter){
         return {
             restrict: 'A',
             scope: {
@@ -27,15 +27,24 @@
 
                     var widgetsByCategory = {};
 
+                    scope.container.widgets = $filter('orderBy')(scope.container.widgets, 'order');
+
                     angular.forEach(scope.container.widgets, function (widget) {
                         var category = widget.subcategory.name;
+
                         if (!widgetsByCategory[category]) {
-                            widgetsByCategory[category] = [];
+                            widgetsByCategory[category] = {name: category, order: widget.order, widgets: []};
                         }
-                        widgetsByCategory[category].push(widget);
+                        widgetsByCategory[category].widgets.push(widget);
                     });
 
-                    scope.widgetsByCategory = widgetsByCategory;
+                    // only an array can be sorted
+                    var finalWidgetsByCategory = [];
+                    angular.forEach(widgetsByCategory, function (category) {
+                        finalWidgetsByCategory.push(category);
+                    });
+
+                    scope.widgetsByCategory = $filter('orderBy')(finalWidgetsByCategory, 'order');;
 
                     scope.selectWidget = function (widget) {
                         scope.selectedWidget = widget;

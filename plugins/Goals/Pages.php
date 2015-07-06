@@ -278,6 +278,8 @@ class Pages
             $translationHelper = new TranslationHelper();
 
             foreach ($this->allReports as $category => $reports) {
+                $order = ($this->getSortOrderOfCategory($category) * 100);
+
                 if ($ecommerce) {
                     $categoryText = $translationHelper->translateEcommerceMetricCategory($category);
                 } else {
@@ -285,6 +287,8 @@ class Pages
                 }
 
                 foreach ($reports as $report) {
+                    $order++;
+
                     if (empty($report['viewDataTable'])
                         && empty($report['abandonedCarts'])
                     ) {
@@ -295,6 +299,7 @@ class Pages
                     $widget->setParameters($customParams);
                     $widget->setCategoryId($categoryText);
                     $widget->setSubcategoryId($categoryText);
+                    $widget->setOrder($order);
                     $widget->setIsNotWidgetizable();
 
                     if (!empty($report['viewDataTable'])) {
@@ -305,6 +310,28 @@ class Pages
                 }
             }
         }
+    }
+
+    private function getSortOrderOfCategory($category)
+    {
+        static $order = null;
+
+        if (is_null($order)) {
+            $order = array(
+                'Referrers_Referrers',
+                'General_Visit',
+                'General_Visitors',
+                'VisitsSummary_VisitsSummary',
+            );
+        }
+
+        $value = array_search($category, $order);
+
+        if (false === $value) {
+            $value = count($order) + 1;
+        }
+
+        return $value;
     }
 
     private function createWidgetForReport($module, $action)

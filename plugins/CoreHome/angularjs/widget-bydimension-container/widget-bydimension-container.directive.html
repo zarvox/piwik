@@ -1,10 +1,10 @@
 <div class="reportsByDimensionView">
 
     <div class="entityList">
-        <div class='dimensionCategory' ng-repeat="(category, widgets) in widgetsByCategory">
-            {{ category }}
+        <div class='dimensionCategory' ng-repeat="category in widgetsByCategory">
+            {{ category.name }}
             <ul class='listCircle'>
-                <li ng-repeat="widget in widgets"
+                <li ng-repeat="widget in category.widgets"
                     class="reportDimension"
                     ng-class="{activeDimension: (selectedWidget.uniqueId===widget.uniqueId)}"
                     ng-click="selectWidget(widget)">

@@ -9,7 +9,12 @@
                 <div class="sparkline">
                     {% if sparkline.url %}{{ sparkline(sparkline.url)|raw }}{% endif %}
                     {% for metric in sparkline.metrics %}
-                        <strong>{{ metric.value }}</strong> {{ metric.description }}{% if not loop.last %}, {% endif %}
+                        {% if '%s' in metric.description %}
+                            {{ metric.description|translate("<strong>"~metric.value~"</strong> ")|raw }}
+                        {% else %}
+                            <strong>{{ metric.value }}</strong> {{ metric.description }}
+                        {% endif %}
+                        {% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </div>
 
@@ -27,7 +32,12 @@
                 <div class="sparkline">
                     {% if sparkline.url %}{{ sparkline(sparkline.url)|raw }}{% endif %}
                     {% for metric in sparkline.metrics %}
-                        <strong>{{ metric.value }}</strong> {{ metric.description }}{% if not loop.last %}, {% endif %}
+                        {% if '%s' in metric.description %}
+                            {{ metric.description|translate("<strong>"~metric.value~"</strong> ")|raw }}
+                        {% else %}
+                            <strong>{{ metric.value }}</strong> {{ metric.description }}
+                        {% endif %}
+                        {% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </div>
 

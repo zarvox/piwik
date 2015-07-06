@@ -91,6 +91,14 @@ class Get extends Base
                 }
             };
 
+            $view->config->addTranslations(array(
+                'nb_visits' => Piwik::translate('VisitsSummary_NbVisitsDescription'),
+                'nb_conversions' => Piwik::translate('Goals_ConversionsDescription'),
+                'nb_visits_converted' => Piwik::translate('General_NVisits'),
+                'conversion_rate' => Piwik::translate('Goals_OverallConversionRate'),
+                'revenue' => Piwik::translate('Goals_OverallRevenue'),
+            ));
+
             if (empty($idGoal)) {
 
                 $view->config->addSparklineMetricsToDisplay(array('nb_conversions'));
@@ -105,27 +113,29 @@ class Get extends Base
                 $allowMultiple = Common::getRequestVar('allow_multiple', 0, 'int');
                 $onlySummary   = Common::getRequestVar('only_summary', 0, 'int');
 
-                $view->config->addSparklineMetricsToDisplay(array('nb_conversions', 'nb_visits'));
+                $conversionSummaryColumns= array('nb_conversions');
 
-                if (!$onlySummary && $allowMultiple) {
-                    $view->config->addSparklineMetricsToDisplay(array('nb_visits_converted'));
+                if ($allowMultiple) {
+                    $conversionSummaryColumns[] = 'nb_visits_converted';
                 }
+
+                $view->config->addSparklineMetricsToDisplay($conversionSummaryColumns);
 
                 $view->config->addSparklineMetricsToDisplay(array('conversion_rate'));
 
-                if (!$onlySummary && $isEcommerceEnabled) {
-                    // TODO this should be done in Ecommerce plugin
-                    $view->config->addSparklineMetricsToDisplay(array('revenue'));
-                }
-            }
+                if ($onlySummary) {
+                    // in Goals Overview we list an overview for each goal....
+                    $view->config->addTranslation('conversion_rate', Piwik::translate('Goals_ConversionRate'));
 
-            $view->config->addTranslations(array(
-                'nb_visits' => Piwik::translate('VisitsSummary_NbVisitsDescription'),
-                'nb_conversions' => Piwik::translate('Goals_ConversionsDescription'),
-                'nb_visits_converted' => Piwik::translate('General_NVisits'),
-                'conversion_rate' => Piwik::translate('Goals_OverallConversionRate'),
-                'revenue' => Piwik::translate('Goals_OverallRevenue'),
-            ));
+                } else {
+                    // in Goals detail page...
+                    if ($isEcommerceEnabled) {
+                        // TODO this should be done in Ecommerce plugin
+                        $view->config->addSparklineMetricsToDisplay(array('revenue'));
+                    }
+                }
+
+            }
         }
     }
 
