@@ -131,6 +131,10 @@ class Get extends Base
                     $view->config->addSparklineMetricsToDisplay(array('revenue'));
                 }
             }
+        } else if ($view->isViewDataTableId(Evolution::ID)) {
+            if (empty($view->config->columns_to_display)) {
+                $view->config->columns_to_display = array('nb_conversions');
+            }
         }
     }
 

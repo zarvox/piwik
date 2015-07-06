@@ -46,7 +46,6 @@ class Pages
         $config->setSubcategoryId($subcategory);
         $config->setAction('getEvolutionGraph');
         $config->setOrder(++$this->orderId);
-        $config->setParameters(array('columns' => 'nb_conversions'));
         $config->setIsNotWidgetizable();
         $widgets[] = $config;
 
@@ -104,7 +103,7 @@ class Pages
         $config->setAction('getEvolutionGraph');
         $config->setOrder(++$this->orderId);
         $config->setIsNotWidgetizable();
-        $config->setParameters(array('columns' => 'nb_conversions', 'idGoal' => $idGoal));
+        $config->setParameters(array('idGoal' => $idGoal));
         $widgets[] = $config;
 
         $config = $this->factory->createWidget();
@@ -173,7 +172,6 @@ class Pages
         $config->forceViewDataTable(Evolution::ID);
         $config->setAction('getEvolutionGraph');
         $config->setParameters($params);
-        $config->addParameters(array('columns' => 'nb_conversions'));
         $config->setOrder(++$this->orderId);
         $config->setIsNotWidgetizable();
         $widgets[] = $config;
