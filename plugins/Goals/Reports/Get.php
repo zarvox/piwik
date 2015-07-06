@@ -99,10 +99,19 @@ class Get extends Base
                 'revenue' => Piwik::translate('Goals_OverallRevenue'),
             ));
 
-            if (empty($idGoal)) {
 
+            $allowMultiple = Common::getRequestVar('allow_multiple', 0, 'int');
+
+            if ($allowMultiple) {
+                $view->config->addSparklineMetricsToDisplay(array('nb_conversions', 'nb_visits_converted'));
+            } else {
                 $view->config->addSparklineMetricsToDisplay(array('nb_conversions'));
-                $view->config->addSparklineMetricsToDisplay(array('conversion_rate'));
+            }
+
+            $view->config->addSparklineMetricsToDisplay(array('conversion_rate'));
+
+            if (empty($idGoal)) {
+                // goals overview sparklines below evolution graph
 
                 if ($isEcommerceEnabled) {
                     // TODO this should be done in Ecommerce plugin
@@ -110,31 +119,17 @@ class Get extends Base
                 }
 
             } else {
-                $allowMultiple = Common::getRequestVar('allow_multiple', 0, 'int');
-                $onlySummary   = Common::getRequestVar('only_summary', 0, 'int');
-
-                $conversionSummaryColumns= array('nb_conversions');
-
-                if ($allowMultiple) {
-                    $conversionSummaryColumns[] = 'nb_visits_converted';
-                }
-
-                $view->config->addSparklineMetricsToDisplay($conversionSummaryColumns);
-
-                $view->config->addSparklineMetricsToDisplay(array('conversion_rate'));
+                $onlySummary = Common::getRequestVar('only_summary', 0, 'int');
 
                 if ($onlySummary) {
                     // in Goals Overview we list an overview for each goal....
                     $view->config->addTranslation('conversion_rate', Piwik::translate('Goals_ConversionRate'));
 
-                } else {
+                } elseif ($isEcommerceEnabled) {
                     // in Goals detail page...
-                    if ($isEcommerceEnabled) {
-                        // TODO this should be done in Ecommerce plugin
-                        $view->config->addSparklineMetricsToDisplay(array('revenue'));
-                    }
+                    // TODO this should be done in Ecommerce plugin
+                    $view->config->addSparklineMetricsToDisplay(array('revenue'));
                 }
-
             }
         }
     }
