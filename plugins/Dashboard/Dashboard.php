@@ -112,7 +112,7 @@ class Dashboard extends \Piwik\Plugin
                 [
                     ' . $topWidget . '
                     {"uniqueId":"widgetReferrersgetWebsites","parameters":{"module":"Referrers","action":"getWebsites"}},
-                    {"uniqueId":"widgetVisitTimegetVisitInformationPerServerTime","parameters":{"viewDataTable": "graphVerticalBar","module":"VisitTime","action":"getVisitInformationPerServerTime"}}
+                    {"uniqueId":"widgetVisitTimegetVisitInformationPerServerTimeviewDataTablegraphVerticalBar","parameters":{"viewDataTable": "graphVerticalBar","module":"VisitTime","action":"getVisitInformationPerServerTime"}}
                 ],
                 [
                     {"uniqueId":"widgetUserCountryMapvisitorMap","parameters":{"module":"UserCountryMap","action":"visitorMap"}},
