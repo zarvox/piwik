@@ -219,6 +219,11 @@ class Pages
         $firstWidget = reset($widgets);
         /** @var \Piwik\Report\ReportWidgetConfig $firstWidget */
 
+        if (!empty($pageName)) {
+            // make sure to not show two titles (one for this container and one for the first widget)
+            $firstWidget->setName('');
+        }
+
         $config = $this->factory->createContainerWidget($containerId);
         $config->setName($pageName);
         $config->setCategoryId($firstWidget->getCategoryId());
