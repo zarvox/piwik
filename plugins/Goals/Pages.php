@@ -200,7 +200,6 @@ class Pages
         }
 
         $container = $this->createWidgetizableWidgetContainer('Goal_' . $idGoal, $name, $widgets);
-        $container->addParameters($params);
 
         $config = $this->factory->createContainerWidget('Goals' . $idGoal);
         $config->setName(Piwik::translate('Goals_GoalConversionsBy', array($name)));

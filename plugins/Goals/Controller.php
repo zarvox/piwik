@@ -337,9 +337,9 @@ class Controller extends \Piwik\Plugin\Controller
         $idGoal = Common::getRequestVar('idGoal', '', 'string');
 
         if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
-            $_GET['containerId'] = 'Goals_EcommerceGeneral_Overview';
+            $_GET['containerId'] = 'EcommerceOverview';
         } elseif (!empty($idGoal)) {
-            $_GET['containerId'] = 'Goals_Goals' . (int) $idGoal;
+            $_GET['containerId'] = 'Goal_' . (int) $idGoal;
         } else {
             return '';
         }
@@ -352,7 +352,7 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function widgetGoalsOverview()
     {
-        $_GET['containerId'] = 'Goals_GoalsGeneral_Overview';
+        $_GET['containerId'] = 'GoalsOverview';
 
         return FrontController::getInstance()->fetchDispatch('CoreHome', 'renderWidgetContainer');
     }

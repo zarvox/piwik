@@ -117,7 +117,7 @@ class WidgetTest extends SystemTestCase
         return array(
             array (
                 'name' => 'Visits Overview (with graph)',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdVisitOverviewWithGraph',
+                'uniqueId' => 'widgetVisitOverviewWithGraph',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
@@ -666,7 +666,7 @@ class WidgetTest extends SystemTestCase
                     ),
             ),array (
                 'name' => 'Overview',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdGoalsOverview',
+                'uniqueId' => 'widgetGoalsOverview',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
@@ -675,7 +675,7 @@ class WidgetTest extends SystemTestCase
                     ),
             ),array (
                 'name' => 'Overview',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContainercontainerIdEcommerceOverview',
+                'uniqueId' => 'widgetEcommerceOverview',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
@@ -684,42 +684,38 @@ class WidgetTest extends SystemTestCase
                     ),
             ),array (
                 'name' => 'Download Software',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal1containerIdGoal_1',
+                'uniqueId' => 'widgetGoal_1',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
-                        'idGoal' => '1',
                         'containerId' => 'Goal_1',
                     ),
             ),array (
                 'name' => 'Download Software2',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal2containerIdGoal_2',
+                'uniqueId' => 'widgetGoal_2',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
-                        'idGoal' => '2',
                         'containerId' => 'Goal_2',
                     ),
             ),array (
                 'name' => 'Opens Contact Form',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal3containerIdGoal_3',
+                'uniqueId' => 'widgetGoal_3',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
-                        'idGoal' => '3',
                         'containerId' => 'Goal_3',
                     ),
             ),array (
                 'name' => 'Visit Docs',
-                'uniqueId' => 'widgetCoreHomerenderWidgetContaineridGoal4containerIdGoal_4',
+                'uniqueId' => 'widgetGoal_4',
                 'parameters' =>
                     array (
                         'module' => 'CoreHome',
                         'action' => 'renderWidgetContainer',
-                        'idGoal' => '4',
                         'containerId' => 'Goal_4',
                     ),
             ),array (

@@ -68,6 +68,16 @@ class WidgetContainerConfig extends WidgetConfig
         return $this->widgets;
     }
 
+    public function getUniqueId()
+    {
+        $parameters = $this->getParameters();
+        unset($parameters['module']);
+        unset($parameters['action']);
+        unset($parameters['containerId']);
+
+        return WidgetsList::getWidgetUniqueId($this->id, '', $parameters);
+    }
+
     public function getParameters()
     {
         $params = parent::getParameters();

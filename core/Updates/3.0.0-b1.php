@@ -221,6 +221,7 @@ class Updates_3_0_0_b1 extends Updates
             ),array (
                 'module' => 'CoreHome',
                 'action' => 'renderWidgetContainer',
+                'uniqueId' => 'widgetVisitOverviewWithGraph',
                 'params' =>
                     array (
                         'containerId' => 'VisitOverviewWithGraph',
@@ -295,6 +296,7 @@ class Updates_3_0_0_b1 extends Updates
             ),array (
                 'module' => 'CoreHome',
                 'action' => 'renderWidgetContainer',
+                'uniqueId' => 'widgetGoalsOverview',
                 'params' =>
                     array (
                         'containerId' => 'GoalsOverview'
@@ -323,6 +325,7 @@ class Updates_3_0_0_b1 extends Updates
             ),array (
                 'module' => 'CoreHome',
                 'action' => 'renderWidgetContainer',
+                'uniqueId' => 'widgetEcommerceOverview',
                 'params' =>
                     array (
                         'containerId' => 'EcommerceOverview',
@@ -334,10 +337,10 @@ class Updates_3_0_0_b1 extends Updates
             $newWidgets[] = array (
                 'module' => 'CoreHome',
                 'action' => 'renderWidgetContainer',
+                'uniqueId' => 'widgetGoal_' . (int) $goal['idgoal'],
                 'params' =>
                     array (
-                        'idGoal' => (int) $goal['idgoal'],
-                        'containerId' => 'Goal' . (int) $goal['idgoal'],
+                        'containerId' => 'Goal_' . (int) $goal['idgoal'],
                     ));
         }
 
