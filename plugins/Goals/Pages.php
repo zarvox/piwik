@@ -173,6 +173,7 @@ class Pages
         $config->forceViewDataTable(Evolution::ID);
         $config->setAction('getEvolutionGraph');
         $config->setParameters($params);
+        $config->addParameters(array('columns' => 'nb_conversions'));
         $config->setOrder(++$this->orderId);
         $config->setIsNotWidgetizable();
         $widgets[] = $config;
