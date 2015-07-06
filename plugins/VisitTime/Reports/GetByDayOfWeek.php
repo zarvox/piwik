@@ -73,4 +73,11 @@ class GetByDayOfWeek extends Base
         }
         return $dateRange;
     }
+
+    public function getRelatedReports()
+    {
+        return array(
+            self::factory('VisitTime', 'getVisitInformationPerLocalTime')
+        );
+    }
 }

@@ -43,10 +43,12 @@ class GetVisitInformationPerLocalTime extends Base
         if ($view->isViewDataTableId(Graph::ID)) {
             $view->config->max_graph_elements = false;
         }
+    }
 
-        // add the visits by day of week as a related report, if the current period is not 'day'
-        if (Common::getRequestVar('period', 'day') != 'day') {
-            $view->config->addRelatedReport('VisitTime.getByDayOfWeek', Piwik::translate('VisitTime_VisitsByDayOfWeek'));
-        }
+    public function getRelatedReports()
+    {
+        return array(
+            self::factory('VisitTime', 'getByDayOfWeek')
+        );
     }
 }

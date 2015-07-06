@@ -83,9 +83,14 @@
         var idSite = getUrlParam('idSite');
         var period = getUrlParam('period');
         var date   = getUrlParam('date');
+        var segment = getUrlParam('segment');
 
         $scope.makeUrl = function (category, subcategory) {
-            return 'idSite=' + idSite + '&period=' + period + '&date=' + date + '&category=' + category.id + '&subcategory=' + subcategory.id;
+            var url = 'idSite=' + idSite + '&period=' + period + '&date=' + date + '&category=' + category.id + '&subcategory=' + subcategory.id;
+            if (segment) {
+                url+= 'segment='+ segment;
+            }
+            return url;
         }
 
         $scope.loadSubcategory = function (category, subcategory) {
