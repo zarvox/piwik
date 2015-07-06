@@ -88,7 +88,7 @@
         $scope.makeUrl = function (category, subcategory) {
             var url = 'idSite=' + idSite + '&period=' + period + '&date=' + date + '&category=' + category.id + '&subcategory=' + subcategory.id;
             if (segment) {
-                url+= 'segment='+ segment;
+                url+= '&segment='+ segment;
             }
             return url;
         }
