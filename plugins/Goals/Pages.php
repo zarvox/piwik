@@ -181,6 +181,7 @@ class Pages
         $config->setName('');
         $config->forceViewDataTable(Sparklines::ID);
         $config->setParameters($params);
+        $config->addParameters(array('allow_multiple' => (int) $goal['allow_multiple']));
         $config->setOrder(++$this->orderId);
         $config->setIsNotWidgetizable();
         $widgets[] = $config;
