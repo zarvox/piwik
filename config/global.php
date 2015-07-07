@@ -66,4 +66,6 @@ return array(
 
     'Piwik\EventDispatcher' => DI\object()->constructorParameter('observers', DI\get('observers.global')),
 
+    'tracker.request.processors' => array(),
+
 );
