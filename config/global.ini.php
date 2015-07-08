@@ -773,6 +773,7 @@ Plugins[] = TestRunner
 Plugins[] = BulkTracking
 Plugins[] = Resolution
 Plugins[] = DevicePlugins
+Plugins[] = Heartbeat
 Plugins[] = Intl
 
 [PluginsInstalled]
