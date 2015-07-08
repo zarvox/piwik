@@ -23,6 +23,7 @@ use Piwik\Access;
 use Piwik\Config;
 use Piwik\Db;
 use Piwik\DbHelper;
+use Piwik\Plugin\Manager as PluginManager;
 use Piwik\Plugins\SitesManager\API as APISitesManager;
 use Piwik\Plugins\UsersManager\API as APIUsersManager;
 use Piwik\Updater;
@@ -50,29 +51,27 @@ DbHelper::createAnonymousUser();
 print("Created DB tables\n");
 flush();
 
+PluginManager::getInstance()->loadPluginTranslations();
+PluginManager::getInstance()->loadActivatedPlugins();
+
 // Apply updates/migrations
 Access::getInstance();
 $updatesPerformed = Access::doAsSuperUser(function () {
 	$updater = new Updater();
 	$componentsWithUpdateFile = $updater->getComponentUpdates();
-	print("components to update:\n");
-	print($componentsWithUpdateFile);
-	print("\n");
-	flush();
 
 	if (empty($componentsWithUpdateFile)) {
 		return false;
 	}
 	$result = $updater->updateComponents($componentsWithUpdateFile);
+	print_r($result);
 	return $result;
 });
 print("updates performed:\n");
-print($updatesPerformed);
+print_r($updatesPerformed);
 print("\n");
 flush();
 Updater::recordComponentSuccessfullyUpdated('core', Version::VERSION);
-print("theoretically applied updates\n");
-flush();
 
 // Create a default site.
 $siteIdsCount = Access::doAsSuperUser(function () {

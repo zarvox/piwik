@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "-------- Start: " && date +%s.%N
+
 # Create a bunch of folders under the clean /var that php, nginx, and mysql expect to exist
 mkdir -p /var/lib/mysql
 mkdir -p /var/lib/nginx
@@ -16,8 +18,10 @@ mkdir -p /var/run/mysqld
 mkdir -p /var/www
 cp /opt/app/piwik.js /var/www/embed.js
 
+echo "-------- MySQL setup start: " && date +%s.%N
 # Ensure mysql tables created
-HOME=/etc/mysql /usr/bin/mysql_install_db --force
+HOME=/etc/mysql /usr/bin/mysql_install_db --force --skip-name-resolve --cross-bootstrap
+echo "-------- MySQL setup done: " && date +%s.%N
 
 MYSQL_SOCKET_FILE=/var/run/mysqld/mysqld.sock
 # Spawn mysqld, wait for the DB to be up, so we can do the DB migration
@@ -27,9 +31,13 @@ while [ ! -e $MYSQL_SOCKET_FILE ] ; do
     sleep .2
 done
 
+echo "-------- MySQL up: " && date +%s.%N
+
 # Ensure the 'piwik' database exists.
 echo "CREATE DATABASE IF NOT EXISTS piwik DEFAULT CHARACTER SET utf8" | mysql --user root --socket $MYSQL_SOCKET_FILE
 echo "database 'piwik' created"
+
+echo "-------- DB exists: " && date +%s.%N
 
 # App-specific: ensure /var/piwik/tmp and /var/piwik/config exist.  Copy the
 # config snippets to where piwik will look for them.
@@ -46,10 +54,11 @@ if [ ! -f $PIWIK_CONFIG_FILE ] ; then
 
     # Run through the Piwik setup flow with some default values, headless.
     time php /opt/app/sandstorm-setup.php
+    echo "-------- sandstorm-setup.php ran: " && date +%s.%N
 
-    # Apply updates that appear to only get pulled in when plugins are involved?
-    time php /opt/app/console core:update --yes -n -vv
-    echo "Ran update script"
+    # On upgrade: apply updates, or let the UI prompt the user
+    #time php /opt/app/console core:update --yes -n -vv
+    #echo "-------- update script ran: " && date +%s.%N
 fi
 
 # Spawn PHP
