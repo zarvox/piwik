@@ -53,7 +53,9 @@ function requestOfferTemplate() {
       renderTemplate: {
         rpcId: rpcId,
         template: sandstormTemplate,
-        petname: "Piwik tracker site-embedded API key"
+        petname: "Piwik tracker site-embedded API key",
+        roleAssignment: { roleId: 2 },
+        forSharing: true
       }
     },
     "*"

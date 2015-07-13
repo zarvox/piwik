@@ -98,7 +98,11 @@ const pkgdef :Spk.PackageDefinition = (
           title = (defaultText = "viewer"),
           permissions = [false, false, true],
           verbPhrase = (defaultText = "can view analytics data")
-        )
+        ),(
+          title = (defaultText = "trackee"),
+          permissions = [false, false, false],
+          verbPhrase = (defaultText = "can be tracked")
+        ),
       ]
     ),
     apiPath = "/piwik.php"

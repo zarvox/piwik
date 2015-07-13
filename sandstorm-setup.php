@@ -51,8 +51,8 @@ DbHelper::createAnonymousUser();
 print("Created DB tables\n");
 flush();
 
-PluginManager::getInstance()->loadPluginTranslations();
 PluginManager::getInstance()->loadActivatedPlugins();
+PluginManager::getInstance()->loadPluginTranslations();
 
 // Apply updates/migrations
 Access::getInstance();

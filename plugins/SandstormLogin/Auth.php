@@ -116,8 +116,14 @@ class Auth implements \Piwik\Auth
         });
         // We make tokenAuth be md5(sandstorm_userid).  This should perhaps be improved to be not guessable.
         // The default implementation appears to be md5(username . md5(password)).
-        $isSuperUser = in_array("superuser", explode(",", $_SERVER['HTTP_X_SANDSTORM_PERMISSIONS']), true);
-        $authResult = $isSuperUser ? AuthResult::SUCCESS_SUPERUSER_AUTH_CODE : AuthResult::SUCCESS;
+        $perms = explode(",", $_SERVER['HTTP_X_SANDSTORM_PERMISSIONS']);
+        $isSuperUser = in_array("superuser", $perms, true);
+        $hasViewPerm = in_array("view", $perms, true);
+        $authResult = $isSuperUser ? AuthResult::SUCCESS_SUPERUSER_AUTH_CODE :
+                                     ($hasViewPerm ? AuthResult::SUCCESS : AuthResult::FAILURE);
+        if ($authResult === AuthResult::FAILURE) {
+            return new AuthResult($authResult, "", "");
+        }
         return new AuthResult($authResult, $_SERVER['HTTP_X_SANDSTORM_USER_ID'], md5($_SERVER['HTTP_X_SANDSTORM_USER_ID']));
     }
 }
