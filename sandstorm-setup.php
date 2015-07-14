@@ -25,6 +25,7 @@ use Piwik\Db;
 use Piwik\DbHelper;
 use Piwik\Plugin\Manager as PluginManager;
 use Piwik\Plugins\SitesManager\API as APISitesManager;
+use Piwik\Plugins\UserCountry\LocationProvider;
 use Piwik\Plugins\UsersManager\API as APIUsersManager;
 use Piwik\Updater;
 use Piwik\Version;
@@ -72,6 +73,9 @@ print_r($updatesPerformed);
 print("\n");
 flush();
 Updater::recordComponentSuccessfullyUpdated('core', Version::VERSION);
+
+// Enable geoip_pecl geolocation backend.
+LocationProvider::setCurrentProvider("geoip_pecl");
 
 // Create a default site.
 $siteIdsCount = Access::doAsSuperUser(function () {
