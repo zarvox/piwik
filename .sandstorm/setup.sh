@@ -64,3 +64,5 @@ EOF
 sed --in-place='' \
         --expression 's/^fastcgi_param *HTTPS.*$/fastcgi_param  HTTPS              \$fe_https if_not_empty;/' \
         /etc/nginx/fastcgi_params
+# Configure PHP to look for the MaxMind GeoIP database in the app folder
+echo "geoip.custom_directory=/opt/app/misc" >> /etc/php5/mods-available/geoip.ini
