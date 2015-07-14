@@ -1,0 +1,5 @@
+{
+    "SandstormLogin": {
+        "PluginDescription": "A plugin integrating sandstorm.io's authentication and permissions to the Piwik platform."
+    }
+}

@@ -52,10 +52,18 @@ class Auth implements \Piwik\Auth
 
     public function authenticate()
     {
-        // Autoprovision a user in the DB if they don't exist yet
-        Access::doAsSuperUser(function () {
-            $login = $_SERVER['HTTP_X_SANDSTORM_USER_ID'];
-            if (!empty($login)) {
+        // We do not currently support anonymous sharing, since Piwik expects users to exist in the
+        // database with permissions in the access table, and it's hard to do that for users without
+        // a unique ID.
+        $login = $_SERVER['HTTP_X_SANDSTORM_USER_ID'];
+        if (!empty($login)) {
+            // We make tokenAuth be md5(sandstorm_userid).  This should perhaps be improved to be not guessable.
+            // The default implementation appears to be md5(username . md5(password)).
+            $perms = explode(",", $_SERVER['HTTP_X_SANDSTORM_PERMISSIONS']);
+            $isSuperUser = in_array("superuser", $perms, true);
+            $hasViewPerm = in_array("view", $perms, true);
+            Access::doAsSuperUser(function () use ($login, $perms, $hasViewPerm, $isSuperUser) {
+                // Autoprovision a user in the DB if they don't exist yet
                 $displayName = rawurldecode($_SERVER['HTTP_X_SANDSTORM_USERNAME']);
                 $api = UsersManagerAPI::getInstance();
                 $user = null;
@@ -66,18 +74,12 @@ class Auth implements \Piwik\Auth
                     // No user in the user table yet, create it.
                     $api->addUser($login, md5($login), $login . "@example.com", $displayName);
                 }
-            }
-        });
 
-        // Patch access levels in the DB to match those of the incoming request
-        Access::doAsSuperUser(function () {
-            $login = $_SERVER['HTTP_X_SANDSTORM_USER_ID'];
-            if (!empty($login)) {
-                // Compute desired effective access from X-Sandstorm-Permissions
-                $perms = explode(",", $_SERVER['HTTP_X_SANDSTORM_PERMISSIONS']);
-                $maxPerm = in_array("admin", $perms, true) ? "admin" : 
-                                in_array("view", $perms, true) ? "view" : "noaccess";
-                $grantSuperUser = in_array("superuser", $perms, true) ? true : false;
+                // Patch access levels in the DB to match those of the incoming request.
+                // Compute desired effective access from X-Sandstorm-Permissions header.
+                $maxPerm = in_array("admin", $perms, true) ? "admin" :
+                                ($hasViewPerm ? "view" : "noaccess");
+                $grantSuperUser = $isSuperUser ? true : false;
                 $api = UsersManagerAPI::getInstance();
 
                 $currentlySuperUser = Piwik::hasTheUserSuperUserAccess($login);
@@ -112,18 +114,12 @@ class Auth implements \Piwik\Auth
                         }
                     }
                 }
-            }
-        });
-        // We make tokenAuth be md5(sandstorm_userid).  This should perhaps be improved to be not guessable.
-        // The default implementation appears to be md5(username . md5(password)).
-        $perms = explode(",", $_SERVER['HTTP_X_SANDSTORM_PERMISSIONS']);
-        $isSuperUser = in_array("superuser", $perms, true);
-        $hasViewPerm = in_array("view", $perms, true);
-        $authResult = $isSuperUser ? AuthResult::SUCCESS_SUPERUSER_AUTH_CODE :
-                                     ($hasViewPerm ? AuthResult::SUCCESS : AuthResult::FAILURE);
-        if ($authResult === AuthResult::FAILURE) {
-            return new AuthResult($authResult, "", "");
+            });
+            $authResult = $isSuperUser ? AuthResult::SUCCESS_SUPERUSER_AUTH_CODE :
+                                         ($hasViewPerm ? AuthResult::SUCCESS : AuthResult::FAILURE);
+            return new AuthResult($authResult, $login, md5($login));
+        } else {
+            return new AuthResult($AuthResult, "anonymous", "anonymous");
         }
-        return new AuthResult($authResult, $_SERVER['HTTP_X_SANDSTORM_USER_ID'], md5($_SERVER['HTTP_X_SANDSTORM_USER_ID']));
     }
 }
