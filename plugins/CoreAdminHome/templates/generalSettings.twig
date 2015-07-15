@@ -226,6 +226,7 @@
         </form>
     </div>
 
+    {# Sandstorm: TrustedHost is a mess when mixed with Sandstorm's random hostnames
     <div class="ui-confirm" id="confirmTrustedHostChange">
         <h2>{{ 'CoreAdminHome_TrustedHostConfirm'|translate }}</h2>
         <input role="yes" type="button" value="{{ 'General_Yes'|translate }}"/>
@@ -263,6 +264,7 @@
             </div>
         {% endif %}
     </div>
+    #}
 
     <input type="submit" value="{{ 'General_Save'|translate }}" class="submit generalSettingsSubmit"/>
     <br/><br/>

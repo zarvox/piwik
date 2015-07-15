@@ -40,12 +40,15 @@ class Menu extends \Piwik\Plugin\Menu
             $menu->addItem($login, null, array('module' => 'UsersManager', 'action' => 'userSettings'), 998);
         }
 
+        // SANDSTORM EDIT: no login/logout at the app level
+        /*
         $module = $this->getLoginModule();
         if (Piwik::isUserIsAnonymous()) {
             $menu->addItem('Login_LogIn', null, array('module' => $module, 'action' => false), 999);
         } else {
             $menu->addItem('General_Logout', null, array('module' => $module, 'action' => 'logout', 'idSite' => null), 999);
         }
+        */
     }
 
     public function configureUserMenu(MenuUser $menu)

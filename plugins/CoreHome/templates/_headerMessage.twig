@@ -11,6 +11,7 @@
 </div>
 {% endset %}
 
+{# Sandstorm: can't update from within the app, so disable this 
 {% if isPiwikDemo or (latest_version_available and hasSomeViewAccess and not isUserIsAnonymous) or (isSuperUser and adminMenu is defined and adminMenu) %}
 <span id="header_message" class="{% if isPiwikDemo or not latest_version_available %}header_info{% else %}header_alert{% endif %}">
     <span class="header_short">
@@ -45,3 +46,4 @@
     </span>
 </span>
 {% endif %}
+#}
