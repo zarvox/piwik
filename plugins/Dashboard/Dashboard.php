@@ -68,6 +68,7 @@ class Dashboard extends \Piwik\Plugin
                     . '"parameters":{"module":"CoreHome","action":"getPromoVideo"}},';
             }
 
+            // SANDSTORM EDIT: remove the RSS plugin since we can't do outbound HTTP
             $defaultLayout = '[
                 [
                     {"uniqueId":"widgetVisitsSummarygetEvolutionGraphcolumnsArray","parameters":{"module":"VisitsSummary","action":"getEvolutionGraph","columns":"nb_visits"}},
@@ -82,8 +83,7 @@ class Dashboard extends \Piwik\Plugin
                 [
                     {"uniqueId":"widgetUserCountryMapvisitorMap","parameters":{"module":"UserCountryMap","action":"visitorMap"}},
                     {"uniqueId":"widgetDevicesDetectiongetBrowsers","parameters":{"module":"DevicesDetection","action":"getBrowsers"}},
-                    {"uniqueId":"widgetReferrersgetSearchEngines","parameters":{"module":"Referrers","action":"getSearchEngines"}},
-                    {"uniqueId":"widgetExampleRssWidgetrssPiwik","parameters":{"module":"ExampleRssWidget","action":"rssPiwik"}}
+                    {"uniqueId":"widgetReferrersgetSearchEngines","parameters":{"module":"Referrers","action":"getSearchEngines"}}
                 ]
             ]';
         }
