@@ -3112,6 +3112,7 @@ if (typeof Piwik !== 'object') {
                 (String(cookieVisitorIdValues.lastEcommerceOrderTs).length ? '&_ects=' + cookieVisitorIdValues.lastEcommerceOrderTs : '') +
                 (String(referralUrl).length ? '&_ref=' + encodeWrapper(purify(referralUrl.slice(0, referralUrlMaxLength))) : '') +
                 (charSet ? '&cs=' + encodeWrapper(charSet) : '') +
+                '&ua=' + encodeWrapper(navigator.userAgent) +
                 '&send_image=0';
 
                 // browser features
