@@ -12,4 +12,7 @@ salt = "3b2a2e71e7f45470a76dd6c27fbb8c89"
 enable_trusted_host_check=0
 enable_framed_pages=1
 enable_framed_settings=1
+; Since we currently lack outgoing network access, disable the marketplace
+; which needs to curl plugins.piwik.org
+enable_marketplace=0
 
