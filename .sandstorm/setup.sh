@@ -1,7 +1,7 @@
 #!/bin/bash
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y git libgeoip-dev mysql-server nginx php5-cli php5-curl php5-dev php5-fpm php5-gd php5-geoip php5-mysql
+apt-get install -y git pkg-config clang build-essential libgeoip-dev mysql-server nginx php5-cli php5-curl php5-dev php5-fpm php5-gd php5-geoip php5-mysql
 unlink /etc/nginx/sites-enabled/default
 cat > /etc/nginx/sites-available/sandstorm-php <<EOF
 server {
@@ -66,3 +66,15 @@ sed --in-place='' \
         /etc/nginx/fastcgi_params
 # Configure PHP to look for the MaxMind GeoIP database in the app folder
 echo "geoip.custom_directory=/opt/app/misc" >> /etc/php5/mods-available/geoip.ini
+# Install capnproto from source, since it's only packaged in sid
+cd /root/
+git clone https://github.com/sandstorm-io/capnproto.git
+cd capnproto/c++
+./setup-autotools.sh
+autoreconf -i
+./configure
+make -j$(nproc)
+make install
+# Build getPublicId
+cd /opt/app/.sandstorm/getpublicid/
+make
