@@ -11,5 +11,4 @@
     g.type='text/javascript'; g.async=true; g.defer=true; g.src='{$publicHost}/embed.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<!-- To protect against XSS, Sandstorm does not support tracking via unauthenticated GETs. -->
 <!-- End Piwik Code -->

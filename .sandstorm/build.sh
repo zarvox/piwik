@@ -1,8 +1,6 @@
 #!/bin/bash
 # Checks if there's a composer.json, and if so, installs/runs composer.
 
-set -eu
-
 cd /opt/app
 
 if [ -f /opt/app/composer.json ] ; then
@@ -10,6 +8,7 @@ if [ -f /opt/app/composer.json ] ; then
         curl -sS https://getcomposer.org/installer | php
     fi
     php composer.phar install
+    echo "vagrant-spk: ignore complaints about xhprof/phpize; everything is fine"
 fi
 
 # Additionally, fetch the GeoLite City geolocation database.

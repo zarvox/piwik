@@ -45,7 +45,7 @@ const pkgdef :Spk.PackageDefinition = (
       icons = (
         appGrid = (svg = embed "piwik-128.svg"),
         grain = (svg = embed "piwik-24.svg"),
-        appMarket = (svg = embed "piwik-150.svg"),
+        market = (svg = embed "piwik-150.svg"),
       ),
       website = "http://piwik.org/",
       codeUrl = "https://github.com/zarvox/piwik",

@@ -10,6 +10,41 @@
     var piwikHost = window.location.host,
         piwikPath = location.pathname.substring(0, location.pathname.lastIndexOf('/')),
         exports = require('piwik/Tracking');
+    var sandstormRequests = [];
+
+    function onMessageSandstorm(event) {
+      console.log("got message: ");
+      console.log(event);
+      var data = event.data;
+      if (! data.hasOwnProperty("rpcId")) {
+        console.log("message did not contain an rpcId, ignoring");
+        return;
+      }
+      var handled = false;
+      for (var idx = 0 ; idx < sandstormRequests.length ; idx++) {
+        if (sandstormRequests[idx].rpcId == data.rpcId) {
+          // RPC id was valid.  Remove it from the list of half-finished RPCs...
+          thisRequest = sandstormRequests[idx];
+          handled = true;
+          sandstormRequests.splice(idx, 1);
+          console.log("got valid rpc reply: ");
+          console.log(data);
+          var tag = document.getElementById("javascript-text");
+          // Trigger a clean nav, since we'll be showing the same offer template page, but a different fragment
+          tag.src = "about:blank";
+          window.setTimeout(function () {
+            tag.src = data.uri;
+            // Guess at appropriate height of iframe based on number of newlines in template text.
+            var lineCount = (thisRequest.templateText.match(/\n/g) || []).length;
+            tag.style.height = String(15 * lineCount) + "px";
+          }, 0);
+          break;
+        }
+      }
+      if (!handled) {
+        console.log("Got unexpected rpcId: " + data.rpcId);
+      }
+    }
 
     /**
      * This class is deprecated. Use server-side events instead.
@@ -23,6 +58,7 @@
     var TrackingCodeGeneratorSingleton = exports.TrackingCodeGenerator = new TrackingCodeGenerator();
 
     $(document).ready(function () {
+        window.addEventListener("message", onMessageSandstorm, false);
 
         // get preloaded server-side data necessary for code generation
         var dataElement = $('#js-tracking-generator-data'),
@@ -185,11 +221,25 @@
                 generateJsCodeAjax.setCallback(function (response) {
                     generateJsCodeAjax = null;
 
-                    var jsCodeTextarea = $('#javascript-text').find('textarea');
-                    jsCodeTextarea.val(response.value);
+                    // SANDSTORM EDIT: rerequest rendering of offer template
+                    var offerTemplate = response.value.replace("$window.location.protocol", window.location.protocol);
+
+                    var rpcId = "rpc";
+                    sandstormRequests.push({rpcId: rpcId, templateText: offerTemplate});
+                    window.parent.postMessage({
+                        renderTemplate: {
+                          rpcId: rpcId,
+                          template: offerTemplate,
+                          petname: "Piwik tracker site-embedded API key",
+                          roleAssignment: { roleId: 2 },
+                          forSharing: true
+                        }
+                      },
+                      "*"
+                    );
 
                     if(trackingCodeChangedManually) {
-                        jsCodeTextarea.effect("highlight", {}, 1500);
+                        $('#javascript-text').effect("highlight", {}, 1500);
                     }
 
                 });

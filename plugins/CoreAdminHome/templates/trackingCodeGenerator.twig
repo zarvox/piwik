@@ -20,8 +20,6 @@
         <br/><br/>
         {{ 'CoreAdminHome_JSTrackingIntro2'|translate }} {{ 'CoreAdminHome_JSTrackingIntro3'|translate('<a href="http://piwik.org/integrate/" rel="noreferrer"  target="_blank">','</a>')|raw }}
         <br/><br/>
-        {{ 'CoreAdminHome_JSTrackingIntro4'|translate('<a href="#image-tracking-link">','</a>')|raw }}
-        <br/><br/>
         {{ 'CoreAdminHome_JSTrackingIntro5'|translate('<a rel="noreferrer"  target="_blank" href="http://piwik.org/docs/javascript-tracking/">','</a>')|raw }}
     </p>
 
@@ -174,72 +172,8 @@
 
     <p>{{ 'CoreAdminHome_JSTracking_CodeNote'|translate("&lt;/body&gt;")|raw }}</p>
 
-    <div id="javascript-text">
-        <textarea class="codeblock"> </textarea>
-    </div>
-</div>
-
-<h2 id="image-tracking-link">{{ 'CoreAdminHome_ImageTracking'|translate }}</h2>
-
-<div id="image-tracking-code-options">
-
-    <p>
-        {{ 'CoreAdminHome_ImageTrackingIntro1'|translate }} {{ 'CoreAdminHome_ImageTrackingIntro2'|translate("<em>&lt;noscript&gt;&lt;/noscript&gt;</em>")|raw }}
-    </p>
-    <p>
-        {{ 'CoreAdminHome_ImageTrackingIntro3'|translate('<a href="http://piwik.org/docs/tracking-api/reference/" rel="noreferrer"  target="_blank">','</a>')|raw }}
-    </p>
-
-    {# website #}
-    <div class="form-group">
-        <label>{{ 'General_Website'|translate }}</label>
-        <div piwik-siteselector
-             class="sites_autocomplete"
-             siteid="{{ idSite }}"
-             sitename="{{ defaultReportSiteName }}"
-             id="image-tracker-website"
-             show-all-sites-item="false"
-             switch-site-on-select="false"
-             show-selected-site="true"></div>
-    </div>
-
-    <h3>{{ 'General_Options'|translate }}</h3>
-
-    <div id="image-tracking-section">
-
-        {# action_name #}
-        <div class="form-group">
-            <label for="image-tracker-action-name">{{ 'Actions_ColumnPageName'|translate }}</label>
-            <input type="text" id="image-tracker-action-name"/>
-        </div>
-
-        {# goal #}
-        <div class="form-group">
-            <label class="checkbox">
-                <input class="section-toggler-link" type="checkbox" id="image-tracking-goal-check" data-section-id="image-goal-picker-extra"/>
-                {{ 'CoreAdminHome_TrackAGoal'|translate }}
-            </label>
-        </div>
-        <div class="form-group" style="display:none;" id="image-goal-picker-extra">
-            <select id="image-tracker-goal">
-                <option value="">{{ 'UserCountryMap_None'|translate }}</option>
-            </select>
-            <span>{{ 'CoreAdminHome_WithOptionalRevenue'|translate }}</span>
-            <div class="input-group">
-                <input type="text" class="revenue" value=""/>
-                <span class="input-group-addon">{{ defaultSiteRevenue }}</span>
-            </div>
-        </div>
-
-    </div>
-
-    <div id="image-link-output-section">
-        <h3>{{ 'CoreAdminHome_ImageTrackingLink'|translate }}</h3>
-
-        <div id="image-tracking-text">
-            <textarea class="codeblock"> </textarea>
-        </div>
-    </div>
+    <iframe id="javascript-text" style="width: 100%;">
+    </iframe>
 
 </div>
 

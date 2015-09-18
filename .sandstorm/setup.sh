@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y git pkg-config clang build-essential libgeoip-dev mysql-server nginx php5-cli php5-curl php5-dev php5-fpm php5-gd php5-geoip php5-mysql
