@@ -19,9 +19,9 @@ const pkgdef :Spk.PackageDefinition = (
 
     appTitle = (defaultText = "Piwik Web Analytics"),
 
-    appVersion = 0,  # Increment this for every release.
+    appVersion = 1,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "2.14.0-sandstorm-1"),
+    appMarketingVersion = (defaultText = "2.15.0-sandstorm-1"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
@@ -61,7 +61,7 @@ const pkgdef :Spk.PackageDefinition = (
       description = (defaultText = embed "description.md"),
       shortDescription = (defaultText = "Web Analytics"),
       # TODO: screenshots
-      # TODO: changeLog
+      changeLog = (defaultText = embed "changelog.md"),
     ),
   ),
 
@@ -76,7 +76,8 @@ const pkgdef :Spk.PackageDefinition = (
         hidePaths = [ "home", "proc", "sys",
                       "etc/passwd", "etc/hosts", "etc/host.conf",
                       "etc/nsswitch.conf", "etc/resolv.conf",
-                      "opt/app/.git" ]
+                      "opt/app/.git", "opt/app/.sandstorm/.vagrant",
+        ],
         # You probably don't want the app pulling files from these places,
         # so we hide them. Note that /dev, /var, and /tmp are implicitly
         # hidden because Sandstorm itself provides them.
