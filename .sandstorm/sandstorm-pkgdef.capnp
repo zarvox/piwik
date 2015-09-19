@@ -60,7 +60,10 @@ const pkgdef :Spk.PackageDefinition = (
 
       description = (defaultText = embed "description.md"),
       shortDescription = (defaultText = "Web Analytics"),
-      # TODO: screenshots
+      screenshots = [
+        (width = 746, height = 795, png = embed "screenshot-1.png"),
+        (width = 1677, height = 871, png = embed "screenshot-2.png"),
+      ],
       changeLog = (defaultText = embed "changelog.md"),
     ),
   ),
