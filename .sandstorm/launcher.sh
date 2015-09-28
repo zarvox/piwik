@@ -62,6 +62,10 @@ if [ ! -f $PIWIK_CONFIG_FILE ] ; then
     #echo "-------- update script ran: " && date +%s.%N
 fi
 
+# Apply sandstorm-specific updates
+php /opt/app/sandstorm-update.php
+echo "-------- sandstorm-update ran: " && date +%s.%N
+
 # Spawn PHP
 /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf &
 # Wait until PHP has bound its socket, indicating readiness

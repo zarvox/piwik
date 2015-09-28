@@ -89,5 +89,9 @@ if ($siteIdsCount <= 0) {
 		return APISitesManager::getInstance()->addSite($name, $url, $ecommerce);
 	});
 }
-print("created site, all done\n");
+print("created site, enabling IP forwarding\n");
+#$config = Config::getInstance();
+#$config->General['proxy_client_headers'] = ['HTTP_X_REAL_IP'];
+#$config->forceSave();
+#print("enabled IP forwarding\n");
 flush();
