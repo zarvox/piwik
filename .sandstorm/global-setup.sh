@@ -1,14 +1,19 @@
 #!/bin/bash
-set -eu
+set -euo pipefail
+
+CURL_OPTS="--silent --show-error"
 echo localhost > /etc/hostname
 hostname localhost
-curl https://install.sandstorm.io/ > /host-dot-sandstorm/caches/install.sh
-SANDSTORM_CURRENT_VERSION=$(curl -fs "https://install.sandstorm.io/dev?from=0&type=install")
+curl $CURL_OPTS https://install.sandstorm.io/ > /host-dot-sandstorm/caches/install.sh
+SANDSTORM_CURRENT_VERSION=$(curl $CURL_OPTS -f "https://install.sandstorm.io/dev?from=0&type=install")
 SANDSTORM_PACKAGE="sandstorm-$SANDSTORM_CURRENT_VERSION.tar.xz"
 if [[ ! -f /host-dot-sandstorm/caches/$SANDSTORM_PACKAGE ]] ; then
-    curl --output "/host-dot-sandstorm/caches/$SANDSTORM_PACKAGE" "https://dl.sandstorm.io/$SANDSTORM_PACKAGE"
+    curl $CURL_OPTS --output "/host-dot-sandstorm/caches/$SANDSTORM_PACKAGE.partial" "https://dl.sandstorm.io/$SANDSTORM_PACKAGE"
+    mv "/host-dot-sandstorm/caches/$SANDSTORM_PACKAGE.partial" "/host-dot-sandstorm/caches/$SANDSTORM_PACKAGE"
 fi
-bash /host-dot-sandstorm/caches/install.sh -d -e "/host-dot-sandstorm/caches/$SANDSTORM_PACKAGE"
+if [ ! -e /opt/sandstorm/latest/sandstorm ] ; then
+    bash /host-dot-sandstorm/caches/install.sh -d -e "/host-dot-sandstorm/caches/$SANDSTORM_PACKAGE" >/dev/null
+fi
 modprobe ip_tables
 # Make the vagrant user part of the sandstorm group so that commands like
 # `spk dev` work.
@@ -17,15 +22,6 @@ usermod -a -G 'sandstorm' 'vagrant'
 sudo sed --in-place='' \
         --expression='s/^BIND_IP=.*/BIND_IP=0.0.0.0/' \
         /opt/sandstorm/sandstorm.conf
-# TODO: update sandstorm installer script to ask about dev accounts, and
-# specify a value for this option in the default config?
-if ! grep --quiet --no-messages ALLOW_DEV_ACCOUNTS=true /opt/sandstorm/sandstorm.conf ; then
-    echo "ALLOW_DEV_ACCOUNTS=true" | sudo tee -a /opt/sandstorm/sandstorm.conf
-    sudo service sandstorm restart
-fi
-# stop some other services that are running by default in vagrant VMs
-sudo service puppet stop
-sudo service chef-client stop
 # Enable apt-cacher-ng proxy to make things faster if one appears to be running on the gateway IP
 GATEWAY_IP=$(ip route  | grep ^default  | cut -d ' ' -f 3)
 if nc -z "$GATEWAY_IP" 3142 ; then
