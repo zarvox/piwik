@@ -11,6 +11,12 @@ server {
 
     server_name localhost;
     root /opt/app;
+
+    # Allow arbitrarily large bodies - Sandstorm can handle them, and requests
+    # are authenticated already, so there's no reason for apps to add additional
+    # limits by default
+    client_max_body_size 0;
+
     location / {
         index index.php;
         try_files \$uri \$uri/ =404;
@@ -45,8 +51,11 @@ sed --in-place='' \
         --expression='s/^;always_populate_raw_post_data.*$/always_populate_raw_post_data = -1/' \
         /etc/php5/fpm/php.ini
 # patch mysql conf to not change uid
+# and to enable local-infile
 sed --in-place='' \
         --expression='s/^user\t\t= mysql/#user\t\t= mysql/' \
+        --expression='s/^\[mysqld\]$/[mysqld]\nlocal-infile/' \
+        --expression='s/^\[mysql\]$/[mysql]\nlocal-infile/' \
         /etc/mysql/my.cnf
 # patch nginx conf to not bother trying to setuid, since we're not root
 sed --in-place='' \
