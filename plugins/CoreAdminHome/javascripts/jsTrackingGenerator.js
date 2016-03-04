@@ -222,7 +222,7 @@
                     generateJsCodeAjax = null;
 
                     // SANDSTORM EDIT: rerequest rendering of offer template
-                    var offerTemplate = response.value.replace("$window.location.protocol", window.location.protocol);
+                    var offerTemplate = response.value.replace(/\$window.location.protocol/g, window.location.protocol);
 
                     var rpcId = "rpc";
                     sandstormRequests.push({rpcId: rpcId, templateText: offerTemplate});

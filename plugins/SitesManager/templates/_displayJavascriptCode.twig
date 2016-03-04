@@ -11,7 +11,7 @@
 
 <script>
 // SANDSTORM EDIT: use offer template to render HTML to copy
-sandstormTemplate = "{{ jsTag|e('js') }}".replace("$window.location.protocol", window.location.protocol);
+sandstormTemplate = "{{ jsTag|e('js') }}".replace(/\$window.location.protocol/g, window.location.protocol);
 
 console.log(sandstormTemplate);
 var sandstormRequests = [];
