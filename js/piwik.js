@@ -2464,7 +2464,7 @@ if (typeof Piwik !== 'object') {
              */
             function sendXmlHttpRequest(request, callback, fallbackToGet) {
                 if (!isDefined(fallbackToGet) || null === fallbackToGet) {
-                    fallbackToGet = true;
+                    fallbackToGet = false;
                 }
 
                 try {
