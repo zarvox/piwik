@@ -1,3 +1,9 @@
+# 2.15.0-sandstorm-4
+
+Avoids prompting tracked users for HTTP Basic Auth credentials when they view a
+page with the Piwik script embedded.  This was triggered by a recent change in
+Sandstorm's API endpoint behavior.
+
 # 2.15.0-sandstorm-3
 
 Enabled LOAD DATA INFILE on MySQL to make bulk import/export work.

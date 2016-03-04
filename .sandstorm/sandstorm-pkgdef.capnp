@@ -19,9 +19,9 @@ const pkgdef :Spk.PackageDefinition = (
 
     appTitle = (defaultText = "Piwik Web Analytics"),
 
-    appVersion = 3,  # Increment this for every release.
+    appVersion = 4,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "2.15.0-sandstorm-3"),
+    appMarketingVersion = (defaultText = "2.15.0-sandstorm-4"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
@@ -114,7 +114,7 @@ const pkgdef :Spk.PackageDefinition = (
         ),(
           name = "view",
           title = (defaultText = "view"),
-          description = (defaultText = "grants Piwik administrative privileges")
+          description = (defaultText = "allows viewing collected analytics data")
         )
       ],
       roles = [(
