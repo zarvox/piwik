@@ -1,3 +1,8 @@
+# 2.15.0-sandstorm-5
+
+Moves the MySQL tmpdir from the 16MB tmpfs on /tmp to /var/tmp.
+Larger grains may need this space when doing analytics over larger amounts of data.
+
 # 2.15.0-sandstorm-4
 
 Avoids prompting tracked users for HTTP Basic Auth credentials when they view a

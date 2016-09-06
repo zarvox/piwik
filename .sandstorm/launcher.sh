@@ -13,6 +13,7 @@ mkdir -p /var/log/nginx
 # TODO someday: I'd prefer a tmpfs for these.
 rm -rf /var/run
 mkdir -p /var/run
+mkdir -p /var/tmp
 mkdir -p /var/run/mysqld
 
 # Prepare piwik.js to be published, which can happen on first request or on each request.

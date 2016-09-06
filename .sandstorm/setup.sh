@@ -50,10 +50,12 @@ sed --in-place='' \
 sed --in-place='' \
         --expression='s/^;always_populate_raw_post_data.*$/always_populate_raw_post_data = -1/' \
         /etc/php5/fpm/php.ini
-# patch mysql conf to not change uid
+# patch mysql conf to not change uid,
+# to not put huge temp files on tmpfs,
 # and to enable local-infile
 sed --in-place='' \
         --expression='s/^user\t\t= mysql/#user\t\t= mysql/' \
+        --expression='s/^tmpdir\t\t= \/tmp/tmpdir\t\t= \/var\/tmp/' \
         --expression='s/^\[mysqld\]$/[mysqld]\nlocal-infile/' \
         --expression='s/^\[mysql\]$/[mysql]\nlocal-infile/' \
         /etc/mysql/my.cnf
