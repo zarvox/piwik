@@ -1,7 +1,8 @@
-# 2.15.0-sandstorm-5
+# 2.15.0-sandstorm-6
 
 Moves the MySQL tmpdir from the 16MB tmpfs on /tmp to /var/tmp.
 Larger grains may need this space when doing analytics over larger amounts of data.
+Cleans up /var/tmp on grain launch, in the event MySQL got killed in the middle of a transaction.
 
 # 2.15.0-sandstorm-4
 
